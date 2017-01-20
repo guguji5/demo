@@ -4,9 +4,9 @@
     font-family: '宋体';
 }
 html{
-    font-size: 50px;
+    font-size: 100px;
 }
-@media only screen and (min-width: 401px){
+/*@media only screen and (min-width: 401px){
     html {
         font-size: 62.5px !important;
     }
@@ -30,7 +30,7 @@ html{
     html {
         font-size: 100px !important; 
     }
-}
+}*/
 html,body{
      width:100%;
     background: url('../img/bg.jpg') no-repeat top center;
@@ -215,7 +215,7 @@ button{
     margin-top:0.256rem;
 }
 .tab div .description .btn button{
-    margin:0.0922rem 50.0256rem 0;
+    margin:0.05rem 0.0256rem 0;
     width:0.6656rem;
     height:0.2202rem;
     color:#fff;
@@ -225,9 +225,11 @@ button{
 }
 .toSee{
     background: url('../img/btn_tosee.png') center;
+    background-size: 100% 100%;
 }
 .toPartici{
     background: url('../img/btn_topartici.png') center;
+    background-size: 100% 100%;
 }
 /*表格style*/
 .table{
