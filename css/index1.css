@@ -152,10 +152,12 @@ button{
     font-size: 0.11264rem;
     font-family: '微软雅黑';
     background: url('../img/tab_red.png') no-repeat;
-    margin-right:0.2765rem;
+    margin-right:0.256rem;
+    background-size: 100% 100%;
 }
 .tabs li.active{
     background: url('../img/tab_yel.png');
+    background-size: 100% 100%;
     color:#ec1421;
 }
 .tab{
@@ -205,9 +207,9 @@ button{
     line-height:0.174rem;
 }
 .tab div .description .title{
-    width: 1.0343rem;
-    font-size: 0.1229rem;
-    line-height: 0.1331rem;
+    width: 1.35rem;
+    font-size: 0.10rem;
+    line-height: 0.15rem;
     font-family: '微软雅黑';
     margin-bottom:0.1024rem;
     margin-top:0.256rem;
