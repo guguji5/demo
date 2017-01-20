@@ -4,7 +4,32 @@
     font-family: '宋体';
 }
 html{
-    font-size: 100px;
+    font-size: 50px;
+}
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 62.5px !important;
+    }
+}
+@media only screen and (min-width: 428px){
+    html {
+        font-size: 68px !important;
+    }
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 75px !important; 
+    }
+}
+@media only screen and (min-width: 569px){
+    html {
+        font-size: 88px !important; 
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 100px !important; 
+    }
 }
 html,body{
      width:100%;
