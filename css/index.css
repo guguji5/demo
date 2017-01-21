@@ -303,7 +303,7 @@ ul.cities li button:hover{
     padding-top:0.1382rem;
     width:100%;
     background:#151515;
-    height:0.6809rem;
+    min-height:0.6809rem;
 }
 .footer .main{
     width:5.289rem;
