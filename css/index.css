@@ -45,10 +45,10 @@ button{
     /*为了小屏能整屏撑下，采用百分比，原尺寸1366*768分辨率不能完全放下“面试大咖秀”banner*/
     width:70%;
     margin-top:0.2355rem;
-    animation: shake 0.5s 0.5s;
-    -webkit-animation: shake 0.5s 0.5s;
-    -o-animation: shake 0.5s 0.5s;
-    -moz-animation: shake 0.5s 0.5s;
+    animation: shake 0.5s 1s;
+    -webkit-animation: shake 0.5s 1s;
+    -o-animation: shake 0.5s 1s;
+    -moz-animation: shake 0.5s 1s;
 }
 /*自定义动画*/
 @-webkit-keyframes shake{
