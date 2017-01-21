@@ -131,12 +131,6 @@ button{
     margin-right:0.256rem;
     background-size: 100% 100%;
 }
-/*pc端用另一套样式*/
-@media only screen and (min-width: 1000px){
-   .tabs li{
-        margin-right:5px;
-    }
-}
 
 .tabs li.active{
     background: url('../img/tab_yel.png');
@@ -156,23 +150,6 @@ button{
     font-size: 0.0819rem;
     line-height: 0.1075rem;
 }
-/*pc端用另一套样式*/
-/*@media only screen and (min-width: 1000px){
-   .tab{
-        display: none;
-        box-sizing: border-box;
-        position: relative;
-        width:100%;
-        padding:35px 28px 40px 20px;
-        margin-top:-9px;
-        height:381px;
-        background: url('../img/tabbg.png') no-repeat;
-        font-size: 16px;
-        line-height: 21px;
-    }
-}
-*/
-
 .tab.active{
     display: block;
 }
@@ -268,18 +245,6 @@ button{
 .isShow{
     display: none;
 }
-@media only screen and (min-width: 1000px){
-   .table table td.grayBg{
-        background: #f6f6f6;
-        display: table-cell;
-    }
-    .table table td.fontL{
-        font-size: 0.0922rem;
-    }
-    .isShow{
-        display: table-cell;
-    }
-}
 .table table th{
     border-left:1px solid #e2313e;
     height:0.2509rem;
@@ -345,17 +310,13 @@ ul.cities li button:hover{
     margin:0 auto;
 }
 .footer .links{
-    margin-left:0.4147rem;
-    height:100%;
+    text-align: center;
 }
-.footer .links li a{
-    font-size: 0.0717rem;
-    line-height: 0.1229rem;
+.footer .links a{
     padding:0 0.0512rem;
     color:#fff;
-    float:left;
 }
-.footer .links li+li a{
+.footer .links  a+a{
     border-left:1px solid #fff;
 }
 .footer p{
@@ -363,4 +324,20 @@ ul.cities li button:hover{
     font-size: 0.0717rem;
     line-height: 0.1229rem;
     color:#fff;
+}
+/*pc端用另一套样式*/
+@media only screen and (min-width: 1000px){
+   .tabs li{
+        margin-right:5px;
+    }
+    .table table td.grayBg{
+        background: #f6f6f6;
+        display: table-cell;
+    }
+    .table table td.fontL{
+        font-size: 0.0922rem;
+    }
+    .isShow{
+        display: table-cell;
+    }
 }

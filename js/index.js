@@ -29,7 +29,15 @@
 			}
 			
 		}(i)
-
-
 	}
+	// 部分安卓浏览器有最小字体限制，隐藏部分内容
+	if(navigator.userAgent.indexOf("Android") > -1){
+		var isShown=document.getElementsByClassName('isShown');
+		for(var i=0;i<isShown.length;i++){
+			isShown[i].style.display="none";
+		}
+	};
+
+
+
 })(document, window);
