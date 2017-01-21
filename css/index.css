@@ -259,9 +259,26 @@ button{
 }
 .table table td.grayBg{
     background: #f6f6f6;
+    display: none;
 }
 .table table td.fontL{
     font-size: 0.0922rem;
+    display:table-cell;
+}
+.isShow{
+    display: none;
+}
+@media only screen and (min-width: 1000px){
+   .table table td.grayBg{
+        background: #f6f6f6;
+        display: table-cell;
+    }
+    .table table td.fontL{
+        font-size: 0.0922rem;
+    }
+    .isShow{
+        display: table-cell;
+    }
 }
 .table table th{
     border-left:1px solid #e2313e;
