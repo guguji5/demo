@@ -1,0 +1,30 @@
+/* 根节点元素是 20px 来计算rem*/
+*{
+    margin:0px;
+    padding:0px;
+}
+html,body{
+    height:100%;
+    width:100%;
+}
+.container{
+    height:100%;
+    width:100%;
+    background:url("../img/bg.jpg") no-repeat;
+    background-size:cover;
+    position: relative;
+}
+.countDown,.game,.mask,.kiss,.rules,.congratulations,.noReceipt{
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+}
+.mask{
+    width: 100%;
+    position: fixed;
+    top:0px;
+    left:0px;
+    background: rgba(0,0,0,0.8);
+}

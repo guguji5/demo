@@ -1,0 +1,257 @@
+@rate : 100;
+.paddingLeft(@a){
+  padding-left: (@a/ @rate)* 1rem;
+}
+.paddingTop(@a){
+  padding-top: (@a/ @rate)* 1rem;
+}
+.paddingRight(@a){
+  padding-right: (@a/ @rate)* 1rem;
+}
+.marginTop(@a){
+  margin-top:(@a/ @rate)* 1rem;
+}
+.marginLeft(@a){
+  margin-left:(@a/ @rate)* 1rem;
+}
+.marginRight(@a){
+  margin-right:(@a/ @rate)* 1rem;
+}
+.fontSize(@a){
+  font-size:(@a/ @rate)* 1rem;
+}
+.width(@a){
+  width:(@a/ @rate)* 1rem;
+}
+.height(@a){
+  height:(@a/ @rate)* 1rem;
+}
+.right(@a){
+  right:(@a/ @rate)* 1rem;
+}
+.left(@a){
+  left:(@a/ @rate)* 1rem;
+}
+.top(@a){
+  top:(@a/ @rate)* 1rem;
+}
+.lineHeight(@a){
+  line-height: (@a/ @rate)* 1rem;
+}
+.backGround(@z,@x,@y){
+  @left:(@x/ @rate)* 1rem;
+  @top:(@y/ @rate)* 1rem;
+  background:url("@{z}") no-repeat @left @top;
+}
+//以上都是函数   以下是倒计时和规则的样式
+.countDown .content{
+  .paddingTop(350)
+}
+.countDown .content p{
+  .marginTop(22);
+  .fontSize(41.5);
+  text-align:center;
+  color:white;
+}
+.countDown .content p .left{
+  display: inline-block;
+  .width(40);
+  .height(30);
+  .backGround("../img/left.png",0,0);
+  .marginRight(22);
+}
+.countDown .content p .right{
+  display: inline-block;
+  .width(40);
+  .height(30);
+  .backGround("../img/right.png",0,0);
+  .marginLeft(20)
+}
+.countDown .content p+div{
+  .marginTop(58);
+  color:white;
+  .fontSize(35);
+  text-align: center;
+}
+.countDown .content p+div span{
+  display: inline-block;
+  .width(163);
+  .height(111);
+  .backGround("../img/countDown.png",0,0);
+  color:black;
+  vertical-align: middle;
+  .lineHeight(111);
+  color:#6351d5;
+  .fontSize(68);
+}
+.countDown .content p+div span{
+  vertical-align: bottom;
+}
+.countDown .content .rule{
+  .width(102);
+  .height(62);
+  position:fixed;
+  .right(0);
+  .top(101);
+  .fontSize(30);
+  color:white;
+  .backGround("../img/rule.png",0,-4);
+  text-align:center;
+  .lineHeight(62);
+}
+//倒计时和规则的样式结束
+//规则内容的样式
+//.rules{
+//  position:absolute;
+//  top:0px;
+//  left:0px;
+//  width:100%;
+//
+//}
+.rules .content{
+  .width(653);
+  .height(597);
+  border-radius: 8px;
+  background:white;
+  margin:0 auto;
+  .marginTop(162);
+  .paddingTop(50);
+  .paddingRight(48);
+  .paddingLeft(46);
+  box-sizing: border-box;
+}
+.rules .content p{
+  .fontSize(30);
+  .lineHeight(48)
+}
+.rules .close{
+  margin:0 auto;
+  .marginTop(26);
+  .width(61);
+  .height(61);
+  .backGround('../img/close.png',0,0)
+}
+//以下是kiss 样式
+.kiss{
+  text-align: center;
+}
+.kiss img{
+  .width(462);
+  .height(683);
+  .marginTop(180);
+}
+//以下是noReceipt样式
+.noReceipt img{
+  .width(750);
+  .height(951);
+}
+//以下是congratulations样式
+.congratulations{
+  background:url("../img/congratulations.png") no-repeat;
+}
+.congratulations .money{
+  .marginTop(280);
+  .fontSize(54);
+  color:#ff3000;
+  text-align: center;
+  line-height: 1;
+}
+.congratulations .money b{
+  .fontSize(135);
+}
+.congratulations .description{
+  .marginTop(225);
+  .fontSize(30);
+  color:#ffe509;
+  text-align: center;
+}
+.congratulations .close{
+  margin:0 auto;
+  .marginTop(150);
+  .width(61);
+  .height(61);
+  .backGround('../img/close.png',0,0)
+}
+//以下是game的样式
+.game{
+  background:url('../img/gamebg.jpg');
+  position:relative;
+}
+.game .coin{
+  position: absolute;
+  .width(55);
+  .height(55);
+  .left(14);
+  .top(29);
+  background: url("../img/coin.png") no-repeat;
+}
+.game p{
+  .fontSize(40);
+  color:#fff;
+  .paddingTop(29);
+  .paddingLeft(92);
+}
+.game .redlip,.game .icon{;
+  position: absolute;
+}
+.game .redlip img.cloud,.game .icon img.cloud{
+  top:-20px;
+  position: absolute;
+}
+.game .lip1,.game .icon1{
+  transform: rotate(-7deg);
+}
+.game .lip1 img.iconandredlip{
+  transform: rotate(14deg) rotateY(180deg);
+}
+.game .icon1 img.iconandredlip{
+  transform: rotate(14deg);
+}
+.game .lip2,.game .icon2{
+  transform: rotate(-35deg);
+}
+.game .lip2 img.iconandredlip,.game .icon2 img.iconandredlip{
+  transform: rotate(0deg);
+}
+.game .lip3,.game .icon3{
+  transform: rotate(-10deg);
+}
+.game .lip3 img.iconandredlip{
+  transform: rotate(0deg) rotateY(180deg);
+}
+.game .icon3 img.iconandredlip{
+  transform: rotate(0deg);
+}
+.game .lip4,.game .icon4{
+  transform: rotate(20deg);
+}
+.game .lip4 img.iconandredlip,.game .icon4 img.iconandredlip{
+  transform: rotate(0deg);
+}
+.game .lip5,.game .icon5{
+  transform: rotate(10deg);
+}
+.game .lip5 img.iconandredlip,.game .icon5 img.iconandredlip{
+  transform: rotate(-10deg);
+}
+.game .small,.game .small img.iconandredlip{
+  .width(136);
+  .height(136);
+}
+.game .small img.cloud{
+  .width(136);
+}
+.game .large,.game .large img.iconandredlip{
+  .width(175);
+  .height(175);
+}
+.game .large img.cloud{
+  .width(175);
+}
+.game .medium,.game .medium img.iconandredlip{
+  .width(163);
+  .height(163);
+}
+.game .medium img.cloud{
+  .width(163);
+}

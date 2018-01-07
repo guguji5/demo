@@ -1,0 +1,343 @@
+*{
+    padding:0px;
+    margin:0px;
+    font-family: '宋体';
+}
+html{
+    font-size: 100px;
+}
+html,body{
+     width:100%;
+    background: url('../img/bg.jpg') no-repeat top center;
+    background-size: cover;
+    perspective: 800px;
+    perspective-origin: 50px 300px;
+}
+/*li,a,button.clearfix等通用效果先初始化样式*/
+li{
+    list-style: none;
+    float:left;
+}
+a{
+    text-decoration: none;
+}
+img{
+    border:none;
+}
+button{
+    border:none;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+.clearfix:after{
+    content: " ";
+    display:block;
+    clear:both;
+}
+/*主体内容*/
+.container{
+    width:5.289rem;
+    text-align: center;
+    margin:0 auto;
+}
+.header> img{
+    /*为了小屏能整屏撑下，采用百分比，原尺寸1366*768分辨率不能完全放下“面试大咖秀”banner*/
+    width:70%;
+    margin-top:0.2355rem;
+    animation: shake 0.5s 1s;
+    -webkit-animation: shake 0.5s 1s;
+    -o-animation: shake 0.5s 1s;
+    -moz-animation: shake 0.5s 1s;
+}
+/*自定义动画*/
+@-webkit-keyframes shake{
+    0%{
+        -webkit-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+    25%{
+        -webkit-transform:rotateZ(14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    75%{
+        -webkit-transform:rotateZ(-14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    100%{
+        -webkit-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+}
+@-moz-keyframes shake{
+    0%{
+        -moz-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+    25%{
+        -moz-transform:rotateZ(14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    75%{
+        -moz-transform:rotateZ(-14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    100%{
+        -moz-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+}
+@-o-keyframes shake{
+    0%{
+        -o-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+    25%{
+        -o-transform:rotateZ(14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    75%{
+        -o-transform:rotateZ(-14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    100%{
+        -o-transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+}
+@keyframes shake{
+    0%{
+        transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+    25%{
+        transform:rotateZ(14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    75%{
+        transform:rotateZ(-14deg) translateZ(15px) scale(1.1,1.1);
+    }
+    100%{
+        transform:rotateZ(0) translateZ(0px) scale(1,1);
+    }
+}
+.header a img{
+    width:5.125rem;
+    margin-top:-0.072rem;
+}
+.tips{
+    width:3.3741rem;
+    margin:0.3072rem auto 0.2458rem;
+}
+/*tab选项卡style*/
+.tabs{
+    padding-left:0.3277rem;
+}
+.tabs li{
+    width:1.1725rem;
+    height:0.3328rem;
+    line-height: 0.3328rem;
+    color:#feda00;
+    float:left;
+    font-size: 0.11264rem;
+    font-family: '微软雅黑';
+    background: url('../img/tab_red.png') no-repeat;
+    margin-right:0.256rem;
+    background-size: 100% 100%;
+}
+
+.tabs li.active{
+    background: url('../img/tab_yel.png');
+    background-size: 100% 100%;
+    color:#ec1421;
+}
+.tab{
+    display: none;
+    box-sizing: border-box;
+    position: relative;
+    width:100%;
+    padding:0.1792rem 0.1434rem 0.2048rem 0.1024rem;
+    margin-top:-0.046rem;
+    height:1.9661rem;
+    background: url('../img/tabbg.png') no-repeat;
+    background-size: 100% 100%;
+    font-size: 0.0819rem;
+    line-height: 0.1075rem;
+}
+.tab.active{
+    display: block;
+}
+.tab > div{
+    background: #fff;
+    height:100%;
+    width:2.5139rem;
+    float:left;
+}
+.tab > div+div{
+    float:right;
+}
+.tab div .pic{
+    box-sizing: border-box;
+    float:left;
+    width:0.8499rem;
+    padding-top:0.3328rem;
+    padding-left:0.0819rem;
+}
+.tab div .pic img{
+    width:0.7578rem;
+    height:0.8858rem;
+}
+.tab div .description{
+    box-sizing: border-box;
+    float:left;
+    width:1.664rem;
+    text-align: left;
+    padding-left:0.087rem;
+}
+.tab div .description p{
+    /*    margin-top:0.046rem;*/
+    line-height:0.174rem;
+}
+.tab div .description .title{
+    width: 1.35rem;
+    font-size: 0.10rem;
+    line-height: 0.15rem;
+    font-family: '微软雅黑';
+    margin-bottom:0.1024rem;
+    margin-top:0.256rem;
+}
+.tab div .description .btn button{
+    margin:0.05rem 0.0256rem 0;
+    width:0.6656rem;
+    height:0.2202rem;
+    color:#fff;
+    font-size: 0.0922rem;
+    padding-left:0.128rem;
+    font-family: '微软雅黑';
+}
+.toSee{
+    background: url('../img/btn_tosee.png') center;
+    background-size: 100% 100%;
+}
+.toPartici{
+    background: url('../img/btn_topartici.png') center;
+    background-size: 100% 100%;
+}
+/*表格style*/
+.table{
+    margin-top:0.343rem;
+    box-sizing: border-box;
+    width:100%;
+    padding:0.1536rem 0.1331rem 0.174rem 0.1075rem;
+    height:4.1472rem;
+    background: url('../img/tablebg.png');
+    background-size: 100% 100%;
+}
+.table table{
+    
+    width: 100%;
+    height:100%;
+    font-size: 0.0922rem;
+    background: #fff;
+    border-right:1px solid #e2313e;
+    border-top:1px solid #e2313e;
+}
+.table table td{
+    font-size: 0.082rem;
+    border-left:1px solid #e2313e;
+    border-bottom:1px solid #e2313e;
+    height:0.2509rem;
+}
+.table table td.grayBg{
+    background: #f6f6f6;
+    display: none;
+}
+.table table td.fontL{
+    font-size: 0.0922rem;
+    display:table-cell;
+}
+.isShow{
+    display: none;
+}
+.table table th{
+    border-left:1px solid #e2313e;
+    height:0.2509rem;
+    background: #fcc300;
+    color:#ec1421;
+}
+.table table td button{
+    font-size: 0.0717rem;
+    color:#fff;
+    width:0.4352rem;
+    height:0.1792rem;
+    border-radius: 0.087rem;
+}
+.table table td button.watch{
+    background: #fa0331;
+}
+.table table td button.appoint{
+    background: #a83bfc;
+}
+/*城市 style*/
+ul.cities li{
+    float:left;
+    width:0.6912rem;
+    height:0.2764rem;
+    margin:0.03rem 0.0256rem;
+} 
+ul.cities li button{
+    font-size: 0.1024rem;
+    color:#c04700;
+
+    width: 100%;
+    height:100%;
+    background:url('../img/button.png');
+    background-size: 100% 100%;
+    float:left;
+}
+ul.cities li button:hover{
+    background:url('../img/button_hover.png');
+    color:#FFF;
+    background-size: 100% 100%;
+}
+.books li{
+    float:left;
+    width:1.1878rem;
+    height:1.408rem;
+    margin-right:0.1177rem;
+    margin-bottom:0.3994rem;
+}
+.books li img{
+    width:1.1878rem;
+    height:1.408rem;
+}
+/*底部样式*/
+.footer{
+    box-sizing: border-box;
+    padding-top:0.1382rem;
+    width:100%;
+    background:#151515;
+    min-height:0.6809rem;
+}
+.footer .main{
+    width:5.289rem;
+    margin:0 auto;
+}
+.footer .links{
+    text-align: center;
+}
+.footer .links a{
+    padding:0 0.0512rem;
+    color:#fff;
+}
+.footer .links  a+a{
+    border-left:1px solid #fff;
+}
+.footer p{
+    text-align: center;
+    font-size: 0.0717rem;
+    line-height: 1.714;
+    color:#fff;
+}
+/*pc端用另一套样式*/
+@media only screen and (min-width: 1000px){
+   .tabs li{
+        margin-right:5px;
+    }
+    .table table td.grayBg{
+        background: #f6f6f6;
+        display: table-cell;
+    }
+    .table table td.fontL{
+        font-size: 0.0922rem;
+    }
+    .isShow{
+        display: table-cell;
+    }
+}

@@ -1,0 +1,211 @@
+.countDown .content {
+  padding-top: 3.5rem;
+}
+.countDown .content p {
+  margin-top: 0.22rem;
+  font-size: 0.415rem;
+  text-align: center;
+  color: white;
+}
+.countDown .content p .left {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.3rem;
+  background: url("../img/left.png") no-repeat 0rem 0rem;
+  margin-right: 0.22rem;
+}
+.countDown .content p .right {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.3rem;
+  background: url("../img/right.png") no-repeat 0rem 0rem;
+  margin-left: 0.2rem;
+}
+.countDown .content p + div {
+  margin-top: 0.58rem;
+  color: white;
+  font-size: 0.35rem;
+  text-align: center;
+}
+.countDown .content p + div span {
+  display: inline-block;
+  width: 1.63rem;
+  height: 1.11rem;
+  background: url("../img/countDown.png") no-repeat 0rem 0rem;
+  color: black;
+  vertical-align: middle;
+  line-height: 1.11rem;
+  color: #6351d5;
+  font-size: 0.68rem;
+}
+.countDown .content p + div span {
+  vertical-align: bottom;
+}
+.countDown .content .rule {
+  width: 1.02rem;
+  height: 0.62rem;
+  position: fixed;
+  right: 0rem;
+  top: 1.01rem;
+  font-size: 0.3rem;
+  color: white;
+  background: url("../img/rule.png") no-repeat 0rem -0.04rem;
+  text-align: center;
+  line-height: 0.62rem;
+}
+.rules .content {
+  width: 6.53rem;
+  height: 5.97rem;
+  border-radius: 8px;
+  background: white;
+  margin: 0 auto;
+  margin-top: 1.62rem;
+  padding-top: 0.5rem;
+  padding-right: 0.48rem;
+  padding-left: 0.46rem;
+  box-sizing: border-box;
+}
+.rules .content p {
+  font-size: 0.3rem;
+  line-height: 0.48rem;
+}
+.rules .close {
+  margin: 0 auto;
+  margin-top: 0.26rem;
+  width: 0.61rem;
+  height: 0.61rem;
+  background: url("../img/close.png") no-repeat 0rem 0rem;
+}
+.kiss {
+  text-align: center;
+}
+.kiss img {
+  width: 4.62rem;
+  height: 6.83rem;
+  margin-top: 1.8rem;
+}
+.noReceipt img {
+  width: 7.5rem;
+  height: 9.51rem;
+}
+.congratulations {
+  background: url("../img/congratulations.png") no-repeat;
+}
+.congratulations .money {
+  margin-top: 2.8rem;
+  font-size: 0.54rem;
+  color: #ff3000;
+  text-align: center;
+  line-height: 1;
+}
+.congratulations .money b {
+  font-size: 1.35rem;
+}
+.congratulations .description {
+  margin-top: 2.25rem;
+  font-size: 0.3rem;
+  color: #ffe509;
+  text-align: center;
+}
+.congratulations .close {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  width: 0.61rem;
+  height: 0.61rem;
+  background: url("../img/close.png") no-repeat 0rem 0rem;
+}
+.game {
+  background: url('../img/gamebg.jpg');
+  position: relative;
+}
+.game .coin {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  left: 0.14rem;
+  top: 0.29rem;
+  background: url("../img/coin.png") no-repeat;
+}
+.game p {
+  font-size: 0.4rem;
+  color: #fff;
+  padding-top: 0.29rem;
+  padding-left: 0.92rem;
+}
+.game .redlip,
+.game .icon {
+  position: absolute;
+}
+.game .redlip img.cloud,
+.game .icon img.cloud {
+  top: -20px;
+  position: absolute;
+}
+.game .lip1,
+.game .icon1 {
+  transform: rotate(-7deg);
+}
+.game .lip1 img.iconandredlip {
+  transform: rotate(14deg) rotateY(180deg);
+}
+.game .icon1 img.iconandredlip {
+  transform: rotate(14deg);
+}
+.game .lip2,
+.game .icon2 {
+  transform: rotate(-35deg);
+}
+.game .lip2 img.iconandredlip,
+.game .icon2 img.iconandredlip {
+  transform: rotate(0deg);
+}
+.game .lip3,
+.game .icon3 {
+  transform: rotate(-10deg);
+}
+.game .lip3 img.iconandredlip {
+  transform: rotate(0deg) rotateY(180deg);
+}
+.game .icon3 img.iconandredlip {
+  transform: rotate(0deg);
+}
+.game .lip4,
+.game .icon4 {
+  transform: rotate(20deg);
+}
+.game .lip4 img.iconandredlip,
+.game .icon4 img.iconandredlip {
+  transform: rotate(0deg);
+}
+.game .lip5,
+.game .icon5 {
+  transform: rotate(10deg);
+}
+.game .lip5 img.iconandredlip,
+.game .icon5 img.iconandredlip {
+  transform: rotate(-10deg);
+}
+.game .small,
+.game .small img.iconandredlip {
+  width: 1.36rem;
+  height: 1.36rem;
+}
+.game .small img.cloud {
+  width: 1.36rem;
+}
+.game .large,
+.game .large img.iconandredlip {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+.game .large img.cloud {
+  width: 1.75rem;
+}
+.game .medium,
+.game .medium img.iconandredlip {
+  width: 1.63rem;
+  height: 1.63rem;
+}
+.game .medium img.cloud {
+  width: 1.63rem;
+}
