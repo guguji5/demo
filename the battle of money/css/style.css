@@ -126,6 +126,24 @@
   top: 0.29rem;
   background: url("../img/coin.png") no-repeat;
 }
+.game .progress {
+  width: 0.43rem;
+  height: 8.56rem;
+  position: absolute;
+  left: 0.2rem;
+  bottom: 2.1rem;
+  border-radius: 0.21rem;
+  overflow: hidden;
+  background: url("../img/middle.png") repeat-y;
+}
+.game .pipe {
+  width: 0.96rem;
+  height: 8.7rem;
+  position: absolute;
+  left: 0px;
+  top: 1.34rem;
+  background: url("../img/pipe.png") no-repeat 0rem 0rem;
+}
 .game p {
   font-size: 0.4rem;
   color: #fff;

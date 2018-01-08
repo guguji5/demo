@@ -35,6 +35,9 @@
 .top(@a){
   top:(@a/ @rate)* 1rem;
 }
+.bottom(@a){
+  bottom:(@a/ @rate)* 1rem;
+}
 .lineHeight(@a){
   line-height: (@a/ @rate)* 1rem;
 }
@@ -184,6 +187,24 @@
   .left(14);
   .top(29);
   background: url("../img/coin.png") no-repeat;
+}
+.game .progress{
+  .width(43);
+  .height(856);
+  position: absolute;
+  .left(20);
+  .bottom(210);
+  border-radius: 0.21rem;
+  overflow: hidden;
+  background: url("../img/middle.png") repeat-y;
+}
+.game .pipe{
+  .width(96);
+  .height(870);
+  position: absolute;
+  left:0px;
+  .top(134);
+  .backGround("../img/pipe.png",0,0);
 }
 .game p{
   .fontSize(40);
