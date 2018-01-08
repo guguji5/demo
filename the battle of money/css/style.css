@@ -53,6 +53,18 @@
   text-align: center;
   line-height: 0.62rem;
 }
+.countDown .content .login {
+  width: 100%;
+  height: 1rem;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background: rgba(104, 0, 211, 0.5);
+  line-height: 1rem;
+  text-align: center;
+  font-size: 0.3rem;
+  color: #fff;
+}
 .rules .content {
   width: 6.53rem;
   height: 5.97rem;
