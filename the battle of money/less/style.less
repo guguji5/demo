@@ -46,6 +46,11 @@
   @top:(@y/ @rate)* 1rem;
   background:url("@{z}") no-repeat @left @top;
 }
+.backGroundSize(@w,@h){
+  @width:(@w/ @rate)* 1rem;
+  @height:(@h/ @rate)* 1rem;
+  background-size: @width @height;
+}
 //以上都是函数   以下是倒计时和规则的样式
 .countDown .content{
   .paddingTop(350)
@@ -81,6 +86,7 @@
   .width(163);
   .height(111);
   .backGround("../img/countDown.png",0,0);
+  .backGroundSize(163,111);
   color:black;
   vertical-align: middle;
   .lineHeight(111);
@@ -99,6 +105,7 @@
   .fontSize(30);
   color:white;
   .backGround("../img/rule.png",0,-4);
+  .backGroundSize(143,66);
   text-align:center;
   .lineHeight(62);
 }
@@ -144,7 +151,8 @@
   .marginTop(26);
   .width(61);
   .height(61);
-  .backGround('../img/close.png',0,0)
+  .backGround('../img/close.png',0,0);
+  .backGroundSize(61,61);
 }
 //以下是kiss 样式
 .kiss{
@@ -163,6 +171,7 @@
 //以下是congratulations样式
 .congratulations{
   background:url("../img/congratulations.png") no-repeat;
+  .backGroundSize(750,785);
 }
 .congratulations .money{
   .marginTop(280);
@@ -185,11 +194,13 @@
   .marginTop(150);
   .width(61);
   .height(61);
-  .backGround('../img/close.png',0,0)
+  .backGround('../img/close.png',0,0);
+  .backGroundSize(61,61);
 }
 //以下是game的样式
 .game{
-  background:url('../img/gamebg.jpg');
+  background:url('../img/gamebg.jpg') no-repeat ;
+  background-size: cover;
   position:relative;
 }
 .game .coin{
@@ -199,6 +210,7 @@
   .left(14);
   .top(29);
   background: url("../img/coin.png") no-repeat;
+  .backGroundSize(55,55);
 }
 .game .progress{
   .width(43);
@@ -215,8 +227,9 @@
   .height(870);
   position: absolute;
   left:0px;
-  .top(134);
+  .bottom(210);
   .backGround("../img/pipe.png",0,0);
+  .backGroundSize(96,870);
 }
 .game p{
   .fontSize(40);
@@ -225,6 +238,7 @@
   .paddingLeft(92);
 }
 .game .redlip,.game .icon{;
+  .top(-175);
   position: absolute;
 }
 .game .redlip img.cloud,.game .icon img.cloud{

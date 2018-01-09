@@ -32,6 +32,7 @@
   width: 1.63rem;
   height: 1.11rem;
   background: url("../img/countDown.png") no-repeat 0rem 0rem;
+  background-size: 1.63rem 1.11rem;
   color: black;
   vertical-align: middle;
   line-height: 1.11rem;
@@ -50,6 +51,7 @@
   font-size: 0.3rem;
   color: white;
   background: url("../img/rule.png") no-repeat 0rem -0.04rem;
+  background-size: 1.43rem 0.66rem;
   text-align: center;
   line-height: 0.62rem;
 }
@@ -87,6 +89,7 @@
   width: 0.61rem;
   height: 0.61rem;
   background: url("../img/close.png") no-repeat 0rem 0rem;
+  background-size: 0.61rem 0.61rem;
 }
 .kiss {
   text-align: center;
@@ -102,6 +105,7 @@
 }
 .congratulations {
   background: url("../img/congratulations.png") no-repeat;
+  background-size: 7.5rem 7.85rem;
 }
 .congratulations .money {
   margin-top: 2.8rem;
@@ -125,9 +129,11 @@
   width: 0.61rem;
   height: 0.61rem;
   background: url("../img/close.png") no-repeat 0rem 0rem;
+  background-size: 0.61rem 0.61rem;
 }
 .game {
-  background: url('../img/gamebg.jpg');
+  background: url('../img/gamebg.jpg') no-repeat;
+  background-size: cover;
   position: relative;
 }
 .game .coin {
@@ -137,6 +143,7 @@
   left: 0.14rem;
   top: 0.29rem;
   background: url("../img/coin.png") no-repeat;
+  background-size: 0.55rem 0.55rem;
 }
 .game .progress {
   width: 0.43rem;
@@ -153,8 +160,9 @@
   height: 8.7rem;
   position: absolute;
   left: 0px;
-  top: 1.34rem;
+  bottom: 2.1rem;
   background: url("../img/pipe.png") no-repeat 0rem 0rem;
+  background-size: 0.96rem 8.7rem;
 }
 .game p {
   font-size: 0.4rem;
@@ -164,6 +172,7 @@
 }
 .game .redlip,
 .game .icon {
+  top: -1.75rem;
   position: absolute;
 }
 .game .redlip img.cloud,

@@ -12,7 +12,7 @@
         <div class="countDown">
             <div class="content">
                 <p><span class="left"></span>距离下一轮抢金币还有<span class="right"></span></p>
-                <div>
+                <div id="countdown">
                     <span>00</span> <font>时</font>
                     <span>05</span> <font>分</font>
                     <span>39</span> <font>秒</font>
@@ -25,11 +25,11 @@
                 </div>
             </div>
         </div>
-        <!--<div class="game">-->
-            <!--<div class="coin"></div>-->
-            <!--<p><span>0.8</span>元</p>-->
-            <!--<div class="progress"></div>-->
-            <!--<div class="pipe"></div>-->
+        <div class="game" style="display: none">
+            <div class="coin"></div>
+            <p><span>0.8</span>元</p>
+            <div class="progress"></div>
+            <div class="pipe"></div>
             <!--红唇模板  五种角度  lip1-lip5  大小 small medium large  -->
             <!--<div class="redlip lip1 medium">-->
                 <!--<img src="img/cloud.png" class="cloud">-->
@@ -44,34 +44,34 @@
             <!--</div>-->
             <!--金币模板  五种角度 icon1-icon5 大小 small medium large-->
 
-        <!--</div>-->
-        <!--<div class="mask"></div>-->
-        <!--<div class="rules">-->
-            <!--<div class="content">-->
-                <!--<p>游戏规则：</p>-->
-                <!--<p>1、每天总共5次抢钱的机会，分别在9:00,12:00,15:00,18:00,21:00；</p>-->
-                <!--<p>2、准点开抢，共10秒；</p>-->
-                <!--<p>3、抢到金币的，代表现金；抢到红唇的，界面将停顿3秒；10秒结束后，抢到的现金将自动发放到客户的账户余额；</p>-->
-                <!--<p>4、本活动结束时间以点贷诚金公告为准。</p>-->
-                <!--<p>4、点贷诚金保留本次活动在法律范围内的所有解释权。</p>-->
-            <!--</div>-->
-            <!--<div class="close"></div>-->
-        <!--</div>-->
-        <!--<div class="kiss">-->
-            <!--<img src="img/kiss.png">-->
-        <!--</div>-->
-        <!--<div class="congratulations">-->
-            <!--<p class="money">-->
-                <!--￥ <b>2</b>-->
-            <!--</p>-->
-            <!--<p class="description">-->
-                <!--2元现金红包-->
-            <!--</p>-->
-            <!--<div class="close"></div>-->
-        <!--</div>-->
-        <!--<div class="noReceipt">-->
-            <!--<img src="img/nothing.png">-->
-        <!--</div>-->
+        </div>
+        <div class="mask" style="display: none"></div>
+        <div class="rules" style="display: none">
+            <div class="content">
+                <p>游戏规则：</p>
+                <p>1、每天总共5次抢钱的机会，分别在9:00,12:00,15:00,18:00,21:00；</p>
+                <p>2、准点开抢，共10秒；</p>
+                <p>3、抢到金币的，代表现金；抢到红唇的，界面将停顿3秒；10秒结束后，抢到的现金将自动发放到客户的账户余额；</p>
+                <p>4、本活动结束时间以点贷诚金公告为准。</p>
+                <p>4、点贷诚金保留本次活动在法律范围内的所有解释权。</p>
+            </div>
+            <div class="close"></div>
+        </div>
+        <div class="kiss" style="display: none">
+            <img src="img/kiss.png">
+        </div>
+        <div class="congratulations" style="display: none">
+            <p class="money">
+                ￥ <b>2</b>
+            </p>
+            <p class="description">
+                2元现金红包
+            </p>
+            <div class="close"></div>
+        </div>
+        <div class="noReceipt" style="display: none">
+            <img src="img/nothing.png">
+        </div>
     </div>
     <script type="text/javascript" src='js/index.js'></script>
 </body>
