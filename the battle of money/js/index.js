@@ -21,7 +21,9 @@
     var position = function(){       //距离左边距20% 右边距 10%的范围内
         return Math.ceil(20+Math.random()*70)+"%";
     };
-    var duration = 15; //游戏时长  15s
+    var duration = 15; //游戏时长  15s   如果需要修改，请一并修改css的 drop 动画
+    total = 0;//收货的金额
+    var killTime =3; //红唇显示的时间 单位是秒
     var coinMetaData = {
         "0.5":0.5,
         "0.8":0.8,
@@ -60,10 +62,9 @@
         this.id = id++;
         this.time = 0;
         this.template ='<img src="img/cloud.png" class="cloud">'+
-            ' <img src="img/redlip0.png" class="iconandredlip">';
+            ' <img src="img/redlip.png" class="iconandredlip">';
     };
     Redlip.prototype.createNode = function () {
-        console.log(this.rem);
         var container = document.querySelector(".game");
         var divElement=document.createElement("div");
         divElement.style.left = this.position;
@@ -76,13 +77,18 @@
             _self.time+=frame;
             var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/50000-1.75*rem;
             var div = document.querySelector("#"+"coin"+_self.id);
-            if(length>clientHeight){
-                var Game = document.querySelector(".game");
-                Game.removeChild(div);
-                clearInterval(timer);
+            if(div){
+                if(length>clientHeight){
+                    var Game = document.querySelector(".game");
+                    Game.removeChild(div);
+                    clearInterval(timer);
+                }else{
+                    div.style.top = length+'px';
+                }
             }else{
-                div.style.top = length+'px';
+                clearInterval(timer);
             }
+
         },frame);
     };
 
@@ -108,23 +114,26 @@
         divElement.className='icon icon'+this.style+' '+ this.size;
         divElement.innerHTML=this.template;
         container.appendChild(divElement);
+
         var _self = this;
-        console.log("this id =",this.id,_self);
         var timer = setInterval(function () {
             _self.time+=frame;
-            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/50000-1.75*rem;;
+            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/50000-1.75*rem;
             var div = document.querySelector("#"+"coin"+_self.id);
-            if(length>clientHeight){
-                var Game = document.querySelector(".game");
-                Game.removeChild(div);
-                clearInterval(timer);
+            if(div){
+                if(length>clientHeight){
+                    var Game = document.querySelector(".game");
+                    Game.removeChild(div);
+                    clearInterval(timer);
+                }else{
+                    div.style.top = length+'px';
+                }
             }else{
-                div.style.top = length+'px';
+                clearInterval(timer);
             }
+
         },frame);
     };
-    //试着创建了几个红唇
-
 
     //点击登陆后跳转到登录页
     $('.login')[0].onclick=function () {
@@ -135,13 +144,14 @@
       $('.mask')[0].show();
       $('.rules')[0].show();
     };
+    console.log()
     $('.rules .close')[0].onclick=function () {
         $('.mask')[0].hide();
         $('.rules')[0].hide();
     };
     $get("http://52.80.63.100:10333/api/definition",function (data) {
         console.log(data);
-        data = {isLogged:0,remainingTime:6};
+        data = {isLogged:0,remainingTime:2};
         if(data.isLogged===1){
             $('.login')[0].style.display = "none";
         }
@@ -150,7 +160,7 @@
         }
 
     })
-
+    //倒计时页面倒计时计算时间
     function randerCountDown(ss) {
         var h = parseInt(ss/3600);
         var m = parseInt(ss / 60 % 60);
@@ -160,7 +170,22 @@
         $("#countdown span")[2].innerText = s;
         if(ss ===0){
             console.log('获取金币序列接口');
-            getCoinList()
+            getCoinList();
+            setTimeout(function () {
+                document.removeEventListener('click',lipAndKillClick);
+                $('.congratulations .close')[0].onclick = function () {
+                    $('.congratulations')[0].hide();
+                    $('.mask')[0].hide();
+                }
+                $('.mask')[0].show();
+                if(total>0){
+                    $('b')[0].innerText = total;
+                    $('.description')[0].innerText = total+"元现金红包";
+                    $('.congratulations')[0].show();
+                }else{
+                    $('.noReceipt')[0].show();
+                }
+            },duration*1000)
             return;
         };
         setTimeout(function () {
@@ -168,13 +193,102 @@
         },1000)
 
     }
-
+    //倒计时结束时获取金币序列
     function getCoinList() {
         $('.countDown')[0].hide();
         $('.game')[0].show();
+        //倒计时开始
+        // console.log($(".progress")[0].classList);
+        document.addEventListener('click',lipAndKillClick);
         new Redlip(2,'large',2,1).createNode();
         new Redlip(1,'small',1,2).createNode();
         new Coin(3,'medium',1.5,0.5,coinMetaData[0.5]).createNode();
+
+        setTimeout(function () {
+            new Redlip(4,'small',2,2).createNode();
+            new Coin(5,'large',1600,0,coinMetaData[0.8]).createNode();
+        },5000)
+
+        setTimeout(function () {
+            new Redlip(3,'medium',2.5,2).createNode();
+            new Coin(1,'small',1,1,coinMetaData[1]).createNode();
+        },3000)
+
+
+    }
+    //点击红唇或者金币的事件
+    function lipAndKillClick(event){
+        var targetDom = event.target;
+        console.log(targetDom.parentElement.offsetLeft,targetDom.parentElement.offsetTop,targetDom.parentElement.offsetWidth)
+        var imgSrc = targetDom.getAttribute('src');
+        switch(imgSrc){
+            case "img/redlip.png":
+                $('.mask')[0].show();
+                $('.kiss')[0].show();
+                setTimeout(function () {
+                    $('.mask')[0].hide();
+                    $('.kiss')[0].hide();
+                },killTime*1000)
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/0.5.png":
+                addTotalValue(0.5);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/0.8.png":
+                addTotalValue(0.8);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/1.png":
+                addTotalValue(0.8);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            default:
+                return;
+        }
+    }
+    function coinEffect(top,left) {
+        var dom = document.createElement("div");
+        var container = document.querySelector(".game");
+        dom.className="coinEffect";
+        dom.style.position = "absolute";
+        dom.style.width = 0.55*rem+'px';
+        dom.style.height = 0.55*rem+'px';
+        dom.style.background = "url(img/coin.png) no-repeat 0 0";
+        dom.style.backgroundSize = "cover";
+        dom.style.animationDuration = "1.5s";
+        dom.style.animationFillMode = "forwards";
+        dom.style.animationName = "fly";
+        container.appendChild(dom);
+        var rule;
+        var ss = document.styleSheets;
+        for (var i = 0; i < ss.length; ++i) {
+            if(ss[i].cssRules){//外链css好像有问题，必须用内联的
+                for (var x = 0; x < ss[i].cssRules.length; ++x) {
+                    rule = ss[i].cssRules[x];
+                    if (rule.name == "fly" && rule.type
+                        == CSSRule.KEYFRAMES_RULE) {
+                        cssRule = rule;
+                    }
+                }
+            }
+
+        }
+        cssRule.deleteRule("0");
+        cssRule.deleteRule("1");
+        cssRule.appendRule("0% { top: "+top*0.01+"rem;left:"+left*0.01+"rem;transform:  scale(2)}");
+        cssRule.appendRule("100% { top:0.29rem;left:0.14rem;transform:  scale(1) }");
+
+    }
+    //game页面给左上角游戏总额赋值；
+    function addTotalValue(v) {
+        if(v){
+            total+=v;
+            $('.game p span')[0].innerText = total;
+        }
     }
 
     Object.prototype.show = function () {

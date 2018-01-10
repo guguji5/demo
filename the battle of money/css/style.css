@@ -147,13 +147,33 @@
 }
 .game .progress {
   width: 0.43rem;
-  height: 8.56rem;
   position: absolute;
   left: 0.2rem;
   bottom: 2.1rem;
   border-radius: 0.21rem;
   overflow: hidden;
   background: url("../img/middle.png") repeat-y;
+  animation: drop 15s linear;
+}
+@keyframes drop {
+  from {
+    height: 8.56rem;
+  }
+  to {
+    height: 0px;
+  }
+}
+@keyframes fly {
+  from {
+    position: absolute;
+    top: 400px;
+    left: 400px;
+  }
+  to {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
 }
 .game .pipe {
   width: 0.96rem;
@@ -177,7 +197,7 @@
 }
 .game .redlip img.cloud,
 .game .icon img.cloud {
-  top: -20px;
+  top: -0.2rem;
   position: absolute;
 }
 .game .lip1,

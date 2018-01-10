@@ -214,14 +214,25 @@
 }
 .game .progress{
   .width(43);
-  .height(856);
+  //.height(0);
   position: absolute;
   .left(20);
   .bottom(210);
   border-radius: 0.21rem;
   overflow: hidden;
   background: url("../img/middle.png") repeat-y;
+  animation:drop 15s linear;
 }
+@keyframes drop
+{
+  from {.height(856);}
+  to {height:0px;}
+}
+@keyframes fly {
+  from{position:absolute;top:400px;left:400px;}
+  to{position: absolute;top:50px;left:50px;}
+}
+
 .game .pipe{
   .width(96);
   .height(870);
@@ -242,7 +253,7 @@
   position: absolute;
 }
 .game .redlip img.cloud,.game .icon img.cloud{
-  top:-20px;
+  .top(-20);
   position: absolute;
 }
 .game .lip1,.game .icon1{
