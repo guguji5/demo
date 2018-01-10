@@ -130,9 +130,18 @@
     $('.login')[0].onclick=function () {
         window.location.href=loginUrl;
     };
+    //点击出现规则页面
+    $('.countDown .rule')[0].onclick=function () {
+      $('.mask')[0].show();
+      $('.rules')[0].show();
+    };
+    $('.rules .close')[0].onclick=function () {
+        $('.mask')[0].hide();
+        $('.rules')[0].hide();
+    };
     $get("http://52.80.63.100:10333/api/definition",function (data) {
         console.log(data);
-        data = {isLogged:0,remainingTime:3};
+        data = {isLogged:0,remainingTime:6};
         if(data.isLogged===1){
             $('.login')[0].style.display = "none";
         }
