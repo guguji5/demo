@@ -21,10 +21,14 @@ li{
 a{
     text-decoration: none;
 }
+img{
+    border:none;
+}
 button{
     border:none;
     outline: none;
     cursor: pointer;
+    overflow: hidden;
 }
 .clearfix:after{
     content: " ";
@@ -41,10 +45,10 @@ button{
     /*为了小屏能整屏撑下，采用百分比，原尺寸1366*768分辨率不能完全放下“面试大咖秀”banner*/
     width:70%;
     margin-top:0.2355rem;
-    animation: shake 0.5s;
-    -webkit-animation: shake 0.5s;
-    -o-animation: shake 0.5s;
-    -moz-animation: shake 0.5s;
+    animation: shake 0.5s 1s;
+    -webkit-animation: shake 0.5s 1s;
+    -o-animation: shake 0.5s 1s;
+    -moz-animation: shake 0.5s 1s;
 }
 /*自定义动画*/
 @-webkit-keyframes shake{
@@ -111,9 +115,6 @@ button{
     width:3.3741rem;
     margin:0.3072rem auto 0.2458rem;
 }
-
-
-
 /*tab选项卡style*/
 .tabs{
     padding-left:0.3277rem;
@@ -127,10 +128,13 @@ button{
     font-size: 0.11264rem;
     font-family: '微软雅黑';
     background: url('../img/tab_red.png') no-repeat;
-    margin-right:0.2765rem;
+    margin-right:0.256rem;
+    background-size: 100% 100%;
 }
+
 .tabs li.active{
     background: url('../img/tab_yel.png');
+    background-size: 100% 100%;
     color:#ec1421;
 }
 .tab{
@@ -141,7 +145,8 @@ button{
     padding:0.1792rem 0.1434rem 0.2048rem 0.1024rem;
     margin-top:-0.046rem;
     height:1.9661rem;
-    background: url('../img/tabbg.png');
+    background: url('../img/tabbg.png') no-repeat;
+    background-size: 100% 100%;
     font-size: 0.0819rem;
     line-height: 0.1075rem;
 }
@@ -180,15 +185,15 @@ button{
     line-height:0.174rem;
 }
 .tab div .description .title{
-    width: 1.0343rem;
-    font-size: 0.1229rem;
-    line-height: 0.1331rem;
+    width: 1.35rem;
+    font-size: 0.10rem;
+    line-height: 0.15rem;
     font-family: '微软雅黑';
     margin-bottom:0.1024rem;
     margin-top:0.256rem;
 }
 .tab div .description .btn button{
-    margin:0.0922rem 50.0256rem 0;
+    margin:0.05rem 0.0256rem 0;
     width:0.6656rem;
     height:0.2202rem;
     color:#fff;
@@ -198,9 +203,11 @@ button{
 }
 .toSee{
     background: url('../img/btn_tosee.png') center;
+    background-size: 100% 100%;
 }
 .toPartici{
     background: url('../img/btn_topartici.png') center;
+    background-size: 100% 100%;
 }
 /*表格style*/
 .table{
@@ -229,9 +236,14 @@ button{
 }
 .table table td.grayBg{
     background: #f6f6f6;
+    display: none;
 }
 .table table td.fontL{
     font-size: 0.0922rem;
+    display:table-cell;
+}
+.isShow{
+    display: none;
 }
 .table table th{
     border-left:1px solid #e2313e;
@@ -291,29 +303,41 @@ ul.cities li button:hover{
     padding-top:0.1382rem;
     width:100%;
     background:#151515;
-    height:0.6809rem;
+    min-height:0.6809rem;
 }
 .footer .main{
     width:5.289rem;
     margin:0 auto;
 }
 .footer .links{
-    margin-left:0.4147rem;
-    height:100%;
+    text-align: center;
 }
-.footer .links li a{
-    font-size: 0.0717rem;
-    line-height: 0.1229rem;
+.footer .links a{
     padding:0 0.0512rem;
     color:#fff;
-    float:left;
 }
-.footer .links li+li a{
+.footer .links  a+a{
     border-left:1px solid #fff;
 }
 .footer p{
     text-align: center;
     font-size: 0.0717rem;
-    line-height: 0.1229rem;
+    line-height: 1.714;
     color:#fff;
+}
+/*pc端用另一套样式*/
+@media only screen and (min-width: 1000px){
+   .tabs li{
+        margin-right:5px;
+    }
+    .table table td.grayBg{
+        background: #f6f6f6;
+        display: table-cell;
+    }
+    .table table td.fontL{
+        font-size: 0.0922rem;
+    }
+    .isShow{
+        display: table-cell;
+    }
 }
