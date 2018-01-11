@@ -33,6 +33,7 @@
     var $ = function(selector){
         return document.querySelectorAll(selector);
     }
+    var isRadio = true;
     var $get = function (url,f) {
         var httpRequest = new XMLHttpRequest();
         if (!httpRequest) {
@@ -144,7 +145,14 @@
       $('.mask')[0].show();
       $('.rules')[0].show();
     };
-    console.log()
+    $('.radio')[0].onclick=function () {
+        isRadio = !isRadio;
+        if(isRadio){
+            $('.radio')[0].className = "radio open";
+        }else{
+            $('.radio')[0].className = "radio shut";
+        }
+    }
     $('.rules .close')[0].onclick=function () {
         $('.mask')[0].hide();
         $('.rules')[0].hide();
@@ -185,6 +193,9 @@
                 }else{
                     $('.noReceipt')[0].show();
                 }
+                if(isRadio){
+                    $('#music')[0].pause();
+                }
             },duration*1000)
             return;
         };
@@ -198,15 +209,17 @@
         $('.countDown')[0].hide();
         $('.game')[0].show();
         //倒计时开始
-        // console.log($(".progress")[0].classList);
+        if(isRadio){
+            $('#music')[0].play();
+        }
         document.addEventListener('click',lipAndKillClick);
         new Redlip(2,'large',2,1).createNode();
         new Redlip(1,'small',1,2).createNode();
-        new Coin(3,'medium',1.5,0.5,coinMetaData[0.5]).createNode();
+        new Coin(3,'small',1.5,0.5,coinMetaData[0.5]).createNode();
 
         setTimeout(function () {
             new Redlip(4,'small',2,2).createNode();
-            new Coin(5,'large',1600,0,coinMetaData[0.8]).createNode();
+            new Coin(5,'small',1600,0,coinMetaData[0.8]).createNode();
         },5000)
 
         setTimeout(function () {

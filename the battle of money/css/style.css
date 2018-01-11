@@ -47,13 +47,28 @@
   height: 0.62rem;
   position: fixed;
   right: 0rem;
-  top: 1.01rem;
+  top: 0.5rem;
   font-size: 0.3rem;
   color: white;
   background: url("../img/rule.png") no-repeat 0rem -0.04rem;
   background-size: 1.43rem 0.66rem;
   text-align: center;
   line-height: 0.62rem;
+}
+.countDown .content .radio {
+  width: 0.46rem;
+  height: 0.46rem;
+  position: absolute;
+  top: 0.58rem;
+  right: 1.24rem;
+}
+.countDown .content .radio.open {
+  background: url("../img/open.png") no-repeat 0rem 0rem;
+  background-size: 0.46rem 0.46rem;
+}
+.countDown .content .radio.shut {
+  background: url("../img/shut.png") no-repeat 0rem 0rem;
+  background-size: 0.46rem 0.46rem;
 }
 .countDown .content .login {
   width: 100%;
@@ -149,7 +164,7 @@
   width: 0.43rem;
   position: absolute;
   left: 0.2rem;
-  bottom: 2.1rem;
+  bottom: 2.2rem;
   border-radius: 0.21rem;
   overflow: hidden;
   background: url("../img/middle.png") repeat-y;

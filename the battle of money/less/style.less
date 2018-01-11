@@ -101,13 +101,28 @@
   .height(62);
   position:fixed;
   .right(0);
-  .top(101);
+  .top(50);
   .fontSize(30);
   color:white;
   .backGround("../img/rule.png",0,-4);
   .backGroundSize(143,66);
   text-align:center;
   .lineHeight(62);
+}
+.countDown .content .radio{
+  .width(46);
+  .height(46);
+  position: absolute;
+  .top(58);
+  .right(124);
+}
+.countDown .content .radio.open{
+  .backGround('../img/open.png',0,0);
+  .backGroundSize(46,46);
+}
+.countDown .content .radio.shut{
+  .backGround('../img/shut.png',0,0);
+  .backGroundSize(46,46);
 }
 .countDown .content .login{
   width:100%;
@@ -217,7 +232,7 @@
   //.height(0);
   position: absolute;
   .left(20);
-  .bottom(210);
+  .bottom(220);
   border-radius: 0.21rem;
   overflow: hidden;
   background: url("../img/middle.png") repeat-y;
