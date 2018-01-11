@@ -18,8 +18,12 @@
     //初始化参数
     var id = 0;
     var frame = 60; //10ms刷新一次动画
-    var position = function(){       //距离左边距20% 右边距 10%的范围内
-        return Math.ceil(20+Math.random()*70)+"%";
+    var position = function(w){       //距离左边距20% 右边距 10%的范围内 参数w为红唇或者kiss的宽度，需要减去宽度的一半。
+        if(w){
+            return Math.ceil(25+Math.random()*65-w*100/2/750)+"%";
+        }else{
+            return Math.ceil(25+Math.random()*65)+"%";
+        }
     };
     var duration = 15; //游戏时长  15s   如果需要修改，请一并修改css的 drop 动画
     total = 0;//收货的金额
@@ -59,7 +63,19 @@
         this.size = size;
         this.v = v;
         this.a = a;
-        this.position = position();
+        switch(this.size){
+            case "large":
+                this.position = position(175);
+                break;
+            case "medium":
+                this.position = position(163);
+                break;
+            case "small":
+                this.position = position(136);
+                break;
+            default:
+                this.position = position();
+        }
         this.id = id++;
         this.time = 0;
         this.template ='<img src="img/cloud.png" class="cloud">'+
@@ -99,7 +115,19 @@
         this.size = size;
         this.v = v;
         this.a = a;
-        this.position = position();
+        switch(this.size){
+            case "large":
+                this.position = position(175);
+                break;
+            case "medium":
+                this.position = position(163);
+                break;
+            case "small":
+                this.position = position(136);
+                break;
+            default:
+                this.position = position();
+        }
         this.id = id++;
         this.time = 0;
         this.num = num;
