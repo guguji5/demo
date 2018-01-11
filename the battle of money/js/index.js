@@ -159,7 +159,7 @@
     };
     $get("http://52.80.63.100:10333/api/definition",function (data) {
         console.log(data);
-        data = {isLogged:0,remainingTime:2};
+        data = {isLogged:0,remainingTime:5};
         if(data.isLogged===1){
             $('.login')[0].style.display = "none";
         }
