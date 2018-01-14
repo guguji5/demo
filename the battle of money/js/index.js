@@ -38,6 +38,7 @@
         return document.querySelectorAll(selector);
     }
     var isRadio = true;
+    var isLogged =false;
     var $get = function (url,f) {
         var httpRequest = new XMLHttpRequest();
         if (!httpRequest) {
@@ -46,8 +47,8 @@
         }
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                if (httpRequest.status === 0) {
-                    f(httpRequest.responseText)
+                if (httpRequest.status === 200) {
+                    f(JSON.parse(httpRequest.responseText));
                 } else {
                     console.log('There was a problem with the request to',url);
                 }
@@ -185,16 +186,21 @@
         $('.mask')[0].hide();
         $('.rules')[0].hide();
     };
-    $get("http://52.80.63.100:10333/api/definition",function (data) {
-        console.log(data);
-        data = {isLogged:0,remainingTime:5};
-        if(data.isLogged===1){
+    $get("http://apitest.ddrmb.com:8012/v1/activity/coins_fight/islogin?phone=18710149987&token=2017-12-27-9155878111",function (data) {
+        //已登陆,如未登陆则按钮依然不显示
+        if(data.content.isLogged===1){
             $('.login')[0].style.display = "none";
+            isLogged = true;
         }
-        if(data.remainingTime>0){
+        //在活动时间内
+        if(data.remainingTime>=0){
             randerCountDown(data.remainingTime)
+        }else if(data.remainingTime=="-1"){
+            //未在活动时间内
+            $("#countdown span")[0].innerText = "00";
+            $("#countdown span")[1].innerText = "00";
+            $("#countdown span")[2].innerText = "-1";
         }
-
     })
     //倒计时页面倒计时计算时间
     function randerCountDown(ss) {
@@ -205,26 +211,28 @@
         $("#countdown span")[1].innerText = m;
         $("#countdown span")[2].innerText = s;
         if(ss ===0){
-            console.log('获取金币序列接口');
-            getCoinList();
-            setTimeout(function () {
-                document.removeEventListener('click',lipAndKillClick);
-                $('.congratulations .close')[0].onclick = function () {
-                    $('.congratulations')[0].hide();
-                    $('.mask')[0].hide();
-                }
-                $('.mask')[0].show();
-                if(total>0){
-                    $('b')[0].innerText = total;
-                    $('.description')[0].innerText = total+"元现金红包";
-                    $('.congratulations')[0].show();
-                }else{
-                    $('.noReceipt')[0].show();
-                }
-                if(isRadio){
-                    $('#music')[0].pause();
-                }
-            },duration*1000)
+            if(isLogged){
+                //如果登陆了，就请求剧本接口。
+                getCoinList();
+                setTimeout(function () {
+                    document.removeEventListener('click',lipAndKillClick);
+                    $('.congratulations .close')[0].onclick = function () {
+                        $('.congratulations')[0].hide();
+                        $('.mask')[0].hide();
+                    }
+                    $('.mask')[0].show();
+                    if(total>0){
+                        $('b')[0].innerText = total;
+                        $('.description')[0].innerText = total+"元现金红包";
+                        $('.congratulations')[0].show();
+                    }else{
+                        $('.noReceipt')[0].show();
+                    }
+                    if(isRadio){
+                        $('#music')[0].pause();
+                    }
+                },duration*1000)
+            }
             return;
         };
         setTimeout(function () {
@@ -239,7 +247,10 @@
         //倒计时开始
         if(isRadio){
             $('#music')[0].play();
-        }
+        };
+        $get("http://apitest.ddrmb.com:8012/v1/activity/coins_fight/data?phone=18710149987&token=2017-12-27-9155878111",function (data) {
+            console.log(data);
+        })
         document.addEventListener('click',lipAndKillClick);
         new Redlip(2,'large',2,1).createNode();
         new Redlip(1,'small',1,2).createNode();
