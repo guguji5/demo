@@ -4,7 +4,7 @@
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {
         var clientWidth = docEl.clientWidth;
-        console.log('the client height is ',docEl.clientHeight);
+        // console.log('the client height is ',docEl.clientHeight);
         clientHeight = docEl.clientHeight;
         if (!clientWidth) return;
         clientWidth=clientWidth>1033?1033:clientWidth;
@@ -17,7 +17,7 @@
 
     //初始化参数
     var id = 0;
-    var frame = 60; //10ms刷新一次动画
+    var frame = 60; //60ms刷新一次动画
     var position = function(w){       //距离左边距20% 右边距 10%的范围内 参数w为红唇或者kiss的宽度，需要减去宽度的一半。
         if(w){
             return Math.ceil(25+Math.random()*65-w*100/2/750)+"%";
@@ -29,10 +29,14 @@
     total = 0;//收货的金额
     var killTime =3; //红唇显示的时间 单位是秒
     var coinMetaData = {
+        "0.01":0.01,
+        "0.1":0.1,
+        "0.2":0.2,
         "0.5":0.5,
         "0.8":0.8,
         "1":1
     };
+    var acceleratedspeed=0.5;
     var loginUrl = "http://www.baidu.com";
     var $ = function(selector){
         return document.querySelectorAll(selector);
@@ -186,16 +190,16 @@
         $('.mask')[0].hide();
         $('.rules')[0].hide();
     };
-    $get("http://apitest.ddrmb.com:8012/v1/activity/coins_fight/islogin?phone=18710149987&token=2017-12-27-9155878111",function (data) {
+    $get("http://apitest.ddrmb.com:8019/v1/activity/coins_fight/islogin?phone=18710149987&token=2017-12-27-9155878111",function (data) {
         //已登陆,如未登陆则按钮依然不显示
         if(data.content.isLogged===1){
             $('.login')[0].style.display = "none";
             isLogged = true;
         }
         //在活动时间内
-        if(data.remainingTime>=0){
-            randerCountDown(data.remainingTime)
-        }else if(data.remainingTime=="-1"){
+        if(data.content.remainingTime>=0){
+            randerCountDown(data.content.remainingTime)
+        }else if(data.content.remainingTime=="-1"){
             //未在活动时间内
             $("#countdown span")[0].innerText = "00";
             $("#countdown span")[1].innerText = "00";
@@ -248,23 +252,49 @@
         if(isRadio){
             $('#music')[0].play();
         };
-        $get("http://apitest.ddrmb.com:8012/v1/activity/coins_fight/data?phone=18710149987&token=2017-12-27-9155878111",function (data) {
-            console.log(data);
-        })
         document.addEventListener('click',lipAndKillClick);
-        new Redlip(2,'large',2,1).createNode();
-        new Redlip(1,'small',1,2).createNode();
-        new Coin(3,'small',1.5,0.5,coinMetaData[0.5]).createNode();
+        $get("http://apitest.ddrmb.com:8019/v1/activity/coins_fight/data?phone=18710149987&token=2017-12-27-9155878111",function (data) {
+            console.log(data);
+            if(data.content.isLogged ===1 && data.content.remainingTime===0 && data.content.xl){
+                var list = data.content.xl;
+                list.forEach(function(value,key){
+                    if(value.number ===0){
+                        var size = ['small','medium','large'];
+                        var ran = Math.floor(Math.random()*3);
+                        var style = [1,2,3,4,5];
+                        var ran1 = Math.floor(Math.random()*5);
+                        setTimeout(function () {
+                            new Redlip(style[ran1],size[ran],value.speed,acceleratedspeed).createNode();
+                        },value.showTime)
+                    }else{
+                        var size = ['small','medium','large'];
+                        var ran = Math.floor(Math.random()*3);
+                        var style = [1,2,3,4,5];
+                        var ran1 = Math.floor(Math.random()*5);
+                        setTimeout(function () {
+                            new Coin(style[ran1],size[ran],value.speed,acceleratedspeed,coinMetaData[0.8]).createNode();
+                        },value.showTime)
+                    }
+                })
 
-        setTimeout(function () {
-            new Redlip(4,'small',2,2).createNode();
-            new Coin(5,'small',1600,0,coinMetaData[0.8]).createNode();
-        },5000)
+            }else{
+                console.log('身份有问题')
+            }
+        })
 
-        setTimeout(function () {
-            new Redlip(3,'medium',2.5,2).createNode();
-            new Coin(1,'small',1,1,coinMetaData[1]).createNode();
-        },3000)
+        // new Redlip(2,'large',2,1).createNode();
+        // new Redlip(1,'small',1,2).createNode();
+        // new Coin(3,'small',1.5,0.5,coinMetaData[0.5]).createNode();
+        //
+        // setTimeout(function () {
+        //     new Redlip(4,'small',2,2).createNode();
+        //     new Coin(5,'small',1600,0,coinMetaData[0.8]).createNode();
+        // },5000)
+        //
+        // setTimeout(function () {
+        //     new Redlip(3,'medium',2.5,2).createNode();
+        //     new Coin(1,'small',1,1,coinMetaData[1]).createNode();
+        // },3000)
 
 
     }
