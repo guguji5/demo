@@ -98,7 +98,7 @@
         var _self = this;
         var timer = setInterval(function () {
             _self.time+=frame;
-            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/50000-1.75*rem;
+            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/ratio-1.75*rem;
             var div = document.querySelector("#"+"coin"+_self.id);
             if(div){
                 if(length>clientHeight){
@@ -153,7 +153,7 @@
         var _self = this;
         var timer = setInterval(function () {
             _self.time+=frame;
-            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/50000-1.75*rem;
+            var length = ((_self.a*_self.time*_self.time)/2+_self.v*_self.time)/ratio-1.75*rem;
             var div = document.querySelector("#"+"coin"+_self.id);
             if(div){
                 if(length>clientHeight){
