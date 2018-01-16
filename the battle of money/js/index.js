@@ -36,7 +36,8 @@
         "0.8":0.8,
         "1":1
     };
-    var acceleratedspeed=0.5;
+    var acceleratedspeed=0.5;  //加速度，越大下落的越快
+    var ratio = 50000;  //配速   越大，下落的越慢
     var loginUrl = "http://www.baidu.com";
     var $ = function(selector){
         return document.querySelectorAll(selector);
@@ -254,7 +255,6 @@
         };
         document.addEventListener('click',lipAndKillClick);
         $get("http://apitest.ddrmb.com:8019/v1/activity/coins_fight/data?phone=18710149987&token=2017-12-27-9155878111",function (data) {
-            console.log(data);
             if(data.content.isLogged ===1 && data.content.remainingTime===0 && data.content.xl){
                 var list = data.content.xl;
                 list.forEach(function(value,key){
@@ -272,13 +272,14 @@
                         var style = [1,2,3,4,5];
                         var ran1 = Math.floor(Math.random()*5);
                         setTimeout(function () {
-                            new Coin(style[ran1],size[ran],value.speed,acceleratedspeed,coinMetaData[0.8]).createNode();
+                            new Coin(style[ran1],size[1],value.speed,acceleratedspeed,coinMetaData[value.number]).createNode();
                         },value.showTime)
                     }
                 })
 
             }else{
-                console.log('身份有问题')
+                alert(data.content.desc,'打开console看log');
+                console.log(data);
             }
         })
 
@@ -303,6 +304,7 @@
         var targetDom = event.target;
         console.log(targetDom.parentElement.offsetLeft,targetDom.parentElement.offsetTop,targetDom.parentElement.offsetWidth)
         var imgSrc = targetDom.getAttribute('src');
+        console.log(imgSrc);
         switch(imgSrc){
             case "img/redlip.png":
                 $('.mask')[0].show();
@@ -311,6 +313,21 @@
                     $('.mask')[0].hide();
                     $('.kiss')[0].hide();
                 },killTime*1000)
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/0.01.png":
+                addTotalValue(0.01);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/0.1.png":
+                addTotalValue(0.1);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
+                $('.game')[0].removeChild(targetDom.parentElement);
+                break;
+            case "img/0.2.png":
+                addTotalValue(0.2);
+                coinEffect(targetDom.parentElement.offsetTop,targetDom.parentElement.offsetLeft);
                 $('.game')[0].removeChild(targetDom.parentElement);
                 break;
             case "img/0.5.png":

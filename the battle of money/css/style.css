@@ -13,6 +13,7 @@
   height: 0.3rem;
   background: url("../img/left.png") no-repeat 0rem 0rem;
   margin-right: 0.22rem;
+  background-size: 0.4rem 0.3rem;
 }
 .countDown .content p .right {
   display: inline-block;
@@ -20,6 +21,7 @@
   height: 0.3rem;
   background: url("../img/right.png") no-repeat 0rem 0rem;
   margin-left: 0.2rem;
+  background-size: 0.4rem 0.3rem;
 }
 .countDown .content p + div {
   margin-top: 0.58rem;
