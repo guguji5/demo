@@ -25,7 +25,7 @@
             return Math.ceil(25+Math.random()*65)+"%";
         }
     };
-    var duration = 15; //游戏时长  15s   如果需要修改，请一并修改css的 drop 动画
+    var duration = 10; //游戏时长  10s   如果需要修改，请一并修改css的 drop 动画
     total = 0;//收货的金额
     var killTime =3; //红唇显示的时间 单位是秒
     var coinMetaData = {
@@ -230,6 +230,13 @@
                         $('b')[0].innerText = total;
                         $('.description')[0].innerText = total+"元现金红包";
                         $('.congratulations')[0].show();
+                        $get("http://apitest.ddrmb.com:8019/v1/activity/coins_fight/handle?phone=18710149987&token=2017-12-27-9155878111                            &value="+total,function (data) {
+                            if(data.content.state ===1 && data.content.money===total){
+                                alert('恭喜您获得'+total+'元现金红包')
+                            }else{
+                                alert(data.desc);
+                            }
+                        })
                     }else{
                         $('.noReceipt')[0].show();
                     }
@@ -278,7 +285,7 @@
                 })
 
             }else{
-                alert(data.content.desc,'打开console看log');
+                alert(data.desc,'打开console看log');
                 console.log(data);
             }
         })
@@ -385,7 +392,8 @@
     //game页面给左上角游戏总额赋值；
     function addTotalValue(v) {
         if(v){
-            total+=v;
+            var temp =total+v;
+            total=Math.round(temp* 100)/100 ;
             $('.game p span')[0].innerText = total;
         }
     }
