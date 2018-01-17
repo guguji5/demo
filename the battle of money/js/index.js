@@ -1,5 +1,10 @@
 // 立即执行函数是为了变量不用其他冲突，合并的时候也会减少报错
 (function (doc, win) {
+    if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+        }, false);
+    }
     var docEl = doc.documentElement,
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {
@@ -25,9 +30,9 @@
             return Math.ceil(25+Math.random()*65)+"%";
         }
     };
-    var duration = 10; //游戏时长  10s   如果需要修改，请一并修改css的 drop 动画
+    var duration = 15; //游戏时长  10s   如果需要修改，请一并修改css的 drop 动画
     total = 0;//收货的金额
-    var killTime =3; //红唇显示的时间 单位是秒
+    var killTime =2; //红唇显示的时间 单位是秒
     var coinMetaData = {
         "0.01":0.01,
         "0.1":0.1,
@@ -37,7 +42,7 @@
         "1":1
     };
     var acceleratedspeed=0.5;  //加速度，越大下落的越快
-    var ratio = 50000;  //配速   越大，下落的越慢
+    var ratio = 10000;  //配速   越大，下落的越慢
     var loginUrl = "http://www.baidu.com";
     var $ = function(selector){
         return document.querySelectorAll(selector);
@@ -198,13 +203,18 @@
             isLogged = true;
         }
         //在活动时间内
-        if(data.content.remainingTime>=0){
+        if(data.content.remainingTime>0){
             randerCountDown(data.content.remainingTime)
         }else if(data.content.remainingTime=="-1"){
             //未在活动时间内
             $("#countdown span")[0].innerText = "00";
             $("#countdown span")[1].innerText = "00";
             $("#countdown span")[2].innerText = "-1";
+        }else if(data.content.remainingTime==0){
+            //当倒计时微0时，不自动开始
+            $("#countdown span")[0].innerText = "00";
+            $("#countdown span")[1].innerText = "00";
+            $("#countdown span")[2].innerText = "00";
         }
     })
     //倒计时页面倒计时计算时间
@@ -222,9 +232,14 @@
                 setTimeout(function () {
                     document.removeEventListener('click',lipAndKillClick);
                     $('.congratulations .close')[0].onclick = function () {
-                        $('.congratulations')[0].hide();
-                        $('.mask')[0].hide();
+                        // $('.congratulations')[0].hide();
+                        // $('.mask')[0].hide();
+                        window.location.replace(location.href);
                     }
+                    $('.noReceipt')[0].onclick=function () {
+                        window.location.replace(location.href);
+                    }
+                    $('.game')[0].hide();
                     $('.mask')[0].show();
                     if(total>0){
                         $('b')[0].innerText = total;

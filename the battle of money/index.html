@@ -12,6 +12,14 @@
             to{top:50px;left:50px;}
         }
     </style>
+    <script src="js/fastclick.js"></script>
+    <script>
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -59,8 +67,8 @@
                 <p>1、每天总共5次抢钱的机会，分别在9:00,12:00,15:00,18:00,21:00；</p>
                 <p>2、准点开抢，共10秒；</p>
                 <p>3、抢到金币的，代表现金；抢到红唇的，界面将停顿3秒；10秒结束后，抢到的现金将自动发放到客户的账户余额；</p>
-                <p>4、本活动结束时间以点贷诚金公告为准。</p>
-                <p>4、点贷诚金保留本次活动在法律范围内的所有解释权。</p>
+                <p>4、本活动结束时间以点贷诚金公告为准；</p>
+                <p>5、点贷诚金保留本次活动在法律范围内的所有解释权；</p>
             </div>
             <div class="close"></div>
         </div>
@@ -79,7 +87,7 @@
         <div class="noReceipt" style="display: none">
             <img src="img/nothing.png">
         </div>
-        <audio src="voice/Fight01.mp3" id="music"></audio>
+        <audio src="voice/Fight01.mp3" id="music" preload="auto">亲 您的浏览器不支持html5的audio标签</audio>
     </div>
     <script type="text/javascript" src='js/index.js'></script>
 </body>
