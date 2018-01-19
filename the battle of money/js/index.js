@@ -269,6 +269,10 @@
     }
     //倒计时结束时获取金币序列
     function getCoinList() {
+        document.addEventListener('touchstart', function () {
+            document.getElementsByTagName('audio')[0].play();
+            document.getElementsByTagName('audio')[0].pause();
+        });
         $('.countDown')[0].hide();
         $('.game')[0].show();
         //倒计时开始
