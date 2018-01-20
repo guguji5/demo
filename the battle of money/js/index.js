@@ -22,7 +22,7 @@
 
     //初始化参数
     var id = 0;
-    var frame = 60; //60ms刷新一次动画
+    var frame = 30; //30ms刷新一次动画
     var position = function(w){       //距离左边距20% 右边距 10%的范围内 参数w为红唇或者kiss的宽度，需要减去宽度的一半。
         if(w){
             return Math.ceil(25+Math.random()*65-w*100/2/750)+"%";
