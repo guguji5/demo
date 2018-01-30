@@ -418,5 +418,26 @@
     };
     Object.prototype.hide = function () {
         this.style.display = "none";
-    }
+    };
+
+    var loadimg = function (src) {
+        var node = document.createElement('img');
+        node.src =src;
+        node.style.height = "0px";
+        $('body')[0].appendChild(node);
+    };
+    setTimeout(function(){
+        loadimg("img/coin.png")
+        loadimg("img/0.1.png")
+        loadimg("img/0.01.png")
+        loadimg("img/0.2.png")
+        loadimg("img/0.5.png")
+        loadimg("img/0.8.png")
+        loadimg("img/1.png")
+        loadimg("img/pipe.png")
+        loadimg("img/middle.png")
+        loadimg("img/cloud.png")
+        loadimg("img/redlip.png")
+        loadimg("voice/Fight01.mp3")
+    },200)
 })(document, window);
