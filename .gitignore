@@ -1,1 +1,11 @@
 .idea/*
+AwesomeProject/.expo/
+AwesomeProject/node_modules
+AwesomeProject/.env.local
+AwesomeProject/.env.development.local
+AwesomeProject/.env.test.local
+AwesomeProject/.env.production.local
+
+AwesomeProject/npm-debug.log*
+AwesomeProject/yarn-debug.log*
+AwesomeProject/yarn-error.log*
