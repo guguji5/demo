@@ -9,3 +9,4 @@ AwesomeProject/.env.production.local
 AwesomeProject/npm-debug.log*
 AwesomeProject/yarn-debug.log*
 AwesomeProject/yarn-error.log*
+.DS_Store
