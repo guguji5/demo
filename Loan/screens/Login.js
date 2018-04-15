@@ -19,7 +19,7 @@ export  default class MyWeb extends Component {
     render() {
         return (
             <WebView
-                source={{url:"http://39.106.198.9:8080/webapi/pages/register.html"}}
+                source={{uri:"http://39.106.198.9:8080/webapi/pages/register.html"}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
             />

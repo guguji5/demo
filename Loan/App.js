@@ -5,6 +5,7 @@ import HomeScreen from  './Home'
 import LoginScreen from './screens/Login'
 import CarrierScreen from './screens/Carrier'
 
+
 const RootStack = StackNavigator(
     {
         Home: {
@@ -15,8 +16,7 @@ const RootStack = StackNavigator(
         },
         Carrier:{
             screen:CarrierScreen
-        }
-
+        },
     },{
         initialRouteName: 'Home',
         navigationOptions: {
