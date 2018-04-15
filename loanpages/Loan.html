@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>loan</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+</head>
+<body>
+<div id="app">
+    <div class="main">
+        <p>提款金额（元）</p>
+        <p class="title">10000</p>
+        <div class="range">
+            <mt-range v-model="rangeValue" :bar-height="15">
+                <div slot="start">
+                    <i class="fa fa-minus-circle" aria-hidden="true" style="color:#fff;font-size: xx-large"></i>
+                </div>
+                <div slot="end">
+                    <i class="fa fa-plus-circle" aria-hidden="true" style="color:#fff;font-size: xx-large"></i>
+                </div>
+            </mt-range>
+        </div>
+    </div>
+    <div class="more">
+        <span class="title">
+            借款期限
+        </span>
+        <span class="description">
+            <span class="highlight">一周</span>&nbsp;>
+        </span>
+    </div>
+    <div class="more">
+        <span class="title">
+            每期还款
+        </span>
+        <span class="description">
+            <span class="highlight_white">¥10000.00</span>(含服务费0.00)&nbsp;>
+        </span>
+    </div>
+    <div class="agreement">
+        <label class="awesome-label"><input class="awesome-radio" type="checkbox" name="demo-checkbox1">
+            <span class="awesome-checkbox awesome-radioInput"></span>
+            我已同意<span class="highlight_green">《取点花分期服务协议》</span>
+        </label>
+    </div>
+
+    <!--<mt-button @click.native="handleClick">按钮</mt-button>-->
+    <button class="btn">立即提现</button>
+    <div class="footer">
+        this is the footer area,this is the footer areathis is the footer areathis is the footer area
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{rangeValue:50,value:0},
+        methods: {
+            handleClick: function() {
+                let content = `${this.rangeValue}`
+                this.$toast(content)
+            }
+        }
+    })
+</script>
+</html>

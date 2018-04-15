@@ -1,0 +1,142 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background: #f1f1f1;
+}
+.header{
+    text-align: center;
+    font-size: 0.5rem;
+    height: 1rem;
+    position: relative;
+    line-height: 1rem;
+    border-bottom: 1px solid #e1e1e1;
+}
+.header .back{
+    position: absolute;
+    left: 0.3rem;
+    font-weight: bold;
+    color:#82E3CA;
+}
+.content{
+    background: #fff;
+    margin-top:0.5rem;
+}
+.content div{
+    /*border-top:1px solid red;*/
+    border-bottom:1px solid #e1e1e1;
+    position: relative;
+    height:1.2rem;
+}
+.content div div.icon{
+    text-align: center;
+    position: absolute;
+    left: 0.3rem;
+    top: 0.3rem;
+    font-size: 0.5rem;
+    width: 0.6rem;
+    border:0
+}
+.content div input{
+    /*border:1px solid #000;*/
+    height: 1rem;
+    width: 100%;
+    vertical-align: super;
+    -webkit-appearance: none;
+    text-shadow: none;
+    border: 0;
+    outline: 0;
+    text-indent: 1.2rem;
+    font-size: 0.4rem;
+    margin-top: 0.1rem;
+}
+button.btn{
+    width:90%;
+    background: #82E3CA;
+    text-align: center;
+    color:#fff;
+    font-size: 0.35rem;
+    /*font-weight: bold;*/
+    height:1rem;
+    line-height: 1rem;
+    margin-left: 5%;
+    border-radius: 0.2rem;
+}
+.btn.active{
+    background-color: #31D6A4;
+}
+#codeBtn{
+    position: absolute;
+    right:0rem;
+    top:0rem;
+    height: 1rem;
+    border: 0;
+    outline: 0;
+    font-size: 0.4rem;
+    margin-top: 0.2rem;
+    line-height: 1rem;
+    width: 35%;
+}
+.disabled{
+    color:#646464
+}
+/*贷款主页面*/
+.main{
+    background-color: #31D6A4;
+    height:4rem;
+    font-size: 0.4rem;
+    text-align: center;
+}
+.main p{
+    color:#f1f1f1;
+    padding-top:0.2rem;
+    padding-bottom:0.2rem;
+
+}
+.main p.title{
+    color:#fff;
+    font-size:0.6rem;
+}
+.main .range{
+    width:80%;
+    margin-left:10%;
+    margin-right:10%;
+}
+.more{
+    height:0.8rem;
+    line-height:0.8rem;
+    font-size: 0.3rem;
+    background-color: #ffffff;
+    color:#808080;
+    padding-left:0.3rem;
+    padding-right:0.3rem;
+    margin-top:0.15rem;
+}
+.more .title{
+
+}
+.more .description{
+    float:right;
+}
+.highlight_white{
+    color:#000;
+}
+.highlight_green{
+    color:#31D6A4;
+}
+.agreement{
+    height:0.8rem;
+    line-height:0.8rem;
+    font-size: 0.2rem;
+    color:#808080;
+    padding-left:0.3rem;
+    padding-right:0.3rem;
+    margin-top:0.45rem;
+}
+.submit{
+    margin-top:1rem;
+}
+.footer{
+
+}

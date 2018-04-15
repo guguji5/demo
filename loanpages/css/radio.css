@@ -1,0 +1,5 @@
+.awesome-label{display:inline-block}
+.awesome-radio{display:none}
+.awesome-radioInput{background-color:#fff;border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:10px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1}
+.awesome-radio:checked + .awesome-radioInput:after{background-color:#57ad68;border-radius:100%;content:"";display:inline-block;height:12px;margin:2px;width:12px}
+.awesome-checkbox.awesome-radioInput,.awesome-radio:checked + .awesome-checkbox.awesome-radioInput:after{border-radius:0}
