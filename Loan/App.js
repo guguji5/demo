@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import HomeScreen from  './Home'
 import LoginScreen from './screens/Login'
 import CarrierScreen from './screens/Carrier'
+import CameraScreen from './screens/Camera'
 
 
 const RootStack = StackNavigator(
@@ -17,6 +18,9 @@ const RootStack = StackNavigator(
         Carrier:{
             screen:CarrierScreen
         },
+        Camera:{
+            screen:CameraScreen
+        }
     },{
         initialRouteName: 'Home',
         navigationOptions: {

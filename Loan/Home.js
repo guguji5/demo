@@ -30,6 +30,10 @@ export default class HomeScreen extends React.Component {
                     title="Let's go to Carrier"
                     onPress={() => this.props.navigation.navigate('Carrier')}
                 />
+                <Button
+                    title="Let's go to Camera"
+                    onPress={() => this.props.navigation.navigate('Camera')}
+                />
             </View>
         );
     }
