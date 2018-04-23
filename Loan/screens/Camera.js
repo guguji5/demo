@@ -32,7 +32,7 @@ export  default class CameraScreen extends Component {
                 />
                 <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
                     <TouchableOpacity
-                        onPress={this.record.bind(this)}
+                        onPress={this.takePicture.bind(this)}
                         style = {styles.capture}
                     >
                         <Text style={{fontSize: 14}}> 拍照 </Text>
@@ -54,7 +54,22 @@ export  default class CameraScreen extends Component {
         if (this.camera) {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options)
-            console.log(data.uri);
+            console.log("the uri of img is", data.uri);
+            let image_form = new FormData();
+            image_form.append('file', {
+                uri:data.uri,
+                type: 'image/jpg', // or photo.type
+                name: 'testPhotoName'
+            });
+            fetch("http://zs.mtkan.cc/upload.php", {
+                method: 'post',
+                // mimeType: 'multipart/form-data',
+                body: image_form,
+            }).then(res => {
+                console.log(res.json())
+            });
+
+
         }
     };
     record = async function(){
