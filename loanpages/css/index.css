@@ -5,6 +5,16 @@
 body{
     background: #f1f1f1;
 }
+a{
+    text-decoration: none;
+    color:#646464;
+}
+.fr{
+    float:right;
+}
+.fl{
+    float:left;
+}
 .header{
     text-align: center;
     font-size: 0.5rem;
@@ -135,8 +145,14 @@ button.btn{
     margin-top:0.45rem;
 }
 .submit{
-    margin-top:1rem;
+    /*margin-top:0.4rem;*/
 }
 .footer{
 
+}
+.attachment{
+    margin-left: 5%;
+    width: 90%;
+    margin-right: 5%;
+    margin-top: 0.5rem;
 }
