@@ -94,7 +94,6 @@ button.btn{
 /*贷款主页面*/
 .main{
     background-color: #31D6A4;
-    height:4rem;
     font-size: 0.4rem;
     text-align: center;
 }
@@ -112,6 +111,7 @@ button.btn{
     width:80%;
     margin-left:10%;
     margin-right:10%;
+    padding-bottom:1rem;
 }
 .more{
     height:0.8rem;
@@ -148,11 +148,34 @@ button.btn{
     /*margin-top:0.4rem;*/
 }
 .footer{
-
+    width: 100%;
+    font-size: 0.3rem;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    height:1rem;
+    border-top:1px solid #82E3CA;
+    line-height: 1rem;
+}
+.footer span{
+    width: 50%;
+    color:#82E3CA;
+    float: left;
+    text-align: center;
+}
+.footer span+span{
+    border-left:1px solid #82E3CA;
+    margin-left:-1px;
 }
 .attachment{
     margin-left: 5%;
     width: 90%;
     margin-right: 5%;
     margin-top: 0.5rem;
+}
+.radius{
+    background: #82e3ca;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 15px;
 }

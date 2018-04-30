@@ -18,7 +18,7 @@
         <div class="icon">
             <i class="fa fa-mobile-phone" style="font-size: 0.7rem"></i>
         </div>
-        <input type="text" placeholder="请输入您的手机号" onchange="checkNum(this.value)" id="phone">
+        <input type="number" placeholder="请输入您的手机号" onchange="checkNum(this.value)" id="phone">
     </div>
     <div>
         <div class="icon">
@@ -59,39 +59,47 @@
     }
     $('.btn')[0].onclick = function () {
         if($(".btn").hasClass('active')){
-            let inputList = document.querySelectorAll('input');
-            let data = {
-                phoneNumber:inputList[0].value,
-                password:inputList[1].value
-            };
-            console.log(data);
-            $.ajax({
-                type: 'POST',
-                url: 'http://39.106.198.9:8080/cashloanapi/login/login',
-                contentType:'application/json',
-                data: JSON.stringify(data),
-                dataType: 'json',
-                success: function(data){
-                    if(data.state.errCode==10000){
-                        $(document).dialog({
-                            type : 'notice',
-                            infoText: '登陆成功',
-                            autoClose: 1500,
-                            position: 'center'  // center: 居中; bottom: 底部
-                        });
-                    }else{
-                        $(document).dialog({
-                            type : 'notice',
-                            infoText: data.body.errMessage,
-                            autoClose: 1500,
-                            position: 'center'  // center: 居中; bottom: 底部
-                        });
-                    }
-                },
-                error: function(xhr, type){
-                    alert('Ajax error!')
-                }
-            })
+            // let inputList = document.querySelectorAll('input');
+            // let data = {
+            //     phoneNumber:inputList[0].value,
+            //     password:inputList[1].value
+            // };
+            // console.log(data);
+            // $.ajax({
+            //     type: 'POST',
+            //     url: 'http://39.106.198.9:8080/cashloanapi/login/login',
+            //     contentType:'application/json',
+            //     data: JSON.stringify(data),
+            //     dataType: 'json',
+            //     success: function(data){
+            //         if(data.state.errCode==10000){
+            //             $(document).dialog({
+            //                 type : 'notice',
+            //                 infoText: '登陆成功',
+            //                 autoClose: 1500,
+            //                 position: 'center'  // center: 居中; bottom: 底部
+            //             });
+            //         }else{
+            //             $(document).dialog({
+            //                 type : 'notice',
+            //                 infoText: data.body.errMessage,
+            //                 autoClose: 1500,
+            //                 position: 'center'  // center: 居中; bottom: 底部
+            //             });
+            //         }
+            //     },
+            //     error: function(xhr, type){
+            //         alert('Ajax error!')
+            //     }
+            // })
+             window.location.href = "./Loan.html"
+        }else{
+            $(document).dialog({
+                type : 'notice',
+                infoText: '用户名和密码均为必填',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
         }
     };
 </script>

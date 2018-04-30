@@ -3,8 +3,10 @@ import { Button,View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import HomeScreen from  './Home'
 import LoginScreen from './screens/Login'
+import CertifyScreen from './screens/Certify'
 import CarrierScreen from './screens/Carrier'
 import CameraScreen from './screens/Camera'
+import FaceRecognitionScreen from './screens/FaceRecognition'
 
 
 const RootStack = StackNavigator(
@@ -20,9 +22,15 @@ const RootStack = StackNavigator(
         },
         Camera:{
             screen:CameraScreen
+        },
+        Certify:{
+            screen:CertifyScreen
+        },
+        FaceRecognition:{
+            screen:FaceRecognitionScreen
         }
     },{
-        initialRouteName: 'Home',
+        initialRouteName: 'FaceRecognition',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: 'gray',

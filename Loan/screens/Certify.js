@@ -3,7 +3,7 @@ import { WebView } from 'react-native';
 
 export  default class MyWeb extends Component {
     static navigationOptions = {
-        title: '注册',
+        title: '认证',
         headerStyle: {
             height:0
         },
@@ -13,13 +13,13 @@ export  default class MyWeb extends Component {
         this.state = {text: ''};
         this.fromWeb = (event) =>{
             alert(event.nativeEvent.data)
-            this.props.navigation.navigate('Camera')
+            this.props.navigation.navigate('Login')
         }
     }
     render() {
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html"}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/certify.html"}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
             />

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>认证</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+</head>
+<body>
+<div id="app">
+    <div class="main">
+        <p class="title">您需要完成以下认证</p>
+    </div>
+    <div class="more">
+        <span class="title">
+            <i class="fa fa-id-card-o"></i>
+            身份验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+    <div class="more">
+        <span class="title">
+            <i class="fa fa-phone"></i>
+            运营商验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+    <div class="more">
+        <span class="title">
+            <i class="fa fa-user-circle"></i>
+            人脸验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+
+    <div class="footer">
+        <span class="left_btn">首页</span>
+        <span class="right_btn">我的</span>
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+<script>
+    $('.radius').click(function(){
+        window.postMessage('只能传递一个字符串类型的参数');
+    })
+</script>
+</html>
