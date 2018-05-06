@@ -87,7 +87,7 @@
             console.log(data);
             $.ajax({
                 type: 'POST',
-                url: 'http://39.106.198.9:8080/cashloanapi/login/register',
+                url: 'http://39.106.198.9:8080/cashloanapi/login/registerAndLogin',
                 contentType:'application/json',
                 data: JSON.stringify(data),
                 dataType: 'json',
@@ -99,6 +99,9 @@
                             autoClose: 1500,
                             position: 'center'  // center: 居中; bottom: 底部
                         });
+                        setTimeout(function(){
+                            window.location.href = "./login.html";
+                        },1500);
                     }else{
                         $(document).dialog({
                             type : 'notice',

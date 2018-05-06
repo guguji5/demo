@@ -28,12 +28,12 @@
         <input type="number" placeholder="请输入验证码" id="code" onkeyup="isComplete()">
         <span id="codeBtn" class="disabled">|   &nbsp;发送验证码</span>
     </div>
-    <div>
-        <div class="icon">
-            <i class="fa fa-lock"></i>
-        </div>
-        <input type="text" placeholder="请设置8-20位组合密码" id="password" onkeyup="isComplete()">
-    </div>
+    <!--<div>-->
+        <!--<div class="icon">-->
+            <!--<i class="fa fa-lock"></i>-->
+        <!--</div>-->
+        <!--<input type="text" placeholder="请设置8-20位组合密码" id="password" onkeyup="isComplete()">-->
+    <!--</div>-->
 </div>
 <p style="margin-left: 5%;font-size: 0.3rem;margin-top:1rem">点击注册即表示同意<span style="color:#82E3CA">《xxx注册协议》</span></p>
 <div class="submit">
@@ -84,12 +84,12 @@
             let data = {
                 phoneNumber:inputList[0].value,
                 code:inputList[1].value,
-                password:inputList[2].value
+                password:''
             };
             console.log(data);
             $.ajax({
                 type: 'POST',
-                url: 'http://39.106.198.9:8080/cashloanapi/login/register',
+                url: 'http://39.106.198.9:8080/cashloanapi/login/registerAndLogin',
                 contentType:'application/json',
                 data: JSON.stringify(data),
                 dataType: 'json',
@@ -101,6 +101,7 @@
                             autoClose: 1500,
                             position: 'center'  // center: 居中; bottom: 底部
                         });
+                        window.location.href="./Loan.html"
                     }else{
                         $(document).dialog({
                             type : 'notice',
@@ -132,8 +133,8 @@
     }
     function isComplete(){
         let code = $("input#code").val();
-        let password = $("input#password").val();
-        if(code && password){
+        // let password = $("input#password").val();
+        if(code){
             $(".btn").addClass('active')
         }
     }
