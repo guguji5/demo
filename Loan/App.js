@@ -7,7 +7,8 @@ import CertifyScreen from './screens/Certify'
 import CarrierScreen from './screens/Carrier'
 import CameraScreen from './screens/Camera'
 import FaceRecognitionScreen from './screens/FaceRecognition'
-
+import IDRecognitionScreen from './screens/IDRecognition'
+import IDTipsScreen from './screens/IDTips'
 
 const RootStack = StackNavigator(
     {
@@ -28,12 +29,19 @@ const RootStack = StackNavigator(
         },
         FaceRecognition:{
             screen:FaceRecognitionScreen
+        },
+        IDRecognition:{
+            screen:IDRecognitionScreen
+        },
+        IDTips:{
+            screen:IDTipsScreen
         }
     },{
-        initialRouteName: 'FaceRecognition',
+        initialRouteName: 'Certify',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: 'gray',
+                height:0
             },
             headerTintColor: '#98FB98',
             headerTitleStyle: {

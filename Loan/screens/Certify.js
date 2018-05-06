@@ -12,14 +12,22 @@ export  default class MyWeb extends Component {
         super(props);
         this.state = {text: ''};
         this.fromWeb = (event) =>{
-            alert(event.nativeEvent.data)
-            this.props.navigation.navigate('Login')
+            console.log(event.nativeEvent)
+            if(event.nativeEvent.data=="ID"){
+                this.props.navigation.navigate('IDTips',{
+                    type: "front"
+                })
+            }else if(event.nativeEvent.data=="Face"){
+                this.props.navigation.navigate('IDTips',{
+                    type: "Face"
+                })
+            }
         }
     }
     render() {
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/certify.html"}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/certify.html?number=3"}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
             />

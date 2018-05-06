@@ -14,7 +14,7 @@
     <div class="main">
         <p class="title">您需要完成以下认证</p>
     </div>
-    <div class="more">
+    <div class="more ID">
         <span class="title">
             <i class="fa fa-id-card-o"></i>
             身份验证
@@ -23,7 +23,7 @@
             <span class="radius">去认证</span>&nbsp;
         </span>
     </div>
-    <div class="more">
+    <div class="more Carrier">
         <span class="title">
             <i class="fa fa-phone"></i>
             运营商验证
@@ -32,7 +32,7 @@
             <span class="radius">去认证</span>&nbsp;
         </span>
     </div>
-    <div class="more">
+    <div class="more Face">
         <span class="title">
             <i class="fa fa-user-circle"></i>
             人脸验证
@@ -51,8 +51,11 @@
 <script src="js/index.js"></script>
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
 <script>
-    $('.radius').click(function(){
-        window.postMessage('只能传递一个字符串类型的参数');
+    $('.ID .radius').click(function(){
+        window.postMessage('ID');
+    })
+    $('.Face .radius').click(function(){
+        window.postMessage('Face');
     })
 </script>
 </html>
