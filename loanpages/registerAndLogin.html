@@ -84,7 +84,7 @@
             let data = {
                 phoneNumber:inputList[0].value,
                 code:inputList[1].value,
-                password:''
+                password:''//直接注册登录的时候不用传密码，数据库存为空
             };
             console.log(data);
             $.ajax({

@@ -12,8 +12,16 @@ export  default class MyWeb extends Component {
         super(props);
         this.state = {text: ''};
         this.fromWeb = (event) =>{
-            alert(event.nativeEvent.data)
-            this.props.navigation.navigate('Camera')
+            console.log(event.nativeEvent)
+            if(event.nativeEvent.data=="ID"){
+                this.props.navigation.navigate('IDTips',{
+                    type: "front"
+                })
+            }else if(event.nativeEvent.data=="Face"){
+                this.props.navigation.navigate('IDTips',{
+                    type: "Face"
+                })
+            }
         }
     }
     render() {
