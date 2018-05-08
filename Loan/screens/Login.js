@@ -12,16 +12,19 @@ export  default class MyWeb extends Component {
         super(props);
         this.state = {text: ''};
         this.fromWeb = (event) =>{
-            console.log(event.nativeEvent)
-            if(event.nativeEvent.data=="ID"){
+            console.log(event.nativeEvent);
+            if(event.nativeEvent.data==="ID"){
                 this.props.navigation.navigate('IDTips',{
                     type: "front"
                 })
-            }else if(event.nativeEvent.data=="Face"){
+            }else if(event.nativeEvent.data==="Face"){
                 this.props.navigation.navigate('IDTips',{
                     type: "Face"
                 })
+            }else if(typeof(JSON.parse(event.nativeEvent.data))==="object" && JSON.parse(event.nativeEvent.data).userId){
+                global.userId = JSON.parse(event.nativeEvent.data).userId;
             }
+            console.log(userId)
         }
     }
     render() {

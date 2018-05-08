@@ -71,13 +71,56 @@ export  default class FaceRecognitionScreen extends Component {
             let that = this;
             fetch("https://v2-auth-api.visioncloudapi.com/identity/silent_idnumber_verification/stateless", {
                 method: 'post',
-                // mimeType: 'multipart/form-data',
                 headers:myHeaders,
                 body: image_form,
-            }).then(res => {
+            })
+            .then(res => res.json())
+            .then(res => {
                 that.setState({isSending:false});
-                console.log(res.json())
-                that.props.navigation.navigate('Certify')
+                console.log("从人脸识别接口返回的数据",res);
+                if(res.code === 1000 && res.passed === true){
+                    let body = {
+                        "code": 1000,
+                        "imageId": "string",
+                        "idCard":"130128199012020036",//还有这里
+                        "imageTimestamp": data.image_timestamp,
+                        "livenessScore": data.liveness_score || 0,
+                        "passed": true,
+                        "requestId": data.request_id,
+                        "userName": "杜宽",//这里也是
+                        "userId": userId,//这里需要去取一下。
+                        "verificationScore": data.verification_score
+                    }
+
+                    let myHeaders = new Headers();
+                    myHeaders.append('Content-Type','application/json');
+                    myHeaders.append('Accept','application/json');
+                    return fetch("http://39.106.198.9:8080/cashloanapi/liveBody/liveBody", {
+                        method: 'post',
+                        headers:myHeaders,
+                        body: JSON.stringify(body)
+                    })
+                }else if(res.code === 1000 && res.passed === false){
+                    throw("未通过活体检测")
+                }
+
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if(res.state.errCode ===10001){
+                    alert(res.body.errMessage)
+                }else if(res.state.errCode ===10000){
+                    that.props.navigation.navigate('Certify')
+                }
+            })
+            .catch(function(error) {
+                alert(error);
+                alert("请重新拍摄");
+                that.props.navigation.navigate('IDTips',{
+                    type: "Face"
+                });
+
             });
 
         } else {

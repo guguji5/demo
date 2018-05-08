@@ -78,15 +78,78 @@ export  default class IDRecognitionScreen extends Component {
             method: 'post',
             headers:myHeaders,
             body: image_form,
-        }).then(res => {
-            console.log(res.json());
-            that.setState({isSending:false});
-            if(that.state.type == "front"){
-                that.props.navigation.navigate('IDTips',{
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.code ===1000){
+                console.log("data is", data);
+                //如果拍的是正面
+                if( that.state.type === "front" &&
+                    data.side ==="front" &&
+                    data.validity.address &&
+                    data.validity.birthday &&
+                    data.validity.gender &&
+                    data.validity.name &&
+                    data.validity.number){
+                    let myHeaders = new Headers();
+                    myHeaders.append('Content-Type','application/json');
+                    myHeaders.append('Accept','application/json');
+                    let body = Object.assign({requestId:data.request_id,authority:'',userId:userId},data.info)
+                    console.log(JSON.stringify(body));
+                    return fetch("http://39.106.198.9:8080/cashloanapi/liveBody/idCardAuthen", {
+                        method: 'post',
+                        headers:myHeaders,
+                        body: JSON.stringify(body)
+                    })
+                }
+                if( that.state.type === "back" &&
+                    data.side ==="back" &&
+                    data.validity.authority &&
+                    data.validity.timelimit){
+                    let myHeaders = new Headers();
+                    myHeaders.append('Content-Type','application/json');
+                    myHeaders.append('Accept','application/json');
+                    let body = Object.assign({requestId:data.request_id,userId:userId},data.info)
+                    console.log(JSON.stringify(body));
+                    return fetch("http://39.106.198.9:8080/cashloanapi/liveBody/idCardAuthen", {
+                        method: 'post',
+                        headers:myHeaders,
+                        body: JSON.stringify(body)
+                    })
+                }
+
+                that.setState({isSending:false});
+            }else{
+                throw(data.message);
+
+            }
+
+        })
+        .then(response => response.json())
+        .then(res => {
+            console.log(res);
+            if (res.state.errCode === 10000 && that.state.type === "front") {
+                that.props.navigation.navigate('IDTips', {
                     type: "back"
                 });
-            }else if(that.state.type == "back"){
-                that.props.navigation.navigate('Certify');
+            }
+            if (res.state.errCode === 10000 && that.state.type === "back") {
+                that.props.navigation.navigate('Certify')
+            }
+        })
+        .catch(function(error) {
+            alert(error);
+            alert("请重新拍摄");
+            if(hat.state.type === "front"){
+                that.props.navigation.navigate('IDTips',{
+                    type: "front"
+                });
+            }
+            if(that.state.type === "back") {
+                that.props.navigation.navigate('IDTips', {
+                    type: "front"
+
+                });
             }
 
         });

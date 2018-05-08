@@ -37,7 +37,7 @@ const RootStack = StackNavigator(
             screen:IDTipsScreen
         }
     },{
-        initialRouteName: 'Certify',
+        initialRouteName: 'Login',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: 'gray',
