@@ -73,9 +73,11 @@
                 this.$toast(content)
             }
         }
-    })
+    });
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId")
     $('.btn')[0].onclick = function () {
-        window.location.href = "./certify.html"
+        window.location.href = "./certify.html?userId="+userId;
     }
 </script>
 </html>

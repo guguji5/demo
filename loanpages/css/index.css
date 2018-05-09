@@ -181,3 +181,7 @@ button.btn{
     padding: 3px 5px;
     border-radius: 15px;
 }
+.done{
+    color:#82e3ca;
+    background: #fff;
+}

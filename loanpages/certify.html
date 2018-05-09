@@ -52,15 +52,53 @@
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
 <script>
     $('.ID .radius').click(function(){
+        if($(this).hasClass("done")){
+            return;
+        }
         window.postMessage('ID');
     })
     $('.Face .radius').click(function(){
+        if($(this).hasClass("done")){
+            return;
+        }
         window.postMessage('Face');
     })
     $('.Carrier .radius').click(function(){
+        if($(this).hasClass("done")){
+            return;
+        }
         window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId=18903393333&backUrl=https%3A%2F%2Fwww.sina.com&themeColor=abcdef"
     })
+    console.log(window.location.search)
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId")
 
+    $.ajax({
+        type: 'GET',
+        url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
+        contentType:'application/json',
+        dataType: 'json',
+        success: function(data){
+            console.log(data)
+            if(data.state.errCode==10000){
+                if(data.body.liveBody==="1"){
+                    $('.Face .radius').addClass('done');
+                    $('.Face .radius').text('已认证')
+                }
+                if(data.body.idcard==="1"){
+                    $('.ID .radius').addClass('done');
+                    $('.ID .radius').text('已认证')
+                }
+                if(data.body.carrieroperator==="1"){
+                    $('.Carrier .radius').addClass('done');
+                    $('.Carrier .radius').text('已认证')
+                }
+            }
+        },
+        error: function(xhr, type){
+            alert('Ajax error!')
+        }
+    })
 
 </script>
 </html>

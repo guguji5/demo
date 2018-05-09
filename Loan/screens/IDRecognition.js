@@ -101,24 +101,38 @@ export  default class IDRecognitionScreen extends Component {
                         headers:myHeaders,
                         body: JSON.stringify(body)
                     })
-                }
-                if( that.state.type === "back" &&
+                }else if( that.state.type === "back" &&
                     data.side ==="back" &&
                     data.validity.authority &&
                     data.validity.timelimit){
                     let myHeaders = new Headers();
                     myHeaders.append('Content-Type','application/json');
                     myHeaders.append('Accept','application/json');
-                    let body = Object.assign({requestId:data.request_id,userId:userId},data.info)
+                    let body = {
+                        backRequestId:data.request_id,
+                        userId:userId,
+                        authority: data.info.authority,
+                        timeLimit: data.info.timeLimit
+                    }
                     console.log(JSON.stringify(body));
-                    return fetch("http://39.106.198.9:8080/cashloanapi/liveBody/idCardAuthen", {
+                    return fetch("http://39.106.198.9:8080/cashloanapi/liveBody/idCardBack", {
                         method: 'post',
                         headers:myHeaders,
                         body: JSON.stringify(body)
                     })
+                }else{
+                    alert("拍照未通过");
+                    if (that.state.type === "front") {
+                        that.props.navigation.navigate('IDTips', {
+                            type: "front"
+                        });
+                    }
+                    if (that.state.type === "back") {
+                        that.props.navigation.navigate('IDTips', {
+                            type: "back"
+                        });
+                    }
                 }
-
-                that.setState({isSending:false});
             }else{
                 throw(data.message);
 
@@ -128,6 +142,7 @@ export  default class IDRecognitionScreen extends Component {
         .then(response => response.json())
         .then(res => {
             console.log(res);
+            that.setState({isSending:false});
             if (res.state.errCode === 10000 && that.state.type === "front") {
                 that.props.navigation.navigate('IDTips', {
                     type: "back"

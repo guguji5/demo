@@ -20,7 +20,24 @@ export  default class FaceRecognitionScreen extends Component {
     };
     constructor(){
         super();
-        this.state = {isRecord: false,isSending: false};
+        this.state = {isRecord: false,isSending: false,name:'',id:''};
+        let myHeaders = new Headers();
+        myHeaders.append('Content-Type','application/json');
+        myHeaders.append('Accept','application/json');
+        //通过userid去获取name 和 id
+        fetch("http://39.106.198.9:8080/cashloanapi/liveBody/"+userId,{
+            headers:myHeaders
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.state.errCode ===10000){
+                this.setState({
+                    name:data.body.name,
+                    id:data.body.number
+                })
+            }
+        })
     }
     render() {
         return (
@@ -82,12 +99,12 @@ export  default class FaceRecognitionScreen extends Component {
                     let body = {
                         "code": 1000,
                         "imageId": "string",
-                        "idCard":"130128199012020036",//还有这里
+                        "idCard":that.state.id,//还有这里
                         "imageTimestamp": data.image_timestamp,
                         "livenessScore": data.liveness_score || 0,
                         "passed": true,
                         "requestId": data.request_id,
-                        "userName": "杜宽",//这里也是
+                        "userName": that.state.name,//这里也是
                         "userId": userId,//这里需要去取一下。
                         "verificationScore": data.verification_score
                     }

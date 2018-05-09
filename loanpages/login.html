@@ -82,7 +82,7 @@
                         });
                         window.postMessage(JSON.stringify({userId:data.body.id}));
                         setTimeout(function(){
-                            window.location.href = "./Loan.html"
+                            window.location.href = "./Loan.html?userId="+data.body.id;
                         },1500)
                     }else{
                         $(document).dialog({
