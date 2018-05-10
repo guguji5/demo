@@ -51,13 +51,20 @@
 <script src="js/index.js"></script>
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
 <script>
-    $('.ID .radius').click(function(){
+    console.log(window.location.search);
+    alert(1);
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId")
+    $('.ID .radius').click(function(event){
+        event.preventDefault();
         if($(this).hasClass("done")){
             return;
         }
-        window.postMessage('ID');
+        // window.postMessage('ID');
+        waitForBridge();
     })
-    $('.Face .radius').click(function(){
+    $('.Face .radius').click(function(event){
+        event.preventDefault();
         if($(this).hasClass("done")){
             return;
         }
@@ -67,37 +74,54 @@
         if($(this).hasClass("done")){
             return;
         }
-        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId=18903393333&backUrl=https%3A%2F%2Fwww.sina.com&themeColor=abcdef"
+        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2Fcertify.html%3FuserId%3D"+userId+"&themeColor=abcdef"
     })
-    console.log(window.location.search)
-    let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId")
 
-    $.ajax({
-        type: 'GET',
-        url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
-        contentType:'application/json',
-        dataType: 'json',
-        success: function(data){
-            console.log(data)
-            if(data.state.errCode==10000){
-                if(data.body.liveBody==="1"){
-                    $('.Face .radius').addClass('done');
-                    $('.Face .radius').text('已认证')
+    setTimeout(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                if(data.state.errCode==10000){
+                    if(data.body.liveBody==="1"){
+                        $('.Face .radius').addClass('done');
+                        $('.Face .radius').text('已认证')
+                    }
+                    if(data.body.idcard==="1"){
+                        $('.ID .radius').addClass('done');
+                        $('.ID .radius').text('已认证')
+                    }
+                    if(data.body.carrieroperator==="1"){
+                        $('.Carrier .radius').addClass('done');
+                        $('.Carrier .radius').text('已认证')
+                    }
                 }
-                if(data.body.idcard==="1"){
-                    $('.ID .radius').addClass('done');
-                    $('.ID .radius').text('已认证')
-                }
-                if(data.body.carrieroperator==="1"){
-                    $('.Carrier .radius').addClass('done');
-                    $('.Carrier .radius').text('已认证')
-                }
+            },
+            error: function(xhr, type){
+                alert('Ajax error!')
             }
-        },
-        error: function(xhr, type){
-            alert('Ajax error!')
+        })
+    },800)
+    function waitForBridge() {
+
+        //the react native postMessage has only 1 parameter
+        //while the default one has 2, so check the signature
+        //of the function
+
+        if (window.postMessage.length !== 1){
+
+            setTimeout(waitForBridge, 200);
         }
+        else {
+
+            window.postMessage('ID');
+        }
+    }
+    $('.back').click(function(){
+        window.history.go(-1);
     })
 
 </script>
