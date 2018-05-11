@@ -30,9 +30,10 @@ export  default class MyWeb extends Component {
     render() {
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=1"}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html"}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
+                javaScriptEnabled={true}
             />
         );
     }

@@ -8,6 +8,7 @@
     <!-- 引入样式 -->
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
 <div id="app">
@@ -50,9 +51,11 @@
 </body>
 <script src="js/index.js"></script>
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
 <script>
-    console.log(window.location.search);
-    alert(1);
+    let state = {};
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId")
     $('.ID .radius').click(function(event){
@@ -60,18 +63,36 @@
         if($(this).hasClass("done")){
             return;
         }
-        // window.postMessage('ID');
-        waitForBridge();
+        window.postMessage('ID');
     })
     $('.Face .radius').click(function(event){
         event.preventDefault();
+
         if($(this).hasClass("done")){
+            return;
+        }
+        if(state.idcard ==="0" || state.carrieroperator ==="0"){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请先完成身份证和运营商验证',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
             return;
         }
         window.postMessage('Face');
     })
     $('.Carrier .radius').click(function(){
         if($(this).hasClass("done")){
+            return;
+        }
+        if(state.idcard ==="0"){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请先完成身份证验证',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
             return;
         }
         window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2Fcertify.html%3FuserId%3D"+userId+"&themeColor=abcdef"
@@ -85,6 +106,7 @@
             dataType: 'json',
             success: function(data){
                 console.log(data)
+                state = data.body;
                 if(data.state.errCode==10000){
                     if(data.body.liveBody==="1"){
                         $('.Face .radius').addClass('done');
@@ -105,21 +127,7 @@
             }
         })
     },800)
-    function waitForBridge() {
 
-        //the react native postMessage has only 1 parameter
-        //while the default one has 2, so check the signature
-        //of the function
-
-        if (window.postMessage.length !== 1){
-
-            setTimeout(waitForBridge, 200);
-        }
-        else {
-
-            window.postMessage('ID');
-        }
-    }
     $('.back').click(function(){
         window.history.go(-1);
     })

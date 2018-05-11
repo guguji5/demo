@@ -79,9 +79,9 @@ export  default class FaceRecognitionScreen extends Component {
                 type: 'video/mp4', // or photo.type
                 name: 'testVideoName'
             });
-            image_form.append('name',"杜宽");
+            image_form.append('name',that.state.name);
             // image_form.append('idnumber',"130128199108040023");
-            image_form.append('idnumber',"130128199012020036");
+            image_form.append('idnumber',that.state.id);
 
             let myHeaders = new Headers();
             myHeaders.append('Authorization', Auth());
