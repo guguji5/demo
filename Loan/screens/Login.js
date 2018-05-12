@@ -34,6 +34,8 @@ export  default class MyWeb extends Component {
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
                 javaScriptEnabled={true}
+                domStorageEnabled={true}
+                startInLoadingState={true}
             />
         );
     }
