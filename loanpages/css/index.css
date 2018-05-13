@@ -4,6 +4,7 @@
 }
 body{
     background: #f1f1f1;
+    font-family: 'Lato', 'Helvetica Neue', sans-serif;
 }
 a{
     text-decoration: none;
@@ -98,6 +99,7 @@ button.btn{
     background-color: #31D6A4;
     font-size: 0.4rem;
     text-align: center;
+    padding:0.4rem 0.3rem;
 }
 .main p{
     color:#f1f1f1;

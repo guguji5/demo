@@ -154,7 +154,7 @@ export  default class IDRecognitionScreen extends Component {
             }
         })
         .catch(function(error) {
-            alert(error);
+            // alert(error);
             alert("请重新拍摄");
             if(that.state.type === "front"){
                 that.props.navigation.navigate('IDTips',{

@@ -9,37 +9,90 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/radio.css">
     <link rel="stylesheet" href="css/dialog.css">
+    <style>
+        .main .left{
+            float:left;
+        }
+        .main .right{
+            float:right;
+        }
+        .main p{
+            padding-top:0px;
+            text-align: left;
+        }
+        .name{
+            font-size: 0.45rem;
+        }
+        .phone{
+            font-size: 0.3rem;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
     <div class="main">
-        <p class="title">您需要完成以下认证</p>
+        <div class="left">
+            <!--<p class="name">18903393932</p>-->
+            <p class="name">周啸天</p>
+            <p class="phone">189****3932</p>
+        </div>
+        <!--<div class="right">-->
+            <!--<img src="./img/jio.jpg" alt="" style="height: 1.3rem;border-radius:50%;">-->
+        <!--</div>-->
+        <div style="clear:both"></div>
     </div>
-    <div class="more ID">
-        <span class="title">
-            <i class="fa fa-id-card-o"></i>
-            身份验证
-        </span>
-        <span class="description">
-            <span class="radius">去认证</span>&nbsp;
-        </span>
-    </div>
+    <!--<div class="more ID">-->
+        <!--<span class="title">-->
+            <!--<i class="fa fa-credit-card-alt"></i>-->
+            <!--银行卡-->
+        <!--</span>-->
+        <!--<span class="description">-->
+            <!--&gt;-->
+        <!--</span>-->
+    <!--</div>-->
     <div class="more Carrier">
         <span class="title">
             <i class="fa fa-phone"></i>
-            运营商验证
+            我的订单
         </span>
         <span class="description">
-            <span class="radius">去认证</span>&nbsp;
+            >
+        </span>
+    </div>
+    <!--<div class="more Face">-->
+        <!--<span class="title">-->
+            <!--<i class="fa fa-cog"></i>-->
+            <!--账户设置-->
+        <!--</span>-->
+        <!--<span class="description">-->
+            <!--&gt;-->
+        <!--</span>-->
+    <!--</div>-->
+    <!--<div class="more Face">-->
+        <!--<span class="title">-->
+            <!--<i class="fa fa-cube"></i>-->
+            <!--信用中心-->
+        <!--</span>-->
+        <!--<span class="description">-->
+            <!--&gt;-->
+        <!--</span>-->
+    <!--</div>-->
+    <div class="more Face">
+        <span class="title">
+            <i class="fa fa-question-circle"></i>
+            常见问题
+        </span>
+        <span class="description">
+            >
         </span>
     </div>
     <div class="more Face">
         <span class="title">
-            <i class="fa fa-user-circle"></i>
-            人脸验证
+            <i class="fa fa-phone-square"></i>
+            联系客服
         </span>
         <span class="description">
-            <span class="radius">去认证</span>&nbsp;
+            >
         </span>
     </div>
 
@@ -47,6 +100,8 @@
         <span class="left_btn">首页</span>
         <span class="right_btn">我的</span>
     </div>
+    <!--<input type="file" accept="image/*;">-->
+    <!--<input type="file" accept="image/*;capture=camera">-->
 </div>
 </body>
 <script src="js/index.js"></script>
@@ -82,6 +137,10 @@
         }
         window.postMessage('Face');
     })
+    // $('.right').click(function(){
+    //     alert("right")
+    //     window.postMessage('Camera');
+    // })
     $('.Carrier .radius').click(function(){
         if($(this).hasClass("done")){
             return;
@@ -133,9 +192,6 @@
     })
     $('.left_btn').click(function(){
         window.location.href = "./Loan.html"
-    })
-    $('.right_btn').click(function(){
-        window.location.href = "./about.html"
     })
 
 </script>
