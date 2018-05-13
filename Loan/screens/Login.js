@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { WebView } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 export  default class MyWeb extends Component {
     static navigationOptions = {
@@ -28,6 +29,8 @@ export  default class MyWeb extends Component {
         }
     }
     render() {
+        const deviceName = DeviceInfo.getDeviceName();
+        alert("设备型号：",deviceName);
         return (
             <WebView
                 source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html"}}
