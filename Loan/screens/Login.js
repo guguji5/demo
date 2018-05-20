@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { WebView } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
+
 export  default class MyWeb extends Component {
     static navigationOptions = {
         title: '注册',
@@ -30,7 +31,22 @@ export  default class MyWeb extends Component {
     }
     render() {
         const deviceName = DeviceInfo.getDeviceName();
-        alert("设备型号：",deviceName);
+        let injectJS =`localStorage.setItem("deviceName", "${deviceName}");`
+        const patchPostMessageFunction = function() {
+            var originalPostMessage = window.postMessage;
+
+            var patchedPostMessage = function(message, targetOrigin, transfer) {
+                originalPostMessage(message, targetOrigin, transfer);
+            };
+
+            patchedPostMessage.toString = function() {
+                return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+            };
+
+            window.postMessage = patchedPostMessage;
+        };
+        const patchPostMessageJsCode = `(` + String(patchPostMessageFunction) + `)();`+`localStorage.setItem("deviceName", "${deviceName}");`
+
         return (
             <WebView
                 source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html"}}
@@ -38,6 +54,7 @@ export  default class MyWeb extends Component {
                 onMessage={this.fromWeb}
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
+                injectedJavaScript={patchPostMessageJsCode}
             />
         );
     }

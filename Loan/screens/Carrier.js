@@ -4,7 +4,7 @@ import { WebView } from 'react-native';
 export  default class CarrierScreen extends Component {
     static navigationOptions = {
         headerStyle: {
-            height:0
+            height:10
         },
     };
     constructor(props) {

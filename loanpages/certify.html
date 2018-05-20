@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>认证</title>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <!-- 引入样式 -->
     <link rel="stylesheet" href="css/index.css">
@@ -24,15 +24,6 @@
             <span class="radius">去认证</span>&nbsp;
         </span>
     </div>
-    <div class="more Carrier">
-        <span class="title">
-            <i class="fa fa-phone"></i>
-            运营商验证
-        </span>
-        <span class="description">
-            <span class="radius">去认证</span>&nbsp;
-        </span>
-    </div>
     <div class="more Face">
         <span class="title">
             <i class="fa fa-user-circle"></i>
@@ -42,6 +33,16 @@
             <span class="radius">去认证</span>&nbsp;
         </span>
     </div>
+    <div class="more Carrier">
+        <span class="title">
+            <i class="fa fa-phone"></i>
+            运营商验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+
 
     <div class="footer">
         <span class="left_btn">首页</span>
@@ -50,14 +51,15 @@
 </div>
 </body>
 <script src="js/index.js"></script>
-<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+<script src="js/zepto.js"></script>
 <script src="js/ripple.js"></script>
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
     let state = {};
     let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId")
+    let userId = param.get("userId");
+
     $('.ID .radius').click(function(event){
         event.preventDefault();
         if($(this).hasClass("done")){
@@ -71,10 +73,10 @@
         if($(this).hasClass("done")){
             return;
         }
-        if(state.idcard ==="0" || state.carrieroperator ==="0"){
+        if(state.idcard ==="0" ){
             $(document).dialog({
                 type : 'notice',
-                infoText: '请先完成身份证和运营商验证',
+                infoText: '请先完成身份证验证',
                 autoClose: 1500,
                 position: 'center'  // center: 居中; bottom: 底部
             });
@@ -86,10 +88,10 @@
         if($(this).hasClass("done")){
             return;
         }
-        if(state.idcard ==="0"){
+        if(state.idcard ==="0" || state.liveBody ==="0"){
             $(document).dialog({
                 type : 'notice',
-                infoText: '请先完成身份证验证',
+                infoText: '请先完成身份证和人脸验证',
                 autoClose: 1500,
                 position: 'center'  // center: 居中; bottom: 底部
             });
@@ -132,10 +134,10 @@
         window.history.go(-1);
     })
     $('.left_btn').click(function(){
-        window.location.href = "./Loan.html"
+        window.location.href = "./Loan.html?userId="+userId;
     })
     $('.right_btn').click(function(){
-        window.location.href = "./about.html"
+        window.location.href = "./about.html?userId="+userId;
     })
 
 </script>

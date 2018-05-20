@@ -69,8 +69,8 @@ export  default class FaceRecognitionScreen extends Component {
     record = async function() {
         if (!this.state.isRecord && this.camera) {
             this.setState({isRecord: true});
-            const options = { quality: RNCamera.Constants.VideoQuality['480p']};
-            const data = await this.camera.recordAsync(options)
+            const options = { quality: RNCamera.Constants.VideoQuality['480p'], mute:false};
+            const data = await this.camera.recordAsync(options);
             // console.log(data.uri);
             this.setState({isSending:true});
             let image_form = new FormData();
@@ -79,9 +79,9 @@ export  default class FaceRecognitionScreen extends Component {
                 type: 'video/mp4', // or photo.type
                 name: 'testVideoName'
             });
-            image_form.append('name',that.state.name);
+            image_form.append('name',this.state.name);
             // image_form.append('idnumber',"130128199108040023");
-            image_form.append('idnumber',that.state.id);
+            image_form.append('idnumber',this.state.id);
 
             let myHeaders = new Headers();
             myHeaders.append('Authorization', Auth());

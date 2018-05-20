@@ -40,13 +40,15 @@ export  default class IDRecognitionScreen extends Component {
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 />
 
+                <View style={styles.mask}>
+
+                </View>
                 <TouchableOpacity
                     onPress={this.takePicture.bind(this)}
                     style = {styles.capture}
                 >
                     <MaterialIcons name="photo-camera" size={30} color="#e1e1e1" />
                 </TouchableOpacity>
-
                 {this.renderIndicator()}
             </View>
         );
@@ -193,11 +195,20 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         // backgroundColor: 'black'
+        // borderWidth: 100
     },
     preview: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center'
+    },
+    mask: {
+        position:"absolute",width:"100%",height:"100%",flex: 1,
+        flexDirection: 'column',
+        borderWidth:50,
+        borderColor:'rgba(0, 0, 0, 0.5)',
+        borderBottomWidth:100,
+        borderTopWidth:100
     },
     capture: {
         position: "absolute",
@@ -207,7 +218,8 @@ const styles = StyleSheet.create({
         padding: 15,
         paddingHorizontal: 20,
         alignSelf: 'center',
-        margin: 20
+        margin: 20,
+        zIndex:999
     },
     indicator: {
         position: "absolute",
