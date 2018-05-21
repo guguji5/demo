@@ -41,6 +41,8 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
+    let param = new URLSearchParams(window.location.search);
+    let deviceName = param.get("deviceName");
     function isComplete(){
         let password = $("input#password").val();
         if(password){
@@ -82,7 +84,7 @@
                         });
                         window.postMessage(JSON.stringify({userId:data.body.id}));
                         setTimeout(function(){
-                            window.location.href = "./Loan.html?userId="+data.body.id;
+                            window.location.href = "./Loan.html?userId="+data.body.id+"&deviceName="+deviceName;
                         },1500)
                     }else{
                         $(document).dialog({

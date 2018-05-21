@@ -40,7 +40,7 @@
     <button class="btn">注册/登录</button>
 </div>
 <div class="attachment">
-    <a href="./login.html?n=1" class="fr" style="font-size: 0.3rem">密码登录</a>
+    <a class="fr" style="font-size: 0.3rem">密码登录</a>
 </div>
 <!--<p class="params" style="font-size: 0.4rem;word-wrap: break-word;"></p>-->
 <!--<a href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId=18903393333&backUrl=https%3A%2F%2Fwww.sina.com&themeColor=abcdef">世界上</a>-->
@@ -50,7 +50,8 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
-    alert(1);
+    let param = new URLSearchParams(window.location.search);
+    let deviceName = param.get("deviceName");
     let verifyCode = 0;
     $('#codeBtn')[0].onclick = function () {
        if(this.classList.contains('disabled')){
@@ -69,6 +70,9 @@
            }
         })
     };
+    $('.attachment a').click(function(){
+        window.location.href = "./login.html?deviceName="+deviceName;
+    });
     $('.btn')[0].onclick = function () {
         if($(".btn").hasClass('active')){
             let code = $("input#code").val()
@@ -102,7 +106,7 @@
                             autoClose: 1500,
                             position: 'center'  // center: 居中; bottom: 底部
                         });
-                        window.location.href="./Loan.html"
+                        window.location.href="./Loan.html?deviceName="+deviceName;
                     }else{
                         $(document).dialog({
                             type : 'notice',
@@ -139,9 +143,6 @@
             $(".btn").addClass('active')
         }
     }
-    // let param = new URLSearchParams(window.location.search);
-    // let Params = document.querySelector('.params');
-    // Params.innerText = param;
 </script>
 
 </body>

@@ -105,14 +105,15 @@
 </div>
 </body>
 <script src="js/index.js"></script>
-<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.js"></script>
+<script src="js/zepto.js"></script>
 <script src="js/ripple.js"></script>
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
     let state = {};
     let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId")
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
     $('.ID .radius').click(function(event){
         event.preventDefault();
         if($(this).hasClass("done")){
@@ -191,7 +192,7 @@
         window.history.go(-1);
     })
     $('.left_btn').click(function(){
-        window.location.href = "./Loan.html?userId="+userId;
+        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
     })
 
 </script>

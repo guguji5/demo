@@ -30,7 +30,9 @@ export  default class MyWeb extends Component {
         }
     }
     render() {
-        const deviceName = DeviceInfo.getDeviceName();
+        // const deviceName = DeviceInfo.getDeviceName();
+        const deviceName = DeviceInfo.getModel();
+        global.deviceName = deviceName;
         let injectJS =`localStorage.setItem("deviceName", "${deviceName}");`
         const patchPostMessageFunction = function() {
             var originalPostMessage = window.postMessage;
@@ -49,7 +51,7 @@ export  default class MyWeb extends Component {
 
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html"}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=6&deviceName="+deviceName}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
                 javaScriptEnabled={true}

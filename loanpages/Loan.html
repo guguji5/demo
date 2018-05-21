@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>loan</title>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8">
-    <!-- 引入样式 -->
-    <!--<link rel="stylesheet" href="css/mint-ui.css">-->
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/radio.css">
 </head>
@@ -14,18 +12,8 @@
 <div id="app">
     <div class="main">
         <p>转机金额（元）</p>
-        <p class="title">5000</p>
-        <div class="range">
-            <!--<mt-range v-model="rangeValue" :bar-height="15">-->
-                <!--<div slot="start">-->
-                    <!--<i class="fa fa-minus-circle" aria-hidden="true" style="color:#fff;font-size: xx-large"></i>-->
-                <!--</div>-->
-                <!--<div slot="end">-->
-                    <!--<i class="fa fa-plus-circle" aria-hidden="true" style="color:#fff;font-size: xx-large"></i>-->
-                <!--</div>-->
-            <!--</mt-range>-->
-        </div>
-        <p id="deviceName" style="padding: 0px;margin-top: -0.7rem;"></p>
+        <p class="title">10000</p>
+        <p class="deviceName" style="padding: 0px;"> </p>
     </div>
     <div class="more">
         <span class="title">
@@ -50,7 +38,6 @@
         </label>
     </div>
 
-    <!--<mt-button @click.native="handleClick">按钮</mt-button>-->
     <button class="btn">立即转机</button>
     <div class="footer">
         <span class="left_btn">详情</span>
@@ -59,37 +46,21 @@
 </div>
 </body>
 <script src="js/index.js"></script>
-<!-- 先引入 Vue -->
-<!--<script src="js/vue.js"></script>-->
-<!-- 引入组件库 -->
-<!--<script src="js/mint-ui.js"></script>-->
 <script src="js/zepto.js"></script>
 <script>
-    // new Vue({
-    //     el: '#app',
-    //     data:{rangeValue:50,value:0},
-    //     methods: {
-    //         handleClick: function() {
-    //             let content = `${this.rangeValue}`
-    //             this.$toast(content)
-    //         }
-    //     }
-    // });
-    alert("loan");
     let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId")
-    $('.btn')[0].onclick = function () {
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
+    $('.btn').click(function(){
         window.location.href = "./certify.html?userId="+userId;
-    }
+    });
     $('.back').click(function(){
         window.history.go(-1);
-    })
+    });
     $('.right_btn').click(function(){
-        window.location.href = "./about.html"
-    })
-    let deviceName = localStorage.getItem('deviceName');
-    let ID = document.getElementById("deviceName");
-    ID.innerText = deviceName;
-    alert("loan1");
+        window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    alert(deviceName);
+    $('.deviceName').text("本机设备型号为："+deviceName);
 </script>
 </html>
