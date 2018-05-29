@@ -30,10 +30,13 @@ export  default class MyWeb extends Component {
         }
     }
     render() {
-        // const deviceName = DeviceInfo.getDeviceName();
+        const systemVersion = DeviceInfo.getSystemVersion();
+        const DiskCapacity = DeviceInfo.getTotalDiskCapacity()/1073741824;
         const deviceName = DeviceInfo.getModel();
-        global.deviceName = deviceName;
-        let injectJS =`localStorage.setItem("deviceName", "${deviceName}");`
+        const params = String(deviceName)+"_"+String(DiskCapacity)+"_"+String(systemVersion)
+        console.log(params)
+        global.deviceName = params;
+
         const patchPostMessageFunction = function() {
             var originalPostMessage = window.postMessage;
 
@@ -51,7 +54,7 @@ export  default class MyWeb extends Component {
 
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=6&deviceName="+deviceName}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=6&deviceName="+params}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
                 javaScriptEnabled={true}
