@@ -3,8 +3,9 @@
     margin: 0px;
 }
 body{
-    background: #f1f1f1;
+    background: #F8F8F8;
     font-family: 'Lato', 'Helvetica Neue', sans-serif;
+    margin-bottom:1rem;
 }
 a{
     text-decoration: none;
@@ -160,9 +161,10 @@ button.btn{
     height:1rem;
     border-top:1px solid #82E3CA;
     line-height: 1rem;
+    background: #F8F8F8;
 }
 .footer span{
-    width: 50%;
+    width: 33%;
     color:#82E3CA;
     float: left;
     text-align: center;

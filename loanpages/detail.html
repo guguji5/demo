@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>转机指南</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">转机指南</span>
+</div>
+<div id="app">
+    <img src="img/tu.png" alt="" style="width: 100%">
+
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+
+    $('.back').click(function(){
+        window.history.go(-1);
+    })
+
+</script>
+</html>

@@ -7,42 +7,91 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/radio.css">
+    <style>
+        .content1{
+            background: #fff;
+            padding-top: 20px;
+        }
+        .content1 .left{
+            width: 30%;
+            float: left;
+            font-size: 0.3rem;
+        }
+        .content1 .right{
+            width: 60%;
+            float: right;
+            font-size: 0.3rem;
+        }
+        .content1 .right p{
+            margin:10px 0;
+        }
+        .money{
+            color:#F9C719;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
-    <div class="main">
-        <p>转机金额（元）</p>
-        <p class="title">10000</p>
-        <p class="deviceName" style="padding: 0px;"> </p>
+    <img src="img/banner.png" style="width: 100%">
+    <!--<div class="main">-->
+        <!--<p>转机金额（元）</p>-->
+        <!--<p class="title">10000</p>-->
+        <!--<p class="deviceName" style="padding: 0px;"> </p>-->
+    <!--</div>-->
+    <!--<div class="more">-->
+        <!--<span class="title">-->
+            <!--抵押期限-->
+        <!--</span>-->
+        <!--<span class="description">-->
+            <!--<span class="highlight">一周</span>&nbsp;>-->
+        <!--</span>-->
+    <!--</div>-->
+    <!--<div class="more">-->
+        <!--<span class="title">-->
+            <!--每期还款-->
+        <!--</span>-->
+        <!--<span class="description">-->
+            <!--<span class="highlight_white">¥10000.00</span>(含服务费0.00)&nbsp;>-->
+        <!--</span>-->
+    <!--</div>-->
+    <!--<div class="agreement">-->
+        <!--<label class="awesome-label"><input class="awesome-radio" type="checkbox" name="demo-checkbox1">-->
+            <!--<span class="awesome-checkbox awesome-radioInput"></span>-->
+            <!--我已同意<span class="highlight_green">《取点花分期服务协议》</span>-->
+        <!--</label>-->
+    <!--</div>-->
+
+    <!--<button class="btn">立即转机</button>-->
+    <div class="content1">
+        <div class="left">
+            <img src="img/tel.png" style="width: 100%">
+        </div>
+        <div class="right">
+            <p class="deviceName"></p>
+            <p class="memory"></p>
+            <p class="system"></p>
+            <p class="money"><span style="font-size:small">¥</span>2000</p>
+        </div>
+        <div style="clear:both"></div>
     </div>
-    <div class="more">
-        <span class="title">
-            抵押期限
-        </span>
-        <span class="description">
-            <span class="highlight">一周</span>&nbsp;>
-        </span>
+    <div class="content1" style="border-top:1px solid #e1e1e1;padding:10px 0;">
+        <div class="left" style="width: 40%">
+            <span style="margin-left:15px;">转机期限：七天</span>
+        </div>
+        <button style="float:right;padding:0.1rem 0.5rem;background: #D9695D;color:#fff;margin-right:15px;outline: none;box-shadow: none;border:0">立即回收</button>
+        <div style="clear:both"></div>
     </div>
-    <div class="more">
-        <span class="title">
-            每期还款
-        </span>
-        <span class="description">
-            <span class="highlight_white">¥10000.00</span>(含服务费0.00)&nbsp;>
-        </span>
-    </div>
-    <div class="agreement">
-        <label class="awesome-label"><input class="awesome-radio" type="checkbox" name="demo-checkbox1">
-            <span class="awesome-checkbox awesome-radioInput"></span>
-            我已同意<span class="highlight_green">《取点花分期服务协议》</span>
-        </label>
+    <div style="margin-top:15px;">
+        <img src="img/liucheng.png" style="width: 100%">
     </div>
 
-    <button class="btn">立即转机</button>
-    <div class="footer">
-        <span class="left_btn">详情</span>
-        <span class="right_btn">我的</span>
-    </div>
+</div>
+<div class="footer">
+    <span class="left_btn">首页</span>
+    <span class="mid_btn">发现</span>
+    <span class="right_btn">我的</span>
 </div>
 </body>
 <script src="js/index.js"></script>
@@ -51,8 +100,9 @@
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId");
     let deviceName = param.get("deviceName");
-    $('.btn').click(function(){
-        window.location.href = "./certify.html?userId="+userId;
+    console.log("deviceName is",deviceName)
+    $('button').click(function(){
+        window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
     });
     $('.back').click(function(){
         window.history.go(-1);
@@ -60,7 +110,15 @@
     $('.right_btn').click(function(){
         window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
     });
-    alert(deviceName);
-    $('.deviceName').text("本机设备型号为："+deviceName);
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
+    })
+    $('img').click(function(){
+        window.location.href = "./detail.html";
+    })
+    let deviceNameArr = deviceName.split("_");
+    $('.deviceName').text("已监测到您的设备型号"+deviceNameArr[0]);
+    $('.memory').text("内存："+deviceNameArr[1]);
+    $('.system').text("版本："+deviceNameArr[2]);
 </script>
 </html>

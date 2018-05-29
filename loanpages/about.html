@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>认证</title>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <!-- 引入样式 -->
     <link rel="stylesheet" href="css/index.css">
@@ -98,6 +98,7 @@
 
     <div class="footer">
         <span class="left_btn">首页</span>
+        <span class="mid_btn">发现</span>
         <span class="right_btn">我的</span>
     </div>
     <!--<input type="file" accept="image/*;">-->
@@ -114,85 +115,15 @@
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId");
     let deviceName = param.get("deviceName");
-    $('.ID .radius').click(function(event){
-        event.preventDefault();
-        if($(this).hasClass("done")){
-            return;
-        }
-        window.postMessage('ID');
-    })
-    $('.Face .radius').click(function(event){
-        event.preventDefault();
-
-        if($(this).hasClass("done")){
-            return;
-        }
-        if(state.idcard ==="0" || state.carrieroperator ==="0"){
-            $(document).dialog({
-                type : 'notice',
-                infoText: '请先完成身份证和运营商验证',
-                autoClose: 1500,
-                position: 'center'  // center: 居中; bottom: 底部
-            });
-            return;
-        }
-        window.postMessage('Face');
-    })
-    // $('.right').click(function(){
-    //     alert("right")
-    //     window.postMessage('Camera');
-    // })
-    $('.Carrier .radius').click(function(){
-        if($(this).hasClass("done")){
-            return;
-        }
-        if(state.idcard ==="0"){
-            $(document).dialog({
-                type : 'notice',
-                infoText: '请先完成身份证验证',
-                autoClose: 1500,
-                position: 'center'  // center: 居中; bottom: 底部
-            });
-            return;
-        }
-        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2Fcertify.html%3FuserId%3D"+userId+"&themeColor=abcdef"
-    })
-
-    setTimeout(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
-            contentType:'application/json',
-            dataType: 'json',
-            success: function(data){
-                console.log(data)
-                state = data.body;
-                if(data.state.errCode==10000){
-                    if(data.body.liveBody==="1"){
-                        $('.Face .radius').addClass('done');
-                        $('.Face .radius').text('已认证')
-                    }
-                    if(data.body.idcard==="1"){
-                        $('.ID .radius').addClass('done');
-                        $('.ID .radius').text('已认证')
-                    }
-                    if(data.body.carrieroperator==="1"){
-                        $('.Carrier .radius').addClass('done');
-                        $('.Carrier .radius').text('已认证')
-                    }
-                }
-            },
-            error: function(xhr, type){
-                alert('Ajax error!')
-            }
-        })
-    },800)
 
     $('.back').click(function(){
         window.history.go(-1);
     })
     $('.left_btn').click(function(){
         window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+    })
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
     })
 
 </script>

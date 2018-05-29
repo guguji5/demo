@@ -42,12 +42,11 @@
             <span class="radius">去认证</span>&nbsp;
         </span>
     </div>
-
-
-    <div class="footer">
-        <span class="left_btn">首页</span>
-        <span class="right_btn">我的</span>
-    </div>
+</div>
+<div class="footer">
+    <span class="left_btn">首页</span>
+    <span class="mid_btn">发现</span>
+    <span class="right_btn">我的</span>
 </div>
 </body>
 <script src="js/index.js"></script>
@@ -56,10 +55,11 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
+    alert("js works")
     let state = {};
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId");
-
+    let deviceName = param.get("deviceName");
     $('.ID .radius').click(function(event){
         event.preventDefault();
         if($(this).hasClass("done")){
@@ -128,17 +128,20 @@
                 alert('Ajax error!')
             }
         })
-    },800)
+    },800);
 
     $('.back').click(function(){
         window.history.go(-1);
-    })
+    });
     $('.left_btn').click(function(){
-        window.location.href = "./Loan.html?userId="+userId;
-    })
+        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+    });
     $('.right_btn').click(function(){
-        window.location.href = "./about.html?userId="+userId;
-    })
+        window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
+    });
 
 </script>
 </html>
