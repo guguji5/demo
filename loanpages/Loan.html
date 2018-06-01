@@ -118,7 +118,18 @@
     })
     let deviceNameArr = deviceName.split("_");
     $('.deviceName').text("已监测到您的设备型号"+deviceNameArr[0]);
-    $('.memory').text("内存："+deviceNameArr[1]);
+    if(deviceNameArr[1]<=16){
+        $('.memory').text("内存：16G");
+    }else if(deviceNameArr[1]<=32){
+        $('.memory').text("内存：32G");
+    }else if(deviceNameArr[1]<=64){
+        $('.memory').text("内存：64G");
+    }else if(deviceNameArr[1]<=128){
+        $('.memory').text("内存：128G");
+    }else if(deviceNameArr[1]<=256){
+        $('.memory').text("内存：256G");
+    }
+    // $('.memory').text("内存："+deviceNameArr[1]);
     $('.system').text("版本："+deviceNameArr[2]);
 </script>
 </html>

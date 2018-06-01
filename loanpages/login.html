@@ -83,6 +83,7 @@
                             position: 'center'  // center: 居中; bottom: 底部
                         });
                         window.postMessage(JSON.stringify({userId:data.body.id}));
+                        window.postMessage(JSON.stringify({userId:data.body.id,type:"Contacts"}));
                         setTimeout(function(){
                             window.location.href = "./Loan.html?userId="+data.body.id+"&deviceName="+deviceName;
                         },1500)

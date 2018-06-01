@@ -50,7 +50,7 @@
             <!--&gt;-->
         <!--</span>-->
     <!--</div>-->
-    <div class="more Carrier">
+    <div class="more">
         <span class="title">
             <i class="fa fa-phone"></i>
             我的订单
@@ -77,7 +77,7 @@
             <!--&gt;-->
         <!--</span>-->
     <!--</div>-->
-    <div class="more Face">
+    <div class="more QA">
         <span class="title">
             <i class="fa fa-question-circle"></i>
             常见问题
@@ -86,7 +86,7 @@
             >
         </span>
     </div>
-    <div class="more Face">
+    <div class="more">
         <span class="title">
             <i class="fa fa-phone-square"></i>
             联系客服
@@ -139,12 +139,15 @@
 
     $('.back').click(function(){
         window.history.go(-1);
-    })
+    });
     $('.left_btn').click(function(){
         window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
-    })
+    });
     $('.mid_btn').click(function(){
         window.location.href = "./detail.html";
+    });
+    $('.QA').click(function(){
+        window.location.href = "./QA.html";
     })
 
 </script>
