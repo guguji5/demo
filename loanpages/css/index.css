@@ -163,16 +163,21 @@ button.btn{
     line-height: 1rem;
     background: #F8F8F8;
 }
-.footer span{
+.footer div{
     width: 33%;
     color:#82E3CA;
     float: left;
     text-align: center;
+    padding-top:0.1rem;
 }
-.footer span+span{
-    border-left:1px solid #82E3CA;
-    margin-left:-1px;
+.footer div p{
+    height:0.4rem;
+    line-height: 0.4rem;
 }
+/*.footer div+div{*/
+    /*border-left:1px solid #82E3CA;*/
+    /*margin-left:-1px;*/
+/*}*/
 .attachment{
     margin-left: 5%;
     width: 90%;
