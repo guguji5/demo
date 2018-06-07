@@ -110,7 +110,34 @@
     let deviceName = param.get("deviceName");
     console.log("deviceName is",deviceName)
     $('button').click(function(){
-        window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+        $.ajax({
+            type: 'GET',
+            url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(data){
+                if(data.state.errCode==10000){
+                    if(data.body.emergencyPerson==="1" &&
+                        data.body.carrieroperator==="1" &&
+                        data.body.idcard==="1" &&
+                        data.body.liveBody==="1"){
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: '您已通过审核，稍后工作人员会与您联系转机事宜',
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                    }else{
+                        window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+                    }
+                }
+
+            },
+            error: function(xhr, type){
+                alert('Ajax error!');
+                window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+            }
+        })
     });
     $('.back').click(function(){
         window.history.go(-1);

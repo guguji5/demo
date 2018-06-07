@@ -83,10 +83,9 @@
             return;
         }
         window.postMessage('ID');
-    })
-    $('.Face .radius').click(function(event){
+    });
+    $('.emergencyContact .radius').click(function(event){
         event.preventDefault();
-
         if($(this).hasClass("done")){
             return;
         }
@@ -99,22 +98,39 @@
             });
             return;
         }
+        window.location.href = "./emergencyContact.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.Face .radius').click(function(event){
+        event.preventDefault();
+
+        if($(this).hasClass("done")){
+            return;
+        }
+        if(state.emergencyPerson ==="0" ){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请添加紧急联系人',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+            return;
+        }
         window.postMessage('Face');
     })
     $('.Carrier .radius').click(function(){
         if($(this).hasClass("done")){
             return;
         }
-        if(state.idcard ==="0" || state.liveBody ==="0"){
+        if(state.liveBody ==="0"){
             $(document).dialog({
                 type : 'notice',
-                infoText: '请先完成身份证和人脸验证',
+                infoText: '请先人脸验证',
                 autoClose: 1500,
                 position: 'center'  // center: 居中; bottom: 底部
             });
             return;
         }
-        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2Fcertify.html%3FuserId%3D"+userId+"&themeColor=abcdef"
+        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
     })
 
     setTimeout(function(){
@@ -139,7 +155,18 @@
                         $('.Carrier .radius').addClass('done');
                         $('.Carrier .radius').text('已认证')
                     }
+                    if(data.body.emergencyPerson==="1"){
+                        $('.emergencyContact .radius').addClass('done');
+                        $('.emergencyContact .radius').text('已认证')
+                    }
+                    if(data.body.emergencyPerson==="1" &&
+                        data.body.carrieroperator==="1" &&
+                        data.body.idcard==="1" &&
+                        data.body.liveBody==="1"){
+                        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+                    }
                 }
+
             },
             error: function(xhr, type){
                 alert('Ajax error!')
