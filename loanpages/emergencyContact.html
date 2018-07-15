@@ -19,19 +19,19 @@
         <div class="icon">
             <i class="fa fa-user-circle-o" style="font-size: 0.4rem"></i>
         </div>
-        <input type="number" placeholder="联系人姓名" id="name">
+        <input type="text" placeholder="联系人姓名" id="name">
     </div>
     <div>
         <div class="icon">
             <i class="fa fa-phone"></i>
         </div>
-        <input type="text" placeholder="联系人手机号" onkeyup="isComplete()" onchange="checkNum(this.value)" id="phone">
+        <input type="number" placeholder="联系人手机号" onkeyup="isComplete()" onchange="checkNum(this.value)" id="phone">
     </div>
     <div>
         <div class="icon">
             <i class="fa fa-user-plus" style="font-size: 0.4rem"></i>
         </div>
-        <input type="number" placeholder="与本人关系" id="relation" onkeyup="isComplete()">
+        <input type="text" placeholder="与本人关系" id="relation" onkeyup="isComplete()">
     </div>
 
 </div>
@@ -78,6 +78,7 @@
                         setTimeout(function(){
                             window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
                         },1500);
+                        // window.postMessage('Certify');
                     }else{
                         $(document).dialog({
                             type : 'notice',

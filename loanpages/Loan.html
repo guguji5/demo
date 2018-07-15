@@ -7,6 +7,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+
     <style>
         .content1{
             background: #fff;
@@ -35,35 +37,6 @@
 <body>
 <div id="app">
     <img src="img/banner.png" style="width: 100%">
-    <!--<div class="main">-->
-        <!--<p>转机金额（元）</p>-->
-        <!--<p class="title">10000</p>-->
-        <!--<p class="deviceName" style="padding: 0px;"> </p>-->
-    <!--</div>-->
-    <!--<div class="more">-->
-        <!--<span class="title">-->
-            <!--抵押期限-->
-        <!--</span>-->
-        <!--<span class="description">-->
-            <!--<span class="highlight">一周</span>&nbsp;>-->
-        <!--</span>-->
-    <!--</div>-->
-    <!--<div class="more">-->
-        <!--<span class="title">-->
-            <!--每期还款-->
-        <!--</span>-->
-        <!--<span class="description">-->
-            <!--<span class="highlight_white">¥10000.00</span>(含服务费0.00)&nbsp;>-->
-        <!--</span>-->
-    <!--</div>-->
-    <!--<div class="agreement">-->
-        <!--<label class="awesome-label"><input class="awesome-radio" type="checkbox" name="demo-checkbox1">-->
-            <!--<span class="awesome-checkbox awesome-radioInput"></span>-->
-            <!--我已同意<span class="highlight_green">《取点花分期服务协议》</span>-->
-        <!--</label>-->
-    <!--</div>-->
-
-    <!--<button class="btn">立即转机</button>-->
     <div class="content1">
         <div class="left">
             <img src="img/tel.png" style="width: 100%">
@@ -104,6 +77,7 @@
 </body>
 <script src="js/index.js"></script>
 <script src="js/zepto.js"></script>
+<script src="js/dialog.js"></script>
 <script>
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId");
@@ -123,7 +97,7 @@
                         data.body.liveBody==="1"){
                         $(document).dialog({
                             type : 'notice',
-                            infoText: '您已通过审核，稍后工作人员会与您联系转机事宜',
+                            infoText: '您已完成资料填写，稍后工作人员会与您联系转机事宜',
                             autoClose: 1500,
                             position: 'center'  // center: 居中; bottom: 底部
                         });

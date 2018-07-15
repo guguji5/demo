@@ -26,7 +26,7 @@
             <i class="fa fa-envelope-o"></i>
         </div>
         <input type="number" placeholder="请输入验证码" id="code" onkeyup="isComplete()">
-        <span id="codeBtn" class="disabled">|   &nbsp;发送验证码</span>
+        <span id="codeBtn" class="disabled">|   &nbsp;<span>发送验证码</span></span>
     </div>
     <div>
         <div class="icon">
@@ -54,6 +54,7 @@
             return false;
         }
         let phone = $("input#phone").val();
+        Countdown()
         $.get("http://39.106.198.9:8080/cashloanapi/login/"+phone,function(data){
             if(data.state.errCode ===10000){
                 $(document).dialog({
@@ -119,7 +120,7 @@
     };
 
     function checkNum(phonenum){
-        let reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+        let reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
         if(reg.test(phonenum)){
             $("#codeBtn").removeClass('disabled')
         }else{
@@ -141,9 +142,20 @@
     $('.back').click(function(){
         window.history.go(-1);
     })
-    // let param = new URLSearchParams(window.location.search);
-    // let Params = document.querySelector('.params');
-    // Params.innerText = param;
+    function Countdown(){
+        var count = 60;
+        var timer = setInterval(function(){
+            if(count>1){
+                count--;
+                $('#codeBtn span')[0].innerText="   ( "+count+" s ) ";
+                $("#codeBtn").addClass('disabled');
+            }else{
+                $('#codeBtn span')[0].innerText='发送验证码';
+                $("#codeBtn").removeClass('disabled');
+                clearInterval(timer);
+            }
+        },1000)
+    }
 </script>
 
 </body>

@@ -19,21 +19,15 @@
         <div class="icon">
             <i class="fa fa-mobile-phone" style="font-size: 0.7rem"></i>
         </div>
-        <input type="number" placeholder="请输入您的手机号" onchange="checkNum(this.value)" id="phone">
+        <input type="number" placeholder="请输入您的手机号" oninput="checkNum(this.value)" id="phone" onblur="checkBlur(this.value)">
     </div>
     <div>
         <div class="icon">
             <i class="fa fa-envelope-o"></i>
         </div>
         <input type="number" placeholder="请输入验证码" id="code" onkeyup="isComplete()">
-        <span id="codeBtn" class="disabled">|   &nbsp;发送验证码</span>
+        <span id="codeBtn" class="disabled">|   &nbsp;<span>发送验证码</span></span>
     </div>
-    <!--<div>-->
-        <!--<div class="icon">-->
-            <!--<i class="fa fa-lock"></i>-->
-        <!--</div>-->
-        <!--<input type="text" placeholder="请设置8-20位组合密码" id="password" onkeyup="isComplete()">-->
-    <!--</div>-->
 </div>
 <p style="margin-left: 5%;font-size: 0.3rem;margin-top:1rem">点击注册即表示同意<a href="./agreement.html" style="color:#82E3CA">《趣转机注册协议》</a></p>
 <div class="submit">
@@ -42,22 +36,22 @@
 <div class="attachment">
     <a class="fr" style="font-size: 0.3rem">密码登录</a>
 </div>
-<!--<p class="params" style="font-size: 0.4rem;word-wrap: break-word;"></p>-->
-<!--<a href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId=18903393333&backUrl=https%3A%2F%2Fwww.sina.com&themeColor=abcdef">世界上</a>-->
+
 <script src="js/zepto.js"></script>
 <script src="js/index.js"></script>
 <script src="js/ripple.js"></script>
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
-    let param = new URLSearchParams(window.location.search);
-    let deviceName = param.get("deviceName");
-    let verifyCode = 0;
-    $('#codeBtn')[0].onclick = function () {
+    var param = new URLSearchParams(window.location.search);
+    var deviceName = param.get("deviceName");
+    var verifyCode = 0;
+    $('#codeBtn').click(function () {
        if(this.classList.contains('disabled')){
            return false;
        }
-        let phone = $("input#phone").val();
+        var phone = $("input#phone").val();
+        Countdown();
        $.get("http://39.106.198.9:8080/cashloanapi/login/"+phone,function(data){
            if(data.state.errCode ===10000){
                $(document).dialog({
@@ -69,13 +63,13 @@
                verifyCode = data.body.code;
            }
         })
-    };
+    });
     $('.attachment a').click(function(){
         window.location.href = "./login.html?deviceName="+deviceName;
     });
-    $('.btn')[0].onclick = function () {
+    $('.btn').click(function () {
         if($(".btn").hasClass('active')){
-            let code = $("input#code").val()
+            var code = $("input#code").val()
             if(verifyCode !=code){
                 $(document).dialog({
                     type : 'notice',
@@ -85,8 +79,8 @@
                 });
                 return false;
             }
-            let inputList = document.querySelectorAll('input');
-            let data = {
+            var inputList = document.querySelectorAll('input');
+            var data = {
                 phoneNumber:inputList[0].value,
                 code:inputList[1].value,
                 password:''//直接注册登录的时候不用传密码，数据库存为空
@@ -125,10 +119,29 @@
                 }
             })
         }
-    };
+    });
 
+    // function checkNum(phonenum){
+    //     var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+    //     if(reg.test(phonenum)){
+    //         $("#codeBtn").removeClass('disabled')
+    //     }else{
+    //         $(document).dialog({
+    //             type : 'notice',
+    //             infoText: '手机号格式不对',
+    //             autoClose: 1500,
+    //             position: 'center'  // center: 居中; bottom: 底部
+    //         });
+    //     }
+    // }
     function checkNum(phonenum){
-        let reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+        var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+        if(reg.test(phonenum)){
+            $("#codeBtn").removeClass('disabled')
+        }
+    }
+    function checkBlur(phonenum){
+        var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
         if(reg.test(phonenum)){
             $("#codeBtn").removeClass('disabled')
         }else{
@@ -141,11 +154,25 @@
         }
     }
     function isComplete(){
-        let code = $("input#code").val();
-        // let password = $("input#password").val();
+        var code = $("input#code").val();
+        // var password = $("input#password").val();
         if(code){
             $(".btn").addClass('active')
         }
+    }
+    function Countdown(){
+        var count = 60;
+        var timer = setInterval(function(){
+            if(count>1){
+                count--;
+                $('#codeBtn span')[0].innerText="   ( "+count+" s ) ";
+                $("#codeBtn").addClass('disabled');
+            }else{
+                $('#codeBtn span')[0].innerText='发送验证码';
+                $("#codeBtn").removeClass('disabled');
+                clearInterval(timer);
+            }
+        },1000)
     }
 </script>
 
