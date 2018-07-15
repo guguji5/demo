@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>常见问题</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <style>
+        .qa{
+            font-size: 0.3rem;
+            background-color: #ffffff;
+            padding-left:0.3rem;
+            padding-right:0.3rem;
+            padding-top:0.2rem;
+            line-height:0.6rem;
+            border-bottom:0.1rem solid #efefef;
+        }
+        p{
+            margin:0.1rem 0;
+        }
+        h3{
+            margin:0.1rem 0;
+        }
+        body{
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">常见问题</span>
+</div>
+<div id="app">
+    <div class="qa">
+        <h3>趣转机是做什么的？</h3>
+        <p>
+            趣转机是国内专业的二手手机回收平台，致力于为用户提供优质的回收服务。
+        </p>
+    </div>
+    <div class="qa">
+        <h3>如何查找自己的手机型号？</h3>
+        <p>1.直接查看苹果手机背面的型号信息</p>
+        <p>2.在app首页中会显示相关型号</p>
+
+    </div>
+    <div class="qa">
+        <h3>回收需要哪些配件？</h3>
+        <p>
+            回收需要完整的手机，单独的零件或配件是不回收的。
+        </p>
+    </div>
+    <div class="qa">
+        <h3>快递费谁来承担？</h3>
+        <p>
+            用户自己承担
+        </p>
+    </div>
+    <div class="qa">
+        <h3>申请回收前需要做哪些认证？</h3>
+        <p>
+            申请转机需要完成手机认证和机主认证方可申请转机，其中手机认证为设备为设备检测直通对手机的全方位检测，确保手机的各项状态正常，机主认证包括，基础信息，活体认证，信用认证，手机运营商认证，银行卡等，为确保顺利转机，请如实填写，我们对您的信息将一律保密。
+        </p>
+    </div>
+    <div class="qa">
+        <h3>多久可以收到手机款？</h3>
+        <p>
+            我们会在用户下完单之后，24小时内结算给用户
+        </p>
+    </div>
+    <div class="qa">
+        <h3>手机里面信息怎么办？</h3>
+        <p>
+            可以退出您的账号，删除数据，如果您忘记删除，会有专人删除您的个人信息，确保隐私不外泄。
+        </p>
+    </div>
+
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    let state = {};
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
+
+
+    $('.back').click(function(){
+        window.history.go(-1);
+    })
+
+</script>
+</html>

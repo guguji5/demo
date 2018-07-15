@@ -81,8 +81,6 @@
 <script>
     let param = new URLSearchParams(window.location.search);
     let userId = param.get("userId");
-    let deviceName = param.get("deviceName");
-    console.log("deviceName is",deviceName)
     $('button').click(function(){
         $.ajax({
             type: 'GET',
@@ -102,14 +100,14 @@
                             position: 'center'  // center: 居中; bottom: 底部
                         });
                     }else{
-                        window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+                        window.location.href = "./certify.html?userId="+userId;
                     }
                 }
 
             },
             error: function(xhr, type){
                 alert('Ajax error!');
-                window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+                window.location.href = "./certify.html?userId="+userId;
             }
         })
     });
@@ -117,7 +115,7 @@
         window.history.go(-1);
     });
     $('.right_btn').click(function(){
-        window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
+        window.location.href = "./about.html?userId="+userId;
     });
     $('.mid_btn').click(function(){
         window.location.href = "./detail.html";
@@ -125,20 +123,5 @@
     $('img').click(function(){
         window.location.href = "./detail.html";
     })
-    let deviceNameArr = deviceName.split("_");
-    $('.deviceName').text("已监测到您的设备型号"+deviceNameArr[0]);
-    if(deviceNameArr[1]<=16){
-        $('.memory').text("内存：16G");
-    }else if(deviceNameArr[1]<=32){
-        $('.memory').text("内存：32G");
-    }else if(deviceNameArr[1]<=64){
-        $('.memory').text("内存：64G");
-    }else if(deviceNameArr[1]<=128){
-        $('.memory').text("内存：128G");
-    }else if(deviceNameArr[1]<=256){
-        $('.memory').text("内存：256G");
-    }
-    // $('.memory').text("内存："+deviceNameArr[1]);
-    $('.system').text("版本："+deviceNameArr[2]);
 </script>
 </html>

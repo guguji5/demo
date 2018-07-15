@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>马上注册</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/dialog.css">
+
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">趣应急欢迎您</span>
+</div>
+<div class="content">
+    <div>
+        <div class="icon">
+            <i class="fa fa-mobile-phone" style="font-size: 0.7rem"></i>
+        </div>
+        <input type="number" placeholder="请输入您的手机号" onchange="checkNum(this.value)" id="phone">
+    </div>
+    <div>
+        <div class="icon">
+            <i class="fa fa-envelope-o"></i>
+        </div>
+        <input type="number" placeholder="请输入验证码" id="code" onkeyup="isComplete()">
+        <span id="codeBtn" class="disabled">|   &nbsp;<span>发送验证码</span></span>
+    </div>
+    <div>
+        <div class="icon">
+            <i class="fa fa-lock"></i>
+        </div>
+        <input type="text" placeholder="请设置8-20位组合密码" id="password" onkeyup="isComplete()">
+    </div>
+</div>
+<p style="margin-left: 5%;font-size: 0.3rem;margin-top:1rem">点击注册即表示同意<a href="./agreement.html" style="color:#82E3CA">《趣转机注册协议》</a></p>
+<div class="submit">
+    <button class="btn">马上注册</button>
+</div>
+
+<script src="js/zepto.js"></script>
+<script src="js/index.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    let verifyCode = 0;
+    $('#codeBtn')[0].onclick = function () {
+        if(this.classList.contains('disabled')){
+            return false;
+        }
+        let phone = $("input#phone").val();
+        Countdown()
+        $.get("http://39.106.198.9:8080/cashloanapi/login/"+phone,function(data){
+            if(data.state.errCode ===10000){
+                $(document).dialog({
+                    type : 'notice',
+                    infoText: '短信已发送',
+                    autoClose: 1000,
+                    position: 'center'  // center: 居中; bottom: 底部
+                });
+                verifyCode = data.body.code;
+            }
+        })
+    };
+    $('.btn')[0].onclick = function () {
+        if($(".btn").hasClass('active')){
+            let code = $("input#code").val()
+            if(verifyCode !=code){
+                $(document).dialog({
+                    type : 'notice',
+                    infoText: '验证码不对，请重新获取',
+                    autoClose: 1500,
+                    position: 'center'  // center: 居中; bottom: 底部
+                });
+                return false;
+            }
+            let inputList = document.querySelectorAll('input');
+            let data = {
+                phoneNumber:inputList[0].value,
+                code:inputList[1].value,
+                password:inputList[2].value
+            };
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: 'http://39.106.198.9:8080/cashloanapi/login/registerAndLogin',
+                contentType:'application/json',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                success: function(data){
+                    if(data.state.errCode==10000){
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: '登陆成功',
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                        setTimeout(function(){
+                            window.location.href = "./login.html";
+                        },1500);
+                    }else{
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: data.body.errMessage,
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                    }
+                },
+                error: function(xhr, type){
+                    alert('Ajax error!')
+                }
+            })
+        }
+    };
+
+    function checkNum(phonenum){
+        let reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+        if(reg.test(phonenum)){
+            $("#codeBtn").removeClass('disabled')
+        }else{
+            $(document).dialog({
+                type : 'notice',
+                infoText: '手机号格式不对',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+        }
+    }
+    function isComplete(){
+        let code = $("input#code").val();
+        let password = $("input#password").val();
+        if(code && password){
+            $(".btn").addClass('active')
+        }
+    }
+    $('.back').click(function(){
+        window.history.go(-1);
+    })
+    function Countdown(){
+        var count = 60;
+        var timer = setInterval(function(){
+            if(count>1){
+                count--;
+                $('#codeBtn span')[0].innerText="   ( "+count+" s ) ";
+                $("#codeBtn").addClass('disabled');
+            }else{
+                $('#codeBtn span')[0].innerText='发送验证码';
+                $("#codeBtn").removeClass('disabled');
+                clearInterval(timer);
+            }
+        },1000)
+    }
+</script>
+
+</body>
+</html>
