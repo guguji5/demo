@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>认证</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+
+    <style>
+        #loading{
+            background-color: #374140;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            margin-top: 0px;
+            top: 0px;
+        }
+        #loading-center{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #loading-center-absolute {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 150px;
+            width: 150px;
+            margin-top: -90px;
+            margin-left: -50px;
+        }
+        .object{
+            width: 20px;
+            height: 20px;
+            background-color: #FFF;
+            float: left;
+            margin-right: 20px;
+            margin-top: 65px;
+            -moz-border-radius: 50% 50% 50% 50%;
+            -webkit-border-radius: 50% 50% 50% 50%;
+            border-radius: 50% 50% 50% 50%;
+        }
+
+        #object_one {
+            -webkit-animation: object_one 1.5s infinite;
+            animation: object_one 1.5s infinite;
+        }
+        #object_two {
+            -webkit-animation: object_two 1.5s infinite;
+            animation: object_two 1.5s infinite;
+            -webkit-animation-delay: 0.25s;
+            animation-delay: 0.25s;
+        }
+        #object_three {
+            -webkit-animation: object_three 1.5s infinite;
+            animation: object_three 1.5s infinite;
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+        @-webkit-keyframes object_one {
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_one {
+
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+        @-webkit-keyframes object_two {
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_two {
+            75% {
+                transform: scale(0);
+                -webkit-transform:  scale(0);
+            }
+        }
+        @-webkit-keyframes object_three {
+
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_three {
+
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="main">
+        <p class="title">您需要完成以下认证</p>
+    </div>
+    <div class="more ID">
+        <span class="title">
+            <i class="fa fa-id-card-o"></i>
+            身份验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+    <div class="more emergencyContact">
+        <span class="title">
+            <i class="fa fa-user-circle-o"></i>
+            紧急联系人
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+    <div class="more Face">
+        <span class="title">
+            <i class="fa fa-user-circle"></i>
+            人脸验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+    <div class="more Carrier">
+        <span class="title">
+            <i class="fa fa-phone"></i>
+            运营商验证
+        </span>
+        <span class="description">
+            <span class="radius">去认证</span>&nbsp;
+        </span>
+    </div>
+</div>
+<div class="footer">
+    <div class="left_btn">
+       <p><i class="fa fa-home"></i></p>
+        <p>首页</p>
+    </div>
+    <div class="mid_btn">
+        <p><i class="fa fa-file-text-o"></i></p>
+        <p>发现</p>
+    </div>
+    <div class="right_btn">
+        <p><i class="fa fa-user-o"></i></p>
+        <p>我的</p>
+    </div>
+</div>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    let state = {};
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
+    $('.ID .radius').click(function(event){
+        event.preventDefault();
+        if($(this).hasClass("done")){
+            return;
+        }
+        window.postMessage('ID');
+    });
+    $('.emergencyContact .radius').click(function(event){
+        event.preventDefault();
+        if($(this).hasClass("done")){
+            return;
+        }
+        if(state.idcard ==="0" ){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请先完成身份证验证',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+            return;
+        }
+        // window.postMessage('EC');
+        window.location.href = "./emergencyContact.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.Face .radius').click(function(event){
+        event.preventDefault();
+
+        if($(this).hasClass("done")){
+            return;
+        }
+        if(state.emergencyPerson ==="0" ){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请添加紧急联系人',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+            return;
+        }
+        window.postMessage('Face');
+    })
+    $('.Carrier .radius').click(function(){
+        if($(this).hasClass("done")){
+            return;
+        }
+        if(state.liveBody ==="0"){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请先人脸验证',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+            return;
+        }
+        // window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
+        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=84f5e4c8171b4c069d6cd02bc02de637&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
+    })
+
+    setTimeout(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                state = data.body;
+                if(data.state.errCode==10000){
+                    if(data.body.liveBody==="1"){
+                        $('.Face .radius').addClass('done');
+                        $('.Face .radius').text('已认证')
+                    }
+                    if(data.body.idcard==="1"){
+                        $('.ID .radius').addClass('done');
+                        $('.ID .radius').text('已认证')
+                    }
+                    if(data.body.carrieroperator==="1"){
+                        $('.Carrier .radius').addClass('done');
+                        $('.Carrier .radius').text('已认证')
+                    }
+                    if(data.body.emergencyPerson==="1"){
+                        $('.emergencyContact .radius').addClass('done');
+                        $('.emergencyContact .radius').text('已认证')
+                    }
+                    if(data.body.emergencyPerson==="1" &&
+                        data.body.carrieroperator==="1" &&
+                        data.body.idcard==="1" &&
+                        data.body.liveBody==="1"){
+                        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+                    }
+                    $('#loading').hide();
+                }
+
+            },
+            error: function(xhr, type){
+                alert('Ajax error!')
+            }
+        })
+    },800);
+
+    $('.back').click(function(){
+        window.history.go(-1);
+    });
+    $('.left_btn').click(function(){
+        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.right_btn').click(function(){
+        window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
+    });
+
+</script>
+</html>

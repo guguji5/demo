@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>注册/登陆</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <style type="text/css">
+        body{
+            height:calc(100% - 2.5rem);
+            background: #fff;
+        }
+        .content{
+            /*height:100%;*/
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /*justify-content: space-between;*/
+        }
+        #loading{
+            background-color: #374140;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            margin-top: 0px;
+            top: 0px;
+        }
+        #loading-center{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #loading-center-absolute {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 150px;
+            width: 150px;
+            margin-top: -90px;
+            margin-left: -50px;
+        }
+        .object{
+            width: 20px;
+            height: 20px;
+            background-color: #FFF;
+            float: left;
+            margin-right: 20px;
+            margin-top: 65px;
+            -moz-border-radius: 50% 50% 50% 50%;
+            -webkit-border-radius: 50% 50% 50% 50%;
+            border-radius: 50% 50% 50% 50%;
+        }
+
+        #object_one {
+            -webkit-animation: object_one 1.5s infinite;
+            animation: object_one 1.5s infinite;
+        }
+        #object_two {
+            -webkit-animation: object_two 1.5s infinite;
+            animation: object_two 1.5s infinite;
+            -webkit-animation-delay: 0.25s;
+            animation-delay: 0.25s;
+        }
+        #object_three {
+            -webkit-animation: object_three 1.5s infinite;
+            animation: object_three 1.5s infinite;
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+        @-webkit-keyframes object_one {
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_one {
+
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+        @-webkit-keyframes object_two {
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_two {
+            75% {
+                transform: scale(0);
+                -webkit-transform:  scale(0);
+            }
+        }
+        @-webkit-keyframes object_three {
+
+            75% { -webkit-transform: scale(0); }
+        }
+        @keyframes object_three {
+
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">身份证信息</span>
+</div>
+<div class="content">
+    <p style="font-size: 0.3rem;margin-bottom:0.5rem">仅用于全国公民身份查询中心核实身份</p>
+    <p  style="font-size: 0.3rem;margin-bottom:0.5rem">拍摄时请确保身份证边框完整、字迹清晰、亮度均衡</p>
+    <img src="need.png" style="margin-bottom:0.5rem" id="front">
+    <p  style="font-size: 0.3rem;margin-bottom:0.5rem">身份证人像面</p>
+    <img src="notneed.png" style="margin-bottom:0.5rem" id="back">
+    <p  style="font-size: 0.3rem;margin-bottom:0.5rem">身份证国徽面</p>
+    <button class="btn" style="margin-left: 0">保存</button>
+</div>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+        </div>
+    </div>
+</div>
+<input type="file" accept="image/*" capture="camera" style="visibility: hidden;" id = "pic" onchange="upload()">
+<img id="hidPic" style="display: none">
+<img id="preview">
+<script src="http://39.106.198.9:8081/target/target-script-min.js#anonymous" type="text/javascript"></script>
+<script src="js/zepto.js"></script>
+<script src="js/index.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script src="js/crypto-js.js"></script>
+<script>
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId");
+    var pic = document.getElementById("pic");
+    var side = "front";
+    var result ={}
+    $('#loading').hide();
+    $('.btn').click(function () {
+        if(!result['front']){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请上传身份证人像面',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+        }else if(!result['back']){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '请上传身份证国徽面',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+        }
+        window.location.href = "./certify.html?userId="+userId;
+    });
+
+    function upload(){
+        console.log(pic.files[0])
+        var url = window.URL.createObjectURL(pic.files[0]);
+
+        var hidPic = document.getElementById("hidPic");
+        hidPic.src = url;
+        hidPic.onload=function(){
+            compress(hidPic,hidPic.width,hidPic.height,pic.files[0].type,function(data){
+                console.log(data);
+               var formData = new FormData();
+                formData.append('file',data,pic.files[0].name);//这是blob
+           
+                var request = new XMLHttpRequest();
+                $('#loading').show();
+                request.open("POST", "http://39.106.198.9:8080/cashloanapi/liveBody/auth/card/"+side+"/"+userId);
+                request.onload = function() {
+                    if (request.status == 200) {
+
+                      var data = JSON.parse(request.responseText);
+			console.log(data);
+                      if(data.state.errCode!==10000){
+                        alert(data.body.errMessage)
+                        $('#loading').hide();
+                      }else{
+                        result[side] = true;
+                          $('#loading').hide();
+                          $(document).dialog({
+                                type : 'notice',
+                                infoText: '身份证'+side==="front"?"人面":"国徽"+'面上传成功',
+                                autoClose: 1500,
+                                position: 'center'  // center: 居中; bottom: 底部
+                            });
+                          }
+                      
+                    } else {
+                      alert(request.responseText);
+                      $('#loading').hide();
+                    }
+                };
+                request.send(formData);
+            })
+        }
+    }
+
+    function compress(img,width,height,type,cb) { // img可以是dataURL或者图片url
+        var canvas, ctx, img64;
+        var originWidth = width;
+        var originHeight = height;
+        // 最大尺寸限制
+        var maxWidth = 400, maxHeight = 400;
+        // 目标尺寸
+        var targetWidth = originWidth, targetHeight = originHeight;
+        // 图片尺寸超过400x400的限制
+        if (originWidth > maxWidth || originHeight > maxHeight) {
+            if (originWidth / originHeight > maxWidth / maxHeight) {
+                // 更宽，按照宽度限定尺寸
+                targetWidth = maxWidth;
+                targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+            } else {
+                targetHeight = maxHeight;
+                targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+            }
+        }
+
+        canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+        img64 = canvas.toDataURL("image/jpeg", 0.5);
+        var preview = document.getElementById("preview");
+        preview.src = img64;
+        canvas.toBlob(function(blob){
+            cb(blob);
+        },type);
+
+
+        // return img64; // 压缩后的base64串
+    }
+
+    $('#front').click(function(e){
+
+        $('input').click();
+        side = "front";
+        e.preventDefault()
+    });
+    $('#back').click(function(){
+        $('input').click();
+        side = "back";
+    })
+
+</script>
+
+</body>

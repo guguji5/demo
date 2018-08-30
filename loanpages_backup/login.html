@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>密码登录</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/dialog.css">
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">登陆</span>
+</div>
+<div class="content">
+    <div>
+        <div class="icon">
+            <i class="fa fa-mobile-phone" style="font-size: 0.7rem"></i>
+        </div>
+        <input type="number" placeholder="请输入您的手机号" onchange="checkNum(this.value)" id="phone">
+    </div>
+    <div>
+        <div class="icon">
+            <i class="fa fa-lock"></i>
+        </div>
+        <input type="text" placeholder="请输入密码" id="password" onkeyup="isComplete()">
+    </div>
+</div>
+<div class="submit">
+    <button class="btn">登陆</button>
+</div>
+<div class="attachment">
+    <a href="./register.html" class="fl" style="font-size: 0.3rem">立即注册</a>
+    <a href="./forgetPassword.html" class="fr" style="font-size: 0.3rem">忘记密码</a>
+    <div style="clear:both"></div>
+</div>
+<script src="js/zepto.js"></script>
+<script src="js/index.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    let param = new URLSearchParams(window.location.search);
+    let deviceName = param.get("deviceName");
+    function isComplete(){
+        let password = $("input#password").val();
+        if(password){
+            $(".btn").addClass('active')
+        }
+    }
+    function checkNum(phonenum){
+        let reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+        if(!reg.test(phonenum)){
+            $(document).dialog({
+                type : 'notice',
+                infoText: '手机号格式不对',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+        }
+    }
+    $('.btn')[0].onclick = function () {
+        if($(".btn").hasClass('active')){
+            let inputList = document.querySelectorAll('input');
+            let data = {
+                phoneNumber:inputList[0].value,
+                password:inputList[1].value
+            };
+            console.log(data);
+            $.ajax({
+                type: 'POST',
+                url: 'http://39.106.198.9:8080/cashloanapi/login/login',
+                contentType:'application/json',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                success: function(data){
+                    if(data.state.errCode==10000){
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: '登陆成功',
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                        window.postMessage(JSON.stringify({userId:data.body.id}));
+                        window.postMessage(JSON.stringify({userId:data.body.id,type:"Contacts"}));
+                        setTimeout(function(){
+                            window.location.href = "./Loan.html?userId="+data.body.id+"&deviceName="+deviceName;
+                        },1500)
+                    }else{
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: data.body.errMessage,
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                    }
+                },
+                error: function(xhr, type){
+                    alert('Ajax error!')
+                }
+            })
+        }else{
+            $(document).dialog({
+                type : 'notice',
+                infoText: '用户名和密码均为必填',
+                autoClose: 1500,
+                position: 'center'  // center: 居中; bottom: 底部
+            });
+        }
+    };
+    $('.back').click(function(){
+        window.history.go(-1);
+    })
+</script>
+</body>
+</html>

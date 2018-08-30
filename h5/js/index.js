@@ -12,5 +12,21 @@
     if (!doc.addEventListener) return;
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
-
+    
 })(document, window);
+function urlSearchParams(url){
+    var result = {};
+    var reg = /[?|&][\w=]+/g;
+    var arr = url.match(reg);
+    if(arr){
+        for(var item of arr){
+            var reg1 = /[^?=&]+/g;
+            var itemArr = item.match(reg1);
+            if(itemArr.length ===2){
+                result[itemArr[0]] = itemArr[1]
+            }
+        }
+    }
+    
+    return result;
+}

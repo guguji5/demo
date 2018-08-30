@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <style>
+        .main .left{
+            float:left;
+        }
+        .main .right{
+            float:right;
+        }
+        .main p{
+            padding-top:0px;
+            text-align: left;
+        }
+        .tab{
+            font-size:0.35rem;
+            display:flex;
+
+        }
+        .tab div{
+            flex:1 1 auto;
+            padding:0.2rem;
+            text-align: center;
+        }
+        .tab div.active{
+            color:#82E3CA;
+            border-bottom:1px solid #82E3CA;
+        }
+        .tab_content > div{
+            display:none;
+        }
+        .tab_content > div.active{
+            display:block;
+        }
+        .card{
+            margin: 0.1rem 0rem;
+            padding: 10px;
+            box-shadow:0px 0px 10px rgb(17, 17, 17) inset;
+            display: none;
+        }
+        .card p{
+            font-size: 0.4rem;
+
+        }
+        .card .no{
+            padding:0.2rem 0;
+        }
+        .card .amount{
+            color:red;
+        }
+        .card .data{
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">我的账单</span>
+</div>
+<div id="app">
+    <div class="tab">
+        <div class="active">未还账单</div>
+        <div>历史账单</div>
+    </div>
+    <div class='tab_content'>
+        <div class='active'>
+            <div class="card">
+                <p class='no'>No.<span class="no"></span> <span class="status" style="float:right;color:orange;font-size: 0.3rem;">待审核</span></p>
+                <p class='amount'>¥1000</p>
+                <p class='data' style="text-align: right">还款日期 2018.08.27</p>
+            </div>
+        </div>
+        <div>
+            历史账单历史账单历史账单
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="left_btn">
+            <p><i class="fa fa-home"></i></p>
+            <p>首页</p>
+        </div>
+        <div class="mid_btn">
+            <p><i class="fa fa-file-text-o"></i></p>
+            <p>发现</p>
+        </div>
+        <div class="right_btn">
+            <p><i class="fa fa-user-o"></i></p>
+            <p>我的</p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/ripple.js"></script>
+<script src="js/tapEvent.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    var loanArr = [];
+    var search = window.location.search;
+    if(search.indexOf("?userId")===0){
+        userId = search.substr(8);
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://39.106.198.9:8080/cashloanapi/locan/findLoan/'+userId,
+        contentType:'application/json',
+        dataType: 'json',
+        success: function(data){
+            console.log(data)
+            
+            loanArr = data.body;
+            loanArr.forEach(function(value){
+                if(value.state <= 2){
+                    switch(value.state){
+                        case "0":
+                         $('.status').text("未审核");
+                            break;
+                        case "1": 
+                        $('.status').text("已审核");
+                            break;
+                        case "2":
+                        $('.status').text("审核未通过");
+                            break;
+                    }
+                    $('span.no').text(value.loanCode);
+                    $('.amount').text("¥"+value.repayment);
+                    $('.data').text('还款日期 '+value.loanEndDate.split(" ")[0])
+                    $('.card').show();
+                }
+            });
+            // console.log($('.tab_content > div').first().find('b').text('gugu'));
+            // .eq[0].text('gugu')
+
+        },
+        error: function(xhr, type){
+            alert('Ajax error!')
+        }
+    })
+
+    $('.back').click(function(){
+        window.history.go(-1);
+    });
+    $('.left_btn').click(function(){
+        window.location.href = "./Loan.html?userId="+userId;
+    });
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
+    });
+   
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>客服QQ</title>
+    <!--<link href="css/font-awesome.min.css" rel="stylesheet">-->
+    <meta charset="utf-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <!--<link rel="stylesheet" href="css/radio.css">-->
+    <!--<link rel="stylesheet" href="css/dialog.css">-->
+    <style>
+        .qa{
+            font-size: 0.3rem;
+            background-color: #ffffff;
+            padding-left:0.3rem;
+            padding-right:0.3rem;
+            padding-top:0.2rem;
+            line-height:0.6rem;
+            border-bottom:0.1rem solid #efefef;
+        }
+        p{
+            margin:0.1rem 0;
+        }
+        h3{
+            margin:0.1rem 0;
+        }
+        body{
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <span class="back"><</span>
+    <span class="title">联系客服</span>
+</div>
+<div id="app">
+    <div class="qa">
+        <!--<h3>遇到问题如何联系客服</h3>-->
+        <p>我们的客服小二一直在等待您的搭讪</p>
+        <p>客服QQ:1695823959</p>
+    </div>
+
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+
+<script>
+    let state = {};
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
+
+
+    $('.back').click(function(){
+        window.history.go(-1);
+    })
+
+</script>
+</html>

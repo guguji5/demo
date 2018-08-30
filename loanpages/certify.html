@@ -166,10 +166,10 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
-    let state = {};
-    let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId");
-    let deviceName = param.get("deviceName");
+    var state = {};
+    var param = urlSearchParams(window.location.search);
+    var userId = param["userId"];
+    var deviceName = param["deviceName"];
     $('.ID .radius').click(function(event){
         event.preventDefault();
         if($(this).hasClass("done")){
@@ -224,7 +224,8 @@
             });
             return;
         }
-        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
+        // window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=72a94c205c434107be76c5d1bf531259&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
+        window.location.href="https://api.51datakey.com/h5/importV3/index.html#/carrier?apiKey=84f5e4c8171b4c069d6cd02bc02de637&userId="+userId+"&backUrl=http%3A%2F%2F39.106.198.9%3A8080%2Floanpages%2FLoan.html%3FuserId%3D"+userId+"&themeColor=abcdef&deviceName="+deviceName;
     })
 
     setTimeout(function(){

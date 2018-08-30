@@ -120,10 +120,10 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
-    let state = {};
-    let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId");
-    let deviceName = param.get("deviceName");
+    var state = {};
+    var param = urlSearchParams(window.location.search);
+    var userId = param["userId"];
+    var deviceName = param["deviceName"];
 
     $.ajax({
         type: 'GET',
@@ -133,8 +133,8 @@
         success: function(data){
             console.log(data)
             if(data.state.errCode ===10000){
-                let telphoneNumber = data.body.telphoneNumber || "138xxxx0000";
-                let userName = data.body.userName || data.body.telphoneNumber || "xxx";
+                var telphoneNumber = data.body.telphoneNumber || "138xxxx0000";
+                var userName = data.body.userName || data.body.telphoneNumber || "xxx";
                 $('.name').text(userName);
                 $('.phone').text(telphoneNumber);
             }

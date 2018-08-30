@@ -33,8 +33,8 @@
     <div class="main">
         <div class="left">
             <!--<p class="name">18903393932</p>-->
-            <p class="name">周啸天</p>
-            <p class="phone">189****3932</p>
+            <p class="name">XXX</p>
+            <p class="phone">xxxxxxxxxx</p>
         </div>
         <!--<div class="right">-->
             <!--<img src="./img/jio.jpg" alt="" style="height: 1.3rem;border-radius:50%;">-->
@@ -50,7 +50,7 @@
             <!--&gt;-->
         <!--</span>-->
     <!--</div>-->
-    <div class="more">
+    <div class="more order">
         <span class="title">
             <i class="fa fa-phone"></i>
             我的订单
@@ -120,10 +120,11 @@
 <script src="js/tapEvent.js"></script>
 <script src="js/dialog.js"></script>
 <script>
-    let state = {};
-    let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId");
-    let deviceName = param.get("deviceName");
+    var state = {};
+    var search = window.location.search;
+    if(search.indexOf("?userId")===0){
+        userId = search.substr(8);
+    }
 
     $.ajax({
         type: 'GET',
@@ -150,7 +151,7 @@
         window.history.go(-1);
     });
     $('.left_btn').click(function(){
-        window.location.href = "./Loan.html?userId="+userId+"&deviceName="+deviceName;
+        window.location.href = "./Loan.html?userId="+userId;
     });
     $('.mid_btn').click(function(){
         window.location.href = "./detail.html";
@@ -161,6 +162,9 @@
     $('.support').click(function(){
         window.location.href = "./support.html";
     })
+    $('.order').click(function(){
+        window.location.href = "./order.html?userId="+userId;
+    });
 
 </script>
 </html>

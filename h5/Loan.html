@@ -75,12 +75,26 @@
     </div>
 </div>
 </body>
+<!-- <script src="http://39.106.198.9:8081/target/target-script-min.js#anonymous" type="text/javascript"></script> -->
 <script src="js/index.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/dialog.js"></script>
+
 <script>
-    let param = new URLSearchParams(window.location.search);
-    let userId = param.get("userId");
+
+        var userId;
+    //     if(URLSearchParams){
+    //         var param = new URLSearchParams(window.location.search);
+    //         userId = param.get("userId");
+    //     }else{
+            var search = window.location.search;
+            if(search.indexOf("?userId")===0){
+                userId = search.substr(8);
+            }
+            
+    //     }
+    //     console.log(userId)
+
     $('button').click(function(){
         $.ajax({
             type: 'GET',

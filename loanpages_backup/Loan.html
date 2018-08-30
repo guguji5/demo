@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>loan</title>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/dialog.css">
+
+    <style>
+        .content1{
+            background: #fff;
+            padding-top: 20px;
+        }
+        .content1 .left{
+            width: 30%;
+            float: left;
+            font-size: 0.3rem;
+        }
+        .content1 .right{
+            width: 60%;
+            float: right;
+            font-size: 0.3rem;
+        }
+        .content1 .right p{
+            margin:10px 0;
+        }
+        .money{
+            color:#F9C719;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <img src="img/banner.png" style="width: 100%">
+    <div class="content1">
+        <div class="left">
+            <img src="img/tel.png" style="width: 100%">
+        </div>
+        <div class="right">
+            <p class="deviceName"></p>
+            <p class="memory"></p>
+            <p class="system"></p>
+            <p class="money"><span style="font-size:small">¥</span>2000</p>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="content1" style="border-top:1px solid #e1e1e1;padding:10px 0;">
+        <div class="left" style="width: 40%">
+            <span style="margin-left:15px;">转机期限：七天</span>
+        </div>
+        <button style="float:right;padding:0.1rem 0.5rem;background: #D9695D;color:#fff;margin-right:15px;outline: none;box-shadow: none;border:0">立即借款</button>
+        <div style="clear:both"></div>
+    </div>
+    <div style="margin-top:15px;">
+        <img src="img/liucheng.png" style="width: 100%">
+    </div>
+</div>
+<div class="footer">
+    <div class="left_btn">
+        <p><i class="fa fa-home"></i></p>
+        <p>首页</p>
+    </div>
+    <div class="mid_btn">
+        <p><i class="fa fa-file-text-o"></i></p>
+        <p>发现</p>
+    </div>
+    <div class="right_btn">
+        <p><i class="fa fa-user-o"></i></p>
+        <p>我的</p>
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/zepto.js"></script>
+<script src="js/dialog.js"></script>
+<script>
+    let param = new URLSearchParams(window.location.search);
+    let userId = param.get("userId");
+    let deviceName = param.get("deviceName");
+    console.log("deviceName is",deviceName)
+    $('button').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'http://39.106.198.9:8080/cashloanapi/authentication/mobile/'+userId,
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(data){
+                if(data.state.errCode==10000){
+                    if(data.body.emergencyPerson==="1" &&
+                        data.body.carrieroperator==="1" &&
+                        data.body.idcard==="1" &&
+                        data.body.liveBody==="1"){
+                        $(document).dialog({
+                            type : 'notice',
+                            infoText: '您已完成资料填写，稍后工作人员会与您联系转机事宜',
+                            autoClose: 1500,
+                            position: 'center'  // center: 居中; bottom: 底部
+                        });
+                    }else{
+                        window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+                    }
+                }
+
+            },
+            error: function(xhr, type){
+                alert('Ajax error!');
+                window.location.href = "./certify.html?userId="+userId+"&deviceName="+deviceName;
+            }
+        })
+    });
+    $('.back').click(function(){
+        window.history.go(-1);
+    });
+    $('.right_btn').click(function(){
+        window.location.href = "./about.html?userId="+userId+"&deviceName="+deviceName;
+    });
+    $('.mid_btn').click(function(){
+        window.location.href = "./detail.html";
+    })
+    $('img').click(function(){
+        window.location.href = "./detail.html";
+    })
+    let deviceNameArr = deviceName.split("_");
+    $('.deviceName').text("已监测到您的设备型号"+deviceNameArr[0]);
+    if(deviceNameArr[1]<=16){
+        $('.memory').text("内存：16G");
+    }else if(deviceNameArr[1]<=32){
+        $('.memory').text("内存：32G");
+    }else if(deviceNameArr[1]<=64){
+        $('.memory').text("内存：64G");
+    }else if(deviceNameArr[1]<=128){
+        $('.memory').text("内存：128G");
+    }else if(deviceNameArr[1]<=256){
+        $('.memory').text("内存：256G");
+    }
+    // $('.memory').text("内存："+deviceNameArr[1]);
+    $('.system').text("版本："+deviceNameArr[2]);
+</script>
+</html>

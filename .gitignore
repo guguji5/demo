@@ -10,3 +10,6 @@ AwesomeProject/npm-debug.log*
 AwesomeProject/yarn-debug.log*
 AwesomeProject/yarn-error.log*
 .DS_Store
+Loan/ios/*
+Loan/android/*
+h5_backup/*
