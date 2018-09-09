@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vuejs</title>
+    <link rel="stylesheet" href="index.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -15,9 +16,11 @@
         <div>
             <button-counter who="damon"></button-counter>
         </div>
+        <hr>
+        <radio-component v-bind:model="sexy" value="male"></radio-component>
+        <radio-component v-bind:model="sexy" value="female"></radio-component>
     </div>
     <script>
-
         Vue.component('button-counter', {
             props: ['who'],
             data: function () {
@@ -26,12 +29,23 @@
                 }
             },
             template: '<button v-on:click="count++">{{who}} clicked me {{ count }} times.</button>'
+        });
+
+        Vue.component('radio-component', {
+            props: ["model", "value"],
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<span class="radio" v-bind:class="{ check: model==value }"></span>'
         })
 
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue!'
+                message: 'Hello Vue!',
+                sexy: "female"
             }
         })
 
