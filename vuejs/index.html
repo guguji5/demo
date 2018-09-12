@@ -12,43 +12,95 @@
 
 <body>
     <div id="app">
-        {{ message }}
-        <div>
-            <button-counter who="damon"></button-counter>
-        </div>
+        <input type="radio" onChange="console.log('1')" name="test" onblur="console.log('blur 1')">
+        <input type="radio" onChange="console.log('2')" name="test" onblur="console.log('blur 2')">
         <hr>
-        <radio-component v-bind:model="sexy" value="male"></radio-component>
-        <radio-component v-bind:model="sexy" value="female"></radio-component>
-    </div>
-    <script>
-        Vue.component('button-counter', {
-            props: ['who'],
-            data: function () {
-                return {
-                    count: 0
-                }
-            },
-            template: '<button v-on:click="count++">{{who}} clicked me {{ count }} times.</button>'
-        });
+        <custom-input v-model=" searchText "></custom-input>
+        {{searchText}}
+        <hr>
+        <base-checkbox v-model="lovingVue "></base-checkbox>
+        <hr>
+        <base-radio v-model="sexy" label="male" v-on:change="console()">男</base-radio>
+        <base-radio v-model="sexy" label="female" v-on:change="console()">女</base-radio>
+        <base-radio v-model="sexy" label="gay" v-on:change="console()">gay</base-radio>
 
-        Vue.component('radio-component', {
-            props: ["model", "value"],
-            data: function () {
-                return {
-                    count: 0
-                }
+        <br>
+        <button v-on:click="console() ">console</button>
+    </div>
+
+    <script>
+        Vue.component('custom-input', {
+            props: ['value'],
+            template: `
+                <input
+                v-bind:value="value "
+                v-on:input="$emit( 'input', $event.target.value) "
+                >
+            `
+        })
+
+        Vue.component('base-checkbox', {
+            model: {
+                prop: 'checked',
+                event: 'change'
             },
-            template: '<span class="radio" v-bind:class="{ check: model==value }"></span>'
+            props: {
+                checked: Boolean
+            },
+            template: `
+                <input
+                type="checkbox"
+                v-bind:checked="checked "
+                v-on:change="$emit( 'change', $event.target.checked) "
+                >
+            `
+        })
+        Vue.component('base-radio', {
+            model: {
+                prop: 'checked',
+                event: 'click'
+            },
+            props: {
+                checked: String | Number,
+                label: String | Number
+            },
+            template: `
+                <div style="display:inline-block">
+                        <span class="radio" 
+                        v-bind:class="{ check: checked==label } " 
+                        v-on:click="handleChange()"></span>
+                        <slot></slot>
+                    </div>
+            `,
+            methods: {
+                handleChange() {
+
+                    this.$emit('click', this.label);
+
+                    this.$emit('change')
+                }
+            }
         })
 
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue!',
-                sexy: "female"
+                sexy: "female",
+                searchText: "damon",
+                lovingVue: true
+            },
+            methods: {
+                setValue(value) {
+                    this.sexy = value;
+                },
+                console() {
+                    console.log(this.sexy, this.searchText, this.lovingVue);
+                },
+                blur(value) {
+                    console.log('blur' + value)
+                }
             }
         })
-
     </script>
 </body>
 
