@@ -85,7 +85,7 @@ export default {
         return {
             query: {
                 condition: '',
-                status: '',
+                status: '0',
                 range: ''
             },
             status: status,
@@ -152,7 +152,7 @@ export default {
             let from = this.query.range ? new Date(this.query.range[0]).format("yyyy-MM-dd") : "";
             let to = this.query.range ? new Date(this.query.range[1]).format("yyyy-MM-dd") : "";
             let condition = this.query.condition.trim();
-            let status = this.query.status;
+            let status = this.query.status === '0' ? '' : this.query.status;
             GetList(condition, status, this.pagination.number, this.pagination.pageSize, from, to).then(res => {
                 let data = res.data;
                 if (data.state.errCode === 10000) {
@@ -164,9 +164,7 @@ export default {
         },
         downloadContacts () {
             this.dialogVisible = false
-            DownloanContacts(this.dialog.userId).then(res => {
-                // console.log(res)
-            })
+            DownloanContacts(this.dialog.userId)
         }
     },
     filters: {

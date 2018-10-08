@@ -18,7 +18,7 @@ function GetUserInfo (userId) {
 }
 
 function DownloanContacts (userId) {
-    return axios.get('/useinfo/contactList/' + userId)
+    window.open(axios.defaults.baseURL + "/useinfo/downloadContactList/" + userId)
 }
 Date.prototype.format = function (format) {
     var o = {
