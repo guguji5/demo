@@ -13,7 +13,7 @@
                 </el-form-item>
                 <el-form-item label="用户状态">
                     <el-select v-model="query.status" placeholder="请选择用户状态">
-                        <el-option v-for="(item, index) in status" :label="item" :value="index+1" :key="index"></el-option>
+                        <el-option v-for="(item, index) in status" :label="item" :value="index" :key="index"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="注册时间">
@@ -66,7 +66,7 @@
             </el-dialog>
         </el-main>
         <el-footer>
-            <el-pagination @size-change="handleSizeChange" @current-change="handlePagerChange" :current-page.sync="pagination.number" :page-sizes="[5, 10, 20, 50, 100]" :page-size="pagination.pageSize" layout="sizes, prev, pager, next" :total="pagination.totalPages">
+            <el-pagination @size-change="handleSizeChange" @current-change="handlePagerChange" :current-page.sync="pagination.number" :page-sizes="[5, 10, 20, 50, 100]" :page-size="pagination.pageSize" layout="sizes, prev, pager, next" :total="pagination.total">
             </el-pagination>
         </el-footer>
     </el-container>
@@ -93,7 +93,7 @@ export default {
             pagination: {
                 number: 1,
                 pageSize: 10,
-                totalPages: 10
+                total: 10
             },
             dialog: {
                 userName: '',
@@ -152,11 +152,12 @@ export default {
             let from = this.query.range ? new Date(this.query.range[0]).format("yyyy-MM-dd") : "";
             let to = this.query.range ? new Date(this.query.range[1]).format("yyyy-MM-dd") : "";
             let condition = this.query.condition.trim();
-            GetList(condition, this.query.status, this.pagination.number, this.pagination.pageSize, from, to).then(res => {
+            let status = this.query.status;
+            GetList(condition, status, this.pagination.number, this.pagination.pageSize, from, to).then(res => {
                 let data = res.data;
                 if (data.state.errCode === 10000) {
                     this.gridData = data.body.content;
-                    this.pagination.totalPages = data.body.totalPages;
+                    this.pagination.total = data.body.total;
                 }
 
             })
