@@ -39,3 +39,4 @@ yarn-error.log*
 hexo/*
 !/hexo/source/
 !/hexo/_config.yml
+hexo/themes/pure
