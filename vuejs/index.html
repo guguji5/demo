@@ -101,6 +101,94 @@
                 }
             }
         })
+        var res = {
+            "errno":0,
+            "errmsg":"ok",
+            "data":[
+                {
+                    "alias":"djc_harbor",
+                    "counters":[
+                        {
+                            "dstype":"GAUGE",
+                            "step":30,
+                            "tags":""
+                        }
+                    ],
+                    "didi_type":"slb",
+                    "metric":"loadbalancer.inbps",
+                    "metric_alias":"负载均衡inbps",
+                    "rid":"cef6ffdaf48a5df5a35137efaa5d7a8a"
+                },
+                {
+                    "alias":"djc_harbor",
+                    "counters":[
+                        {
+                            "dstype":"GAUGE",
+                            "step":30,
+                            "tags":""
+                        },
+                        {
+                            "dstype":"DAMON",
+                            "step":60,
+                            "tags":""
+                        }
+                    ],
+                    "didi_type":"slb",
+                    "metric":"loadbalancer.outbps",
+                    "metric_alias":"负载均衡outbps",
+                    "rid":"cef6ffdaf48a5df5a35137efaa5d7a8a"
+                },
+                {
+                    "alias":"djc_harbor",
+                    "counters":[
+                        {
+                            "dstype":"GAUGE",
+                            "step":30,
+                            "tags":""
+                        }
+                    ],
+                    "didi_type":"slb",
+                    "metric":"loadbalancer.conns",
+                    "metric_alias":"负载均衡conns",
+                    "rid":"cef6ffdaf48a5df5a35137efaa5d7a8a"
+                }
+            ]
+        }
+
+        let params = (res.data || []).reduce(function (accumulator, value, index, array) {
+          value.counters.forEach(item => {
+            accumulator.push({
+              cf: 'AVERAGE',
+              metric: value.metric,
+              rid: value.rid,
+              didi_type: value.didi_type,
+              tags: item.tags,
+              dstype: item.dstype,
+              step: item.step
+            })
+          })
+          return accumulator
+        }, [])
+
+        let params1 = res.data.map((value,key,arr) => {
+            return Object.assign({},{
+              cf: 'AVERAGE',
+              metric: value.metric,
+              rid: value.rid,
+              didi_type: value.didi_type,
+            },value.counters)
+        })
+        
+        console.log("before", res.data)
+        console.log("after", params)
+        console.log("after", params1)
+
+        var numbers = [65, 44, 12, 4];
+ 
+        function getSum(total, num) {
+            return total + num;
+        }
+        // console.log(numbers.reduce(getSum));
     </script>
 </body>
 
