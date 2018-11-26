@@ -60,7 +60,21 @@ baidu搜索的话需要禁用其他两种。
 这个topic展开的话会很冗长，搜索引擎上也有很多这类的文章。我最后选择了gittalk，简单大方，技术类的文章，Github不是门槛。
 ### 字数统计，阅读时间统计
 
-这一部分比较简单，只需要安装hexo-wordcount插件，传入博客的内容即可计算得出。
+这一部分比较简单，只需要安装hexo-wordcount插件，传入博客的内容即可计算得出。先安装插件：
+```
+npm i --save hexo-wordcount
+```
+在主题模板文件中即可使用wordcount方法计算字数统计和阅读时长。
+```
+<% if(theme.postCount.enable){  %>
+	<% if(theme.postCount.wordcount){  %>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount"><%= __('article.wordcount') %>: <%= wordcount(post.content) %>(<%= __('unit.word') %>)</span>
+	<% } %>
+	<% if(theme.postCount.min2read){  %>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired"><%= __('article.readcount') %>: <%= min2read(post.content) %>(<%= __('unit.time') %>)</span>
+	<% } %>
+<% } %>
+```
 
 ### 如何在博客展示自己github托管的项目
 
