@@ -79,7 +79,6 @@ import { GetList, GetUserInfo, DownloanContacts } from '../utils/service'
 export default {
     name: 'UserList',
     props: {
-        msg: String
     },
     data () {
         return {
