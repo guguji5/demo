@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            margin: 50px;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            border: 1px solid #000;
+            overflow: hidden;
+            float: left;
+        }
+
+        .shadow {
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+
+        .wrapper img {
+            width: 500px;
+        }
+
+        .magnifier {
+            float: right;
+            width: 600px;
+            height: 600px;
+            border: 1px solid #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .magnifier img {
+            width: 1500px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>damon is try CI of gitlab</h1>
+    <div class="container">
+        <div class="wrapper">
+            <img src="http://ww1.sinaimg.cn/large/7ec3646fly1g3ysfhxthqj20qo0qoq4l.jpg">
+            <span class="shadow"></span>
+        </div>
+
+        <div class="magnifier">
+            <img id="bigImg" src="http://ww1.sinaimg.cn/large/7ec3646fly1g3ysfhxthqj20qo0qoq4l.jpg">
+        </div>
+        
+    </div>
+    <p>thanks for the link as below</p>
+    <p><i>https://www.jianshu.com/p/941a0a034e4d</i></p>
+    
+
+    <script>
+        window.onload = function () {
+            var Img = document.getElementsByClassName('wrapper')[0];
+            var Shadow = document.getElementsByClassName('shadow')[0];
+            var BigImg = document.getElementById('bigImg');
+
+            var ImgOffSetLeft = Img.offsetLeft
+            var ImgOffSetTop = Img.offsetTop
+            var ImgOffSetWidth = Img.offsetWidth
+            var ImgOffSetHeight = Img.offsetHeight
+
+            Img.onmouseover = function (event) {
+                Shadow.style.display = "block"
+            }
+
+            Img.onmousemove = function (event) {
+                let top = event.clientY - 100 - ImgOffSetTop;
+                let left = event.clientX - 100 - ImgOffSetLeft;
+
+                if (top < 0) {
+                    top = 0
+                } else if (top > 300) {
+                    top = 300
+                }
+                if (left < 0) {
+                    left = 0
+                } else if (left > 300) {
+                    left = 300
+                }
+
+                Shadow.style.top = top + "px"
+                Shadow.style.left = left + "px"
+
+                BigImg.style.left = -3 * left + 'px'
+                BigImg.style.top = -3 * top + 'px'
+            }
+
+
+            Img.onmouseout = function (event) {
+                Shadow.style.display = "none"
+            }
+
+        }
+    </script>
+</body>
+
+</html>
