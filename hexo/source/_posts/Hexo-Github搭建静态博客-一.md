@@ -63,6 +63,8 @@ author: didicloud
 language: zh-CN 
 timezone: 
 ```
+**主题** 的更换是在_config.yml中`theme`字段。
+
 最后我们要更改的设置是default_layout: 在Writing下边，在一个博文没发表之前，它是不可见的，我们想存成草稿，所以我们把default_layout设置成draft。
 ```
 # Writing
@@ -130,7 +132,7 @@ deploy:
 
 deploy:
   type: git
-  repo: https://Github.com/username/username.Github.io.git
+  repo: https://Github.com/username/username.Github.io.git //e.g. https://Github.com/guguji5/guguji5.Github.io.git
   branch: master
 ```
 ***因为我们选择了git来部署，所以我们需要安装Hexo包来发布静态模板到git仓库。用npm来安装：
