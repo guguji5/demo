@@ -135,7 +135,7 @@ deploy:
   repo: https://Github.com/username/username.Github.io.git //e.g. https://Github.com/guguji5/guguji5.Github.io.git
   branch: master
 ```
-***因为我们选择了git来部署，所以我们需要安装Hexo包来发布静态模板到git仓库。用npm来安装：
+因为我们选择了git来部署，所以我们需要安装Hexo包来发布静态模板到git仓库。用npm来安装：
 ```
 $ npm install hexo-deployer-git --save
 ```

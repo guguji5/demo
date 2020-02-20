@@ -14,7 +14,7 @@ comments: true
 
 ## Online 
 
-[http://angular-splitter.guguji5.top](http://angular-splitter.guguji5.top)
+[https://guguji5.github.io/angular-splitter-demo](https://guguji5.github.io/angular-splitter-demo)
 
 ## How to run
 ```
