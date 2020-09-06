@@ -23,8 +23,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # - run: cd hexo && npm run d
       - run: ls
+      - run: cd hexo
+      - run: ls
+      - run: npm run d
 
       # - uses: actions/checkout@v2
 
